@@ -1,0 +1,5 @@
+xf86-input-libinput
+libinput
+mesa
+vulkan-intel
+vulkan-radeon

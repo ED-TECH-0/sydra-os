@@ -1,0 +1,37 @@
+{
+  "version": 1,
+  "name": "Siddha Glass Pro",
+  "brandName": "Sydra OS",
+  "radius": { "window": 12, "control": 10, "dock": 16 },
+  "blur": { "sm": 12, "md": 24, "lg": 36, "saturation": 1.2, "noise": 0.03 },
+  "opacity": {
+    "panel": 0.60,
+    "menu": 0.70,
+    "window": 0.80,
+    "terminal": 0.88,
+    "editor": 0.96,
+    "game": 1.0
+  },
+  "border": {
+    "width": 1,
+    "color": "#FFFFFF",
+    "alpha": 0.10,
+    "highlightAlpha": 0.16
+  },
+  "shadow": { "blur": 32, "offsetY": 8, "alpha": 0.35 },
+  "fonts": { "ui": "Inter", "mono": "JetBrains Mono" },
+  "contrast": { "minTextRatio": 4.5 },
+  "intensity": {
+    "pro":      { "blurScale": 0.7, "opacityBoost": 0.05 },
+    "standard": { "blurScale": 1.0, "opacityBoost": 0.00 },
+    "heavy":    { "blurScale": 1.4, "opacityBoost": -0.05 },
+    "flat":     { "blurScale": 0.0, "opacityBoost": 0.30 }
+  },
+  "presets": {
+    "graphite":      { "tint": "#12141A", "text": "#F2F4F8", "muted": "#A8AFBD", "accent": "#5B8DEF" },
+    "midnight":      { "tint": "#0B0F1A", "text": "#EEF1F8", "muted": "#9AA3B5", "accent": "#4FB3BF" },
+    "slate-light":   { "tint": "#E9ECF2", "text": "#12141A", "muted": "#4A5163", "accent": "#2F6FDE" },
+    "high-contrast": { "tint": "#000000", "text": "#FFFFFF", "muted": "#D0D0D0", "accent": "#FFD84D" }
+  },
+  "accentLimits": { "maxSaturation": 0.65, "minLightness": 0.45, "maxLightness": 0.75 }
+}

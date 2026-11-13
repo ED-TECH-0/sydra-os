@@ -1,0 +1,11 @@
+# Live environment and ISO boot tools
+mkinitcpio-archiso
+syslinux
+memtest86+
+memtest86+-efi
+efibootmgr
+btrfs-progs
+dosfstools
+e2fsprogs
+exfatprogs
+ntfs-3g
