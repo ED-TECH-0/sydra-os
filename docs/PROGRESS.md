@@ -11,12 +11,12 @@ Task logging format:
 ### T0.1 Create the repository
 - Status: DONE
 - Date: 2026-11-13
-- Result: Repository structure initialized, `.gitignore`, `LICENSE`, `AGENTS.md`, `README.md`, `docs/MASTER_PLAN.md` created. Matches section 6 layout. Commit `c1dd2a1`.
+- Result: Repository structure initialized, `.gitignore`, `LICENSE`, `AGENTS.md`, `README.md`, `docs/MASTER_PLAN.md` created. Pushed to `https://github.com/ED-TECH-0/sydra-os.git`.
 
 ### T0.2 Makefile and logging
 - Status: DONE
 - Date: 2026-11-13
-- Result: `Makefile` created with targets `check`, `packages`, `repo`, `iso`, `qemu-bios`, `qemu-uefi`, `sums`, `clean`. `scripts/preflight.sh` executes with 0 failures and 5 build-tool warnings.
+- Result: `Makefile` created with targets `check`, `packages`, `repo`, `iso`, `qemu-bios`, `qemu-uefi`, `sums`, `clean`. `scripts/preflight.sh` executes with 0 failures.
 
 ### T0.3 Secret hygiene
 - Status: DONE
@@ -31,7 +31,7 @@ Task logging format:
 ### T0.5 Build machine bootstrap (Laptop A)
 - Status: WAITING_HUMAN_ACTION
 - Date: 2026-11-13
-- Need: Host toolchain installation (`archiso`, `devtools`, `qemu-desktop`, `edk2-ovmf`, etc.) requiring sudo/root privileges.
+- Need: Host toolchain installation (`archiso`, `devtools`, `qemu-desktop`, `edk2-ovmf`, etc.) requiring sudo/root privileges on Laptop A.
 
 ---
 
@@ -48,22 +48,40 @@ Task logging format:
 
 ---
 
+## Phase 4: Glassmorphism Visual Identity
+
+### T4.1 Design tokens (`tokens/glass.json`)
+- Status: DONE
+- Date: 2026-11-13
+- Result: `tokens/glass.json` created with radii, blur scales, layer opacity, shadow, fonts, and presets (`graphite`, `midnight`, `slate-light`, `high-contrast`).
+
+### T4.2 Theme Generator (`tools/glassgen.py`)
+- Status: DONE
+- Date: 2026-11-13
+- Result: Validation passed. Contrast checks exceed 8.9:1 across all reference backgrounds. Compiled KDE `.colors`, Konsole `.colorscheme`, and GTK CSS overrides deterministically.
+
+### T4.5 Procedural 4K Wallpapers & Branding Logo
+- Status: DONE
+- Date: 2026-11-13
+- Result: 4 procedural frosted glass SVG wallpapers generated in `assets/wallpapers/`. Vector logo `assets/logo/sydra-logo.svg` created. Pushed to remote repo.
+
+---
+
 ## Phase 2 & 7: Core Custom Packages (`siddha-*`)
 
 ### Custom Package Recipes Prepared & Tested
 - Status: DONE
 - Date: 2026-11-13
 - Packages in `repo/pkgbuilds/`:
-  - `siddha-branding`: `/etc/os-release`, `/etc/issue` with public name Sydra OS and internal codename siddha.
+  - `siddha-branding`: `/etc/os-release`, `/etc/issue` with public name Sydra OS and internal codename siddha, bundled wallpapers and logo.
   - `siddha-theme`: Compiled color schemes, Konsole profiles, GTK styles, and `siddha-glass-set` switcher.
   - `siddha-settings`: Zsh, Starship, `99-siddha.conf` gaming sysctl, ZRAM, and dynamic blur GameMode hook.
   - `siddha-gpu-setup`: Hardware detection verified on Laptop A (detected Intel UHD 620), PRIME offload toggle.
   - `siddha-dev`: Interactive terminal hub for Rust, Node, Go, Docker.
   - `siddha-welcome`: PySide6 onboarding app.
   - `siddha-gamehub`: PySide6 game browser and launcher; `--dump-badges` passes offline test.
-  - `siddha-calamares-config`: Calamares branding, initcpio leak prevention, live-environment cleanup.
+  - `siddha-calamares-config`: Calamares modules preventing archiso initcpio leakage and cleaning live configs.
   - `siddha-keyring`: Pacman GPG validation package.
-- Commit: `3e2e0e0`
 
 ---
 
@@ -73,4 +91,4 @@ Task logging format:
   ```bash
   sudo pacman -Syu --needed archiso devtools git base-devel qemu-desktop edk2-ovmf squashfs-tools libisoburn mtools dosfstools rsync reflector shellcheck jq python python-pip btrfs-progs gnupg
   ```
-  Once installed, `make iso` and `make qemu-uefi` are ready to run.
+  Once installed, run `make iso` to compile the bootable ISO!
