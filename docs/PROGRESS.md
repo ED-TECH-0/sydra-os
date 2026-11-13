@@ -106,12 +106,22 @@ Task logging format:
 - Target: Compile `calamares` 3.4.2 against Qt6 and add to local `[siddha]` repo. Integrate with `siddha-calamares-config` (branding, unpackfs squashfs configuration, initcpio cleanup, service setup).
 - Result: Built `calamares-3.4.2-2-x86_64.pkg.tar.zst` (5.0 MB) and `siddha-calamares-config-0.1.0-2-any.pkg.tar.zst`. Added to `repo/x86_64/siddha.db`. Enabled in `packages/siddha.txt`. `scripts/gen-packages.sh` updated `iso/profile/packages.x86_64`.
 
+### T2.2 Calamares Installer ISO Build & Live Boot Verification
+- Status: DONE
+- Date: 2026-11-13
+- Target: Rebuild Sydra OS ISO with `calamares` included; verify via QEMU.
+- Result: Successfully produced `build/out/sydra-os-2026.11.13-x86_64.iso` (4.1 GiB). SHA-256: `fe37ba928624a33b1d57a29272d77a7a94aa199dacaeb94c2f2f6254cfdd3556`. Boot verified in QEMU: "Install Sydra OS" launcher backed by `sudo calamares` and Sydra branding present on desktop.
+
 ---
 
 ## HUMAN ACTIONS NEEDED
-- Host toolchain installation on Laptop A:
-  Run in terminal:
+- **Interactive QEMU GUI Testing (Laptop A)**:
+  Run in terminal to test the installer UI interactively:
   ```bash
-  sudo pacman -Syu --needed archiso devtools git base-devel qemu-desktop edk2-ovmf squashfs-tools libisoburn mtools dosfstools rsync reflector shellcheck jq python python-pip btrfs-progs gnupg
+  make qemu-uefi
   ```
-  Once installed, run `make iso` to compile the bootable ISO!
+- **Physical USB Flash for Hardware Testing (Laptop B / Nitro RTX 5050)**:
+  Insert a USB pendrive (<= 256GB), check device name with `lsblk`, then run:
+  ```bash
+  sudo scripts/flash-usb.sh build/out/sydra-os-2026.11.13-x86_64.iso /dev/sdX
+  ```
