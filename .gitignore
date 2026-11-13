@@ -11,6 +11,8 @@ repo/x86_64/siddha.db*
 repo/x86_64/siddha.files*
 repo/pkgbuilds/**/src/
 repo/pkgbuilds/**/pkg/
+repo/pkgbuilds/**/*.tar.*
+repo/pkgbuilds/**/*.pkg.tar.*
 
 # Environment and secrets
 .env

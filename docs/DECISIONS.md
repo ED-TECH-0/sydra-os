@@ -35,3 +35,7 @@ Format:
 ### [2026-11-13] DEC-004: Filesystem Overlay for os-release and issue
 - **Context**: `/usr/lib/os-release` and `/etc/issue` are owned by Arch's core `filesystem` package. Including them directly in `siddha-branding` caused pacman transaction conflict during `airootfs` generation.
 - **Decision**: Overlay `/etc/os-release` and `/etc/issue` directly via `iso/profile/airootfs/etc/`. `siddha-branding` retains backup/reference copies at `/usr/share/siddha/branding/`.
+
+### [2026-11-13] DEC-005: Calamares 3.4.2 Qt6 Packaging
+- **Context**: Calamares is not in official Arch core/extra repositories. Needs native compilation for Qt6 installer integration.
+- **Decision**: Compiled `calamares` 3.4.2 natively using CMake, Ninja, and Qt6 against `kpmcore` 26.08 and `libpwquality`. Packaged and hosted inside the local `[siddha]` pacman repository with custom module overrides (`unpackfs` targeting `/run/archiso/bootmnt/sydra/x86_64/airootfs.sfs`).

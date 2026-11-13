@@ -16,10 +16,7 @@ strings:
 images:
     productLogo:         "logo.svg"
     productIcon:         "logo.svg"
-    productWelcome:      "welcome.png"
 
 style:
    Sidebar: "widget"
    Navigation: "widget"
-
-slideshow:               "show.qml"

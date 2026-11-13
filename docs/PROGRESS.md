@@ -89,6 +89,8 @@ Task logging format:
 - Status: DONE
 - Date: 2026-11-13
 - Packages in `repo/pkgbuilds/`:
+  - `calamares`: Compiled v3.4.2 installer framework for Qt6.
+  - `siddha-calamares-config`: Calamares modules preventing archiso initcpio leakage, cleaning live configs, and configuring squashfs unpack.
   - `siddha-branding`: `/etc/os-release`, `/etc/issue` with public name Sydra OS and internal codename siddha, bundled wallpapers and logo.
   - `siddha-theme`: Compiled color schemes, Konsole profiles, GTK styles, and `siddha-glass-set` switcher.
   - `siddha-settings`: Zsh, Starship, `99-siddha.conf` gaming sysctl, ZRAM, and dynamic blur GameMode hook.
@@ -96,8 +98,13 @@ Task logging format:
   - `siddha-dev`: Interactive terminal hub for Rust, Node, Go, Docker.
   - `siddha-welcome`: PySide6 onboarding app.
   - `siddha-gamehub`: PySide6 game browser and launcher; `--dump-badges` passes offline test.
-  - `siddha-calamares-config`: Calamares modules preventing archiso initcpio leakage and cleaning live configs.
   - `siddha-keyring`: Pacman GPG validation package.
+
+### T2.1 Calamares Framework & Sydra Integration
+- Status: DONE
+- Date: 2026-11-13
+- Target: Compile `calamares` 3.4.2 against Qt6 and add to local `[siddha]` repo. Integrate with `siddha-calamares-config` (branding, unpackfs squashfs configuration, initcpio cleanup, service setup).
+- Result: Built `calamares-3.4.2-2-x86_64.pkg.tar.zst` (5.0 MB) and `siddha-calamares-config-0.1.0-2-any.pkg.tar.zst`. Added to `repo/x86_64/siddha.db`. Enabled in `packages/siddha.txt`. `scripts/gen-packages.sh` updated `iso/profile/packages.x86_64`.
 
 ---
 

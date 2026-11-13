@@ -10,6 +10,7 @@ bluez
 bluez-utils
 btop
 btrfs-progs
+calamares
 clang
 cmake
 curl
