@@ -11,65 +11,59 @@ Task logging format:
 ### T0.1 Create the repository
 - Status: DONE
 - Date: 2026-11-13
-- Commands run:
-  ```bash
-  git init
-  git branch -m main
-  mkdir -p docs iso/profile/airootfs packages repo/pkgbuilds repo/x86_64 tokens tools assets/wallpapers assets/logo assets/sounds catalog scripts tests build/logs build/vm build/out
-  ```
 - Result: Repository structure initialized, `.gitignore`, `LICENSE`, `AGENTS.md`, `README.md`, `docs/MASTER_PLAN.md` created. Matches section 6 layout. Commit `c1dd2a1`.
 
 ### T0.2 Makefile and logging
 - Status: DONE
 - Date: 2026-11-13
-- Commands run:
-  ```bash
-  make check
-  ```
 - Result: `Makefile` created with targets `check`, `packages`, `repo`, `iso`, `qemu-bios`, `qemu-uefi`, `sums`, `clean`. `scripts/preflight.sh` executes with 0 failures and 5 build-tool warnings.
 
 ### T0.3 Secret hygiene
 - Status: DONE
 - Date: 2026-11-13
-- Commands run:
-  ```bash
-  cat .env.example
-  cat .pre-commit-config.yaml
-  ```
 - Result: `.env.example` created with variable names only. `.pre-commit-config.yaml` configured with gitleaks and shellcheck hooks. `.env` and `*.key` added to `.gitignore`.
 
 ### T0.4 Progress, decisions and blockers files
 - Status: DONE
 - Date: 2026-11-13
-- Commands run:
-  ```bash
-  ls docs/
-  ```
 - Result: Created `docs/PROGRESS.md`, `docs/DECISIONS.md`, `docs/BLOCKERS.md`, `docs/LICENSES.md`, `docs/TEST_MATRIX.md`, `docs/RELEASE_NOTES_TEMPLATE.md`. Initial entries recorded for T0.1–T0.4 and DEC-001 through DEC-003.
 
 ### T0.5 Build machine bootstrap (Laptop A)
-- Status: IN_PROGRESS
+- Status: WAITING_HUMAN_ACTION
 - Date: 2026-11-13
 - Need: Host toolchain installation (`archiso`, `devtools`, `qemu-desktop`, `edk2-ovmf`, etc.) requiring sudo/root privileges.
 
 ---
 
-## Phase 4: Glassmorphism Core
+## Phase 1: Base Profile Setup
 
-### T4.1 Design tokens (`tokens/glass.json`)
+### T1.1 & T1.2 Profile Definition and Boot Configurations
 - Status: DONE
 - Date: 2026-11-13
-- Result: `tokens/glass.json` created with radii, blur scales, layer opacity, shadow, fonts, and presets (`graphite`, `midnight`, `slate-light`, `high-contrast`).
+- Result: 
+  - `iso/profile/profiledef.sh` configured with Sydra OS branding.
+  - `iso/profile/pacman.conf` and `pacman.conf.in` rendered with `[multilib]` and local `[siddha]` repo.
+  - `iso/profile/airootfs/` setup: live user, autologin, passwordless sudo, systemd service symlinks.
+  - Bootloader configurations complete: UEFI systemd-boot entries (`efiboot/`), GRUB (`grub/grub.cfg`), BIOS syslinux (`syslinux/`).
 
-### T4.2 Theme Generator (`tools/glassgen.py`)
+---
+
+## Phase 2 & 7: Core Custom Packages (`siddha-*`)
+
+### Custom Package Recipes Prepared & Tested
 - Status: DONE
 - Date: 2026-11-13
-- Commands run:
-  ```bash
-  python3 tools/glassgen.py --check
-  python3 tools/glassgen.py --out-dir build/theme
-  ```
-- Result: Validation passed. Contrast checks exceed 8.9:1 across all reference backgrounds (minimum 4.5:1). Compiled KDE `.colors`, Konsole `.colorscheme`, and GTK CSS overrides deterministically. Commit `96d122c`.
+- Packages in `repo/pkgbuilds/`:
+  - `siddha-branding`: `/etc/os-release`, `/etc/issue` with public name Sydra OS and internal codename siddha.
+  - `siddha-theme`: Compiled color schemes, Konsole profiles, GTK styles, and `siddha-glass-set` switcher.
+  - `siddha-settings`: Zsh, Starship, `99-siddha.conf` gaming sysctl, ZRAM, and dynamic blur GameMode hook.
+  - `siddha-gpu-setup`: Hardware detection verified on Laptop A (detected Intel UHD 620), PRIME offload toggle.
+  - `siddha-dev`: Interactive terminal hub for Rust, Node, Go, Docker.
+  - `siddha-welcome`: PySide6 onboarding app.
+  - `siddha-gamehub`: PySide6 game browser and launcher; `--dump-badges` passes offline test.
+  - `siddha-calamares-config`: Calamares branding, initcpio leak prevention, live-environment cleanup.
+  - `siddha-keyring`: Pacman GPG validation package.
+- Commit: `3e2e0e0`
 
 ---
 
@@ -79,4 +73,4 @@ Task logging format:
   ```bash
   sudo pacman -Syu --needed archiso devtools git base-devel qemu-desktop edk2-ovmf squashfs-tools libisoburn mtools dosfstools rsync reflector shellcheck jq python python-pip btrfs-progs gnupg
   ```
-  Once installed, `make check` will pass with 0 warnings.
+  Once installed, `make iso` and `make qemu-uefi` are ready to run.
