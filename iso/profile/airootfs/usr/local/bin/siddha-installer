@@ -1,8 +1,7 @@
 #!/usr/bin/env bash
-set -euo pipefail
 
-mkdir -p /var/log/siddha
-exec > >(tee -a /var/log/siddha/installer.log) 2>&1
+LOG="/tmp/siddha-installer.log"
+exec > >(tee -a "$LOG") 2>&1
 
 echo "=== Starting Sydra OS Installer at $(date) ==="
 echo "User: $(whoami) [UID: $UID]"
@@ -10,7 +9,7 @@ echo "DISPLAY: ${DISPLAY:-unset}"
 echo "WAYLAND_DISPLAY: ${WAYLAND_DISPLAY:-unset}"
 echo "XDG_RUNTIME_DIR: ${XDG_RUNTIME_DIR:-unset}"
 
-# Allow local root to access Xwayland
+# Allow local root to access Xwayland / Wayland
 if command -v xhost >/dev/null 2>&1; then
     xhost +local:root 2>/dev/null || true
 fi
@@ -23,17 +22,19 @@ if [[ -n "${XDG_RUNTIME_DIR:-}" ]]; then
     fi
 fi
 
-# Launch with kdesu (KDE native) or sudo -E preserving Wayland environment
-if [[ -x /usr/lib/kf6/kdesu ]]; then
-    exec /usr/lib/kf6/kdesu -t -c "calamares -D 8"
-elif command -v kdesu >/dev/null 2>&1; then
-    exec kdesu -t -c "calamares -D 8"
-else
-    exec sudo -E \
-        DISPLAY="${DISPLAY:-:0}" \
-        WAYLAND_DISPLAY="${WAYLAND_DISPLAY:-wayland-0}" \
-        XDG_RUNTIME_DIR="${XDG_RUNTIME_DIR:-/run/user/1000}" \
-        XAUTHORITY="${XAUTHORITY:-/home/live/.Xauthority}" \
-        QT_QPA_PLATFORM="wayland;xcb" \
-        calamares -D 8 "$@"
+# Run Calamares with sudo -E preserving display variables
+sudo -E \
+    DISPLAY="${DISPLAY:-:0}" \
+    WAYLAND_DISPLAY="${WAYLAND_DISPLAY:-wayland-0}" \
+    XDG_RUNTIME_DIR="/run/user/1000" \
+    XAUTHORITY="${XAUTHORITY:-$HOME/.Xauthority}" \
+    QT_QPA_PLATFORM="wayland;xcb" \
+    calamares -D 8 "$@"
+STATUS=$?
+
+if [[ $STATUS -ne 0 ]]; then
+    echo "Calamares exited with error code $STATUS"
+    if command -v kdialog >/dev/null 2>&1; then
+        kdialog --title "Sydra OS Installer Error" --error "Calamares failed to start (exit code $STATUS).\n\nDetails:\n$(tail -n 20 "$LOG")" 2>/dev/null || true
+    fi
 fi
