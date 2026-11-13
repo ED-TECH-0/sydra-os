@@ -1,6 +1,7 @@
 [options]
 Architecture = auto
-ParallelDownloads = 5
+ParallelDownloads = 3
+DisableDownloadTimeout
 SigLevel = Required DatabaseOptional
 LocalFileSigLevel = Optional
 
