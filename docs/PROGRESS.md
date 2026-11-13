@@ -47,8 +47,20 @@ Task logging format:
   - Bootloader configurations complete: UEFI systemd-boot entries (`efiboot/`), GRUB (`grub/grub.cfg`), BIOS syslinux (`syslinux/`).
 
 ### T1.3 Base ISO Compilation
-- Status: CLAIMED by agent on 2026-11-13
+- Status: DONE
+- Date: 2026-11-13
 - Target: Run `make iso` to compile `build/out/sydra-os-*.iso` using mkarchiso with custom siddha repository.
+- Result: Successfully produced `build/out/sydra-os-2026.11.13-x86_64.iso` (4.1 GiB). SHA256 checksum recorded in `build/out/SHA256SUMS` (`d8db54e54a3faab9e0ba2365259751cb17c356af7fd389c04b7e14aab988d499`). Hybrid BIOS/UEFI partition layout verified via `fdisk -l`.
+
+### T1.4 Live Desktop QEMU Boot Verification
+- Status: DONE
+- Date: 2026-11-13
+- Target: Boot live ISO in QEMU (2GB RAM cap), verify autologin, KDE Plasma 6 session, and Sydra OS branding.
+- Result: PASS. QEMU booted into graphical session within 45s. Verified via screendump:
+  - KDE Plasma 6 Wayland desktop active with autologin (`liveuser`).
+  - "Install Sydra OS" desktop launcher present.
+  - Welcome Center opens: "Welcome to the Sydra OS operating system running KDE Plasma!" with Sydra OS documentation link.
+  - Floating bottom panel, status tray, NetworkManager active.
 
 ---
 
