@@ -1,0 +1,23 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 3840 2160" width="3840" height="2160">
+  <defs>
+    <filter id="ultra-blur" x="-50%" y="-50%" width="200%" height="200%">
+      <feGaussianBlur stdDeviation="180" />
+    </filter>
+  </defs>
+
+  <!-- Base Canvas -->
+  <rect width="3840" height="2160" fill="#12141A" />
+
+  <!-- Luminous Blurred Ambient Blobs -->
+  <g filter="url(#ultra-blur)">
+    <circle cx="40%" cy="35%" r="55%" fill="#222736" fill-opacity="0.50" />
+    <circle cx="70%" cy="70%" r="45%" fill="#182030" fill-opacity="0.40" />
+  </g>
+
+  <!-- Subtle Film Grain / Vignette Overlay -->
+  <radialGradient id="vignette" cx="50%" cy="50%" r="70%">
+    <stop offset="60%" stop-color="#000000" stop-opacity="0.0" />
+    <stop offset="100%" stop-color="#000000" stop-opacity="0.45" />
+  </radialGradient>
+  <rect width="3840" height="2160" fill="url(#vignette)" />
+</svg>

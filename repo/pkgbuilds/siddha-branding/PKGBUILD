@@ -2,16 +2,29 @@
 pkgname=siddha-branding
 pkgver=0.1.0
 pkgrel=1
-pkgdesc="Branding and OS identity files for Sydra OS (internal codename Siddha)"
+pkgdesc="Branding, wallpapers, logos, and OS identity files for Sydra OS"
 arch=('any')
 url="https://sydra-os.org"
 license=('GPL-3.0-or-later')
-source=('os-release' 'issue')
-sha256sums=('SKIP' 'SKIP')
+source=(
+  'os-release'
+  'issue'
+  '../../assets/logo/sydra-logo.svg'
+)
+sha256sums=('SKIP' 'SKIP' 'SKIP')
 
 package() {
+  # OS release
   install -Dm644 "$srcdir/os-release" "$pkgdir/usr/lib/os-release"
   install -d "$pkgdir/etc"
   ln -sf /usr/lib/os-release "$pkgdir/etc/os-release"
   install -Dm644 "$srcdir/issue" "$pkgdir/etc/issue"
+  
+  # Logo
+  install -Dm644 "$srcdir/sydra-logo.svg" "$pkgdir/usr/share/pixmaps/sydra-logo.svg"
+  install -Dm644 "$srcdir/sydra-logo.svg" "$pkgdir/usr/share/siddha/branding/logo.svg"
+
+  # Wallpapers
+  install -d "$pkgdir/usr/share/wallpapers/Sydra"
+  cp "$srcdir/../../assets/wallpapers"/*.svg "$pkgdir/usr/share/wallpapers/Sydra/"
 }
