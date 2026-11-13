@@ -1,6 +1,7 @@
 plasma-meta
 sddm
 sddm-kcm
+kdesu
 konsole
 dolphin
 kate
