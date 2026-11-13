@@ -46,6 +46,10 @@ Task logging format:
   - `iso/profile/airootfs/` setup: live user, autologin, passwordless sudo, systemd service symlinks.
   - Bootloader configurations complete: UEFI systemd-boot entries (`efiboot/`), GRUB (`grub/grub.cfg`), BIOS syslinux (`syslinux/`).
 
+### T1.3 Base ISO Compilation
+- Status: CLAIMED by agent on 2026-11-13
+- Target: Run `make iso` to compile `build/out/sydra-os-*.iso` using mkarchiso with custom siddha repository.
+
 ---
 
 ## Phase 4: Glassmorphism Visual Identity

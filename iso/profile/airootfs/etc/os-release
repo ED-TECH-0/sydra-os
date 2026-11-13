@@ -1,0 +1,12 @@
+NAME="Sydra OS"
+PRETTY_NAME="Sydra OS"
+ID=sydra
+ID_LIKE="arch"
+BUILD_ID=2026.11
+ANSI_COLOR="38;2;91;141;239"
+HOME_URL="https://sydra-os.org"
+DOCUMENTATION_URL="https://sydra-os.org/docs"
+SUPPORT_URL="https://sydra-os.org/community"
+BUG_REPORT_URL="https://github.com/ED-TECH-0/sydra-os/issues"
+LOGO="sydra-logo"
+VERSION_CODENAME="siddha"

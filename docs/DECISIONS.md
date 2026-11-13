@@ -31,3 +31,7 @@ Format:
   - `ckbcomp`: Available in `endeavouros` repository
   - `kpmcore`: Available in `extra`
   - `[multilib]` is already enabled in host `/etc/pacman.conf`.
+
+### [2026-11-13] DEC-004: Filesystem Overlay for os-release and issue
+- **Context**: `/usr/lib/os-release` and `/etc/issue` are owned by Arch's core `filesystem` package. Including them directly in `siddha-branding` caused pacman transaction conflict during `airootfs` generation.
+- **Decision**: Overlay `/etc/os-release` and `/etc/issue` directly via `iso/profile/airootfs/etc/`. `siddha-branding` retains backup/reference copies at `/usr/share/siddha/branding/`.
