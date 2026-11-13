@@ -1,5 +1,6 @@
 # Custom Siddha / Sydra OS packages (built into [siddha] repo)
-calamares
+# calamares (built in Phase 2)
+# paru (built in Phase 2)
 siddha-calamares-config
 siddha-branding
 siddha-theme
@@ -9,4 +10,3 @@ siddha-dev
 siddha-welcome
 siddha-gamehub
 siddha-keyring
-paru

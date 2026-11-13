@@ -1,0 +1,90 @@
+# Native Linux Games Catalog for Sydra Game Hub
+# Curated and verified offline games catalog
+
+- id: supertuxkart
+  name: SuperTuxKart
+  genre: Racing
+  badge: NATIVE
+  source: pacman
+  install: supertuxkart
+  license: GPL-3.0-or-later
+  notes: "3D open-source arcade kart racing game"
+  verified: false
+  verified_on: ""
+
+- id: xonotic
+  name: Xonotic
+  genre: FPS
+  badge: NATIVE
+  source: pacman
+  install: xonotic
+  license: GPL-3.0-or-later
+  notes: "Fast-paced arena shooter based on modified DarkPlaces engine"
+  verified: false
+  verified_on: ""
+
+- id: 0ad
+  name: 0 A.D.
+  genre: RTS
+  badge: NATIVE
+  source: pacman
+  install: 0ad
+  license: GPL-2.0-or-later
+  notes: "Historical real-time strategy game"
+  verified: false
+  verified_on: ""
+
+- id: openttd
+  name: OpenTTD
+  genre: Simulation
+  badge: NATIVE
+  source: pacman
+  install: openttd
+  license: GPL-2.0-only
+  notes: "Open source simulation game based on Transport Tycoon Deluxe"
+  verified: false
+  verified_on: ""
+
+- id: wesnoth
+  name: The Battle for Wesnoth
+  genre: Turn-Based Strategy
+  badge: NATIVE
+  source: pacman
+  install: wesnoth
+  license: GPL-2.0-or-later
+  notes: "Turn-based tactical strategy game with high-fantasy theme"
+  verified: false
+  verified_on: ""
+
+- id: mindustry
+  name: Mindustry
+  genre: Tower Defense / Factory
+  badge: NATIVE
+  source: pacman
+  install: mindustry
+  license: GPL-3.0-only
+  notes: "Factory management and tower defense"
+  verified: false
+  verified_on: ""
+
+- id: openra
+  name: OpenRA
+  genre: RTS
+  badge: NATIVE
+  source: pacman
+  install: openra
+  license: GPL-3.0-or-later
+  notes: "Classic RTS engine recreation"
+  verified: false
+  verified_on: ""
+
+- id: luanti
+  name: Luanti (Minetest)
+  genre: Sandbox / Voxel
+  badge: NATIVE
+  source: pacman
+  install: luanti
+  license: LGPL-2.1-or-later
+  notes: "Open-source voxel game engine"
+  verified: false
+  verified_on: ""

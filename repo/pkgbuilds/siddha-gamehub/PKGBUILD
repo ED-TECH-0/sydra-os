@@ -6,20 +6,20 @@ pkgdesc="Native game hub and launch optimizer for Sydra OS"
 arch=('any')
 url="https://sydra-os.org"
 license=('GPL-3.0-or-later')
-depends=('python-pyside6' 'python-pyyaml' 'bash')
+depends=('pyside6' 'python-pyyaml' 'bash')
 optdepends=(
   'nvidia-prime: PRIME offload toggle support'
   'gamemode: GameMode compositor blur suppression'
   'mangohud: HUD performance overlay'
 )
-source=('siddha-gamehub.py' 'siddha-gamehub.desktop')
-sha256sums=('SKIP' 'SKIP')
+source=('siddha-gamehub.py' 'siddha-gamehub.desktop' 'native-games.yaml')
+sha256sums=('SKIP' 'SKIP' 'SKIP')
 
 package() {
   install -Dm755 "$srcdir/siddha-gamehub.py" "$pkgdir/usr/share/siddha/gamehub/siddha-gamehub.py"
   install -Dm644 "$srcdir/siddha-gamehub.desktop" "$pkgdir/usr/share/applications/siddha-gamehub.desktop"
   install -d "$pkgdir/usr/share/siddha/catalog"
-  install -Dm644 "$srcdir/../../../catalog/native-games.yaml" "$pkgdir/usr/share/siddha/catalog/native-games.yaml"
+  install -Dm644 "$srcdir/native-games.yaml" "$pkgdir/usr/share/siddha/catalog/native-games.yaml"
   install -d "$pkgdir/usr/bin"
   ln -sf /usr/share/siddha/gamehub/siddha-gamehub.py "$pkgdir/usr/bin/siddha-gamehub"
 }

@@ -33,10 +33,11 @@ wget
 curl
 unzip
 zip
-p7zip
+7zip
 htop
 btop
 zram-generator
 power-profiles-daemon
 firewalld
+iptables
 fwupd

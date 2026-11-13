@@ -6,21 +6,15 @@ pkgdesc="Calamares installer branding and configurations for Sydra OS"
 arch=('any')
 url="https://sydra-os.org"
 license=('GPL-3.0-or-later')
-source=(
-  'settings.conf'
-  'modules/shellprocess_initcpio.conf'
-  'modules/shellprocess_cleanup.conf'
-  'modules/shellprocess_firstboot.conf'
-  'branding/branding.desc'
-)
-sha256sums=('SKIP' 'SKIP' 'SKIP' 'SKIP' 'SKIP')
+source=()
+sha256sums=()
 
 package() {
-  install -Dm644 "$srcdir/settings.conf" "$pkgdir/etc/calamares/settings.conf"
+  install -Dm644 "$startdir/settings.conf" "$pkgdir/etc/calamares/settings.conf"
   
   install -d "$pkgdir/etc/calamares/modules"
-  install -m644 "$srcdir/modules"/*.conf "$pkgdir/etc/calamares/modules/"
+  install -m644 "$startdir/modules"/*.conf "$pkgdir/etc/calamares/modules/"
   
   install -d "$pkgdir/usr/share/calamares/branding/siddha"
-  install -m644 "$srcdir/branding/branding.desc" "$pkgdir/usr/share/calamares/branding/siddha/"
+  install -m644 "$startdir/branding"/* "$pkgdir/usr/share/calamares/branding/siddha/"
 }

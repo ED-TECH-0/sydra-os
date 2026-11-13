@@ -19,6 +19,7 @@ docker-compose
 dolphin
 dosfstools
 e2fsprogs
+edk2-shell
 efibootmgr
 exfatprogs
 eza
@@ -45,6 +46,7 @@ inotify-tools
 intel-media-driver
 intel-ucode
 inter-font
+iptables
 jq
 kate
 kdegraphics-thumbnailers
@@ -89,6 +91,7 @@ os-prober
 papirus-icon-theme
 pipewire
 pipewire-alsa
+pipewire-jack
 pipewire-pulse
 plasma-firewall
 plasma-meta
@@ -99,6 +102,7 @@ pyside6
 python
 python-pip
 python-pipx
+qt6-multimedia-ffmpeg
 reflector
 ripgrep
 rsync
@@ -124,6 +128,7 @@ steam
 sudo
 switcheroo-control
 syslinux
+tesseract-data-eng
 tmux
 ttf-jetbrains-mono
 unzip

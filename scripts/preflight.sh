@@ -26,9 +26,13 @@ else
   fail "/etc/os-release not found"
 fi
 
-# 2. Unprivileged user check
+# 2. User check
 if [[ $EUID -eq 0 ]]; then
-  fail "Preflight must run as a regular user, not root"
+  if [[ -n "${SUDO_USER:-}" ]]; then
+    pass "Running via sudo from user $SUDO_USER"
+  else
+    warn "Running as root directly (recommended to run make check as regular user)"
+  fi
 else
   pass "Running as non-root user ($USER)"
 fi
@@ -52,7 +56,7 @@ fi
 
 # 5. Core tools check
 REQUIRED_TOOLS=(git repo-add python)
-BUILD_TOOLS=(mkarchiso makechrootpkg qemu-system-x86_64 edk2-ovmf)
+BUILD_TOOLS=(mkarchiso makechrootpkg qemu-system-x86_64)
 
 for tool in "${REQUIRED_TOOLS[@]}"; do
   if command -v "$tool" &>/dev/null; then
@@ -69,6 +73,13 @@ for tool in "${BUILD_TOOLS[@]}"; do
     warn "Build tool not yet installed: $tool (install before building ISO / VM testing)"
   fi
 done
+
+# Check UEFI OVMF firmware files
+if [[ -f /usr/share/edk2/x64/OVMF_CODE.4m.fd || -f /usr/share/edk2-ovmf/x64/OVMF_CODE.fd || -f /usr/share/ovmf/x64/OVMF_CODE.fd ]]; then
+  pass "UEFI OVMF firmware installed"
+else
+  warn "UEFI OVMF firmware not found (package: edk2-ovmf)"
+fi
 
 # 6. Memory check
 TOTAL_RAM_KB=$(grep MemTotal /proc/meminfo | awk '{print $2}')

@@ -13,12 +13,14 @@ mkdir -p "$OUT" "$LOGDIR"
 avail_gb=$(df --output=avail -BG "$ROOT" | tail -1 | tr -dc '0-9')
 (( avail_gb >= 25 )) || { echo "need >= 25 GB free, have ${avail_gb} GB"; exit 1; }
 
-# render pacman.conf with absolute path to the local repo (after T2.2)
+# render pacman.conf with URL-encoded path for pacman file:// compatibility
 if [[ -f iso/profile/pacman.conf.in ]]; then
-  sed "s|@REPO_DIR@|$ROOT|g" iso/profile/pacman.conf.in > iso/profile/pacman.conf
+  REPO_ENC=$(python3 -c "import urllib.parse; print(urllib.parse.quote('''$ROOT'''))")
+  sed "s|@REPO_DIR@|$REPO_ENC|g" iso/profile/pacman.conf.in > iso/profile/pacman.conf
 fi
 
 rm -rf "$WORK"
+echo "Starting mkarchiso build..."
 mkarchiso -v -w "$WORK" -o "$OUT" iso/profile 2>&1 | tee "$LOG"
 
 ( cd "$OUT" && sha256sum ./*.iso > SHA256SUMS )

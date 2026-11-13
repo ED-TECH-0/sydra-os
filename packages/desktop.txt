@@ -20,6 +20,7 @@ xorg-xwayland
 pipewire
 pipewire-alsa
 pipewire-pulse
+pipewire-jack
 wireplumber
 bluez
 bluez-utils
@@ -32,4 +33,6 @@ ttf-jetbrains-mono
 noto-fonts
 noto-fonts-cjk
 noto-fonts-emoji
-python-pyside6
+pyside6
+qt6-multimedia-ffmpeg
+tesseract-data-eng

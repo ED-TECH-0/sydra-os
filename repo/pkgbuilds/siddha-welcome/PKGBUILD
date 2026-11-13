@@ -6,7 +6,7 @@ pkgdesc="Welcome and onboarding application for Sydra OS"
 arch=('any')
 url="https://sydra-os.org"
 license=('GPL-3.0-or-later')
-depends=('python-pyside6' 'bash')
+depends=('pyside6' 'bash')
 source=('siddha-welcome.py' 'siddha-welcome.desktop')
 sha256sums=('SKIP' 'SKIP')
 

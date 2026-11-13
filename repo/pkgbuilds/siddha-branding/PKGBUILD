@@ -9,7 +9,7 @@ license=('GPL-3.0-or-later')
 source=(
   'os-release'
   'issue'
-  '../../assets/logo/sydra-logo.svg'
+  'sydra-logo.svg'
 )
 sha256sums=('SKIP' 'SKIP' 'SKIP')
 
@@ -26,5 +26,7 @@ package() {
 
   # Wallpapers
   install -d "$pkgdir/usr/share/wallpapers/Sydra"
-  cp "$srcdir/../../assets/wallpapers"/*.svg "$pkgdir/usr/share/wallpapers/Sydra/"
+  if compgen -G "$startdir/wallpapers/*.svg" > /dev/null; then
+    cp "$startdir/wallpapers"/*.svg "$pkgdir/usr/share/wallpapers/Sydra/"
+  fi
 }
