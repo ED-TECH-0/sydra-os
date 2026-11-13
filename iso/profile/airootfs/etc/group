@@ -1,0 +1,15 @@
+root:x:0:root
+sys:x:3:bin,live
+adm:x:4:daemon,live
+wheel:x:988:live
+log:x:19:live
+network:x:90:live
+video:x:986:live
+audio:x:995:live
+optical:x:990:live
+storage:x:989:live
+scanner:x:991:live
+power:x:98:live
+input:x:985:live
+users:x:984:live
+live:x:1000:

@@ -1,0 +1,19 @@
+# Maintainer: Sydra OS Team <team@sydra-os.org>
+pkgname=siddha-gpu-setup
+pkgver=0.1.0
+pkgrel=1
+pkgdesc="GPU hardware detection and driver configuration tool for Sydra OS"
+arch=('any')
+url="https://sydra-os.org"
+license=('GPL-3.0-or-later')
+depends=('pciutils' 'bash')
+optdepends=(
+  'nvidia-prime: PRIME offload support for hybrid graphics laptops'
+  'mesa-utils: for glxinfo renderer queries'
+)
+source=('siddha-gpu-setup')
+sha256sums=('SKIP')
+
+package() {
+  install -Dm755 "$srcdir/siddha-gpu-setup" "$pkgdir/usr/bin/siddha-gpu-setup"
+}

@@ -1,0 +1,30 @@
+#!/usr/bin/env bash
+# Siddha Glass GameMode hook: dynamically toggles compositor blur effect during gameplay
+set -euo pipefail
+
+ACTION=${1:-status}
+
+# Don't fail loudly if outside graphical session or D-Bus error
+trap 'exit 0' ERR
+
+if ! command -v qdbus6 &>/dev/null && ! command -v qdbus &>/dev/null; then
+    exit 0
+fi
+
+QDBUS_BIN=$(command -v qdbus6 || command -v qdbus)
+
+case "$ACTION" in
+    on)
+        # Unload blur effect in KWin
+        "$QDBUS_BIN" org.kde.KWin /Effects org.kde.kwin.Effects.unloadEffect blur 2>/dev/null || true
+        ;;
+    off)
+        # Reload blur effect in KWin
+        "$QDBUS_BIN" org.kde.KWin /Effects org.kde.kwin.Effects.loadEffect blur 2>/dev/null || true
+        ;;
+    status)
+        "$QDBUS_BIN" org.kde.KWin /Effects org.kde.kwin.Effects.isEffectLoaded blur 2>/dev/null || true
+        ;;
+esac
+
+exit 0

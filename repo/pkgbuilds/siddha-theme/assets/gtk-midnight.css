@@ -1,0 +1,19 @@
+/* Sydra OS / Siddha Glass GTK Overrides - Preset: midnight */
+@define-color accent_color #4FB3BF;
+@define-color window_bg_color rgba(11, 15, 26, 0.8);
+@define-color window_fg_color #EEF1F8;
+
+window {
+    background-color: @window_bg_color;
+    color: @window_fg_color;
+    border-radius: 12px;
+}
+
+headerbar {
+    background-color: rgba(11, 15, 26, 0.90);
+    border-bottom: 1px solid rgba(255, 255, 255, 0.10);
+}
+
+button {
+    border-radius: 10px;
+}

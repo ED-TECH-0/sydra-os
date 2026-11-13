@@ -1,0 +1,10 @@
+[Desktop Entry]
+Type=Application
+Version=1.0
+Name=Sydra Game Hub
+Comment=Discover, launch, and optimize native Linux and Proton games
+Exec=python3 /usr/share/siddha/gamehub/siddha-gamehub.py
+Icon=applications-games
+Terminal=false
+Categories=Game;
+StartupNotify=true

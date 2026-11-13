@@ -1,0 +1,15 @@
+# Maintainer: Sydra OS Team <team@sydra-os.org>
+pkgname=siddha-dev
+pkgver=0.1.0
+pkgrel=1
+pkgdesc="Developer workstation setup CLI for Sydra OS"
+arch=('any')
+url="https://sydra-os.org"
+license=('GPL-3.0-or-later')
+depends=('bash')
+source=('siddha-dev')
+sha256sums=('SKIP')
+
+package() {
+  install -Dm755 "$srcdir/siddha-dev" "$pkgdir/usr/bin/siddha-dev"
+}

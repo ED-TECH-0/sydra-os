@@ -1,0 +1,47 @@
+#!/usr/bin/env bash
+# Sydra OS / Siddha Glass Theme & Intensity Switcher
+set -euo pipefail
+
+PRESET=${1:-graphite}
+INTENSITY=${2:-pro}
+
+echo "=== Applying Siddha Glass: Preset [$PRESET], Intensity [$INTENSITY] ==="
+
+SCHEME_NAME="SiddhaGlass${PRESET^}"
+
+# 1. Apply KDE Color Scheme if in Plasma
+if command -v plasma-apply-colorscheme &>/dev/null; then
+    plasma-apply-colorscheme "$SCHEME_NAME" 2>/dev/null || true
+fi
+
+# 2. Adjust KWin blur based on intensity
+if command -v kwriteconfig6 &>/dev/null; then
+    case "$INTENSITY" in
+        pro)
+            kwriteconfig6 --file kwinrc --group Plugins --key blurEnabled true
+            kwriteconfig6 --file kwinrc --group Effect-blur --key BlurStrength 8
+            kwriteconfig6 --file kwinrc --group Effect-blur --key NoiseStrength 2
+            ;;
+        standard)
+            kwriteconfig6 --file kwinrc --group Plugins --key blurEnabled true
+            kwriteconfig6 --file kwinrc --group Effect-blur --key BlurStrength 12
+            kwriteconfig6 --file kwinrc --group Effect-blur --key NoiseStrength 3
+            ;;
+        heavy)
+            kwriteconfig6 --file kwinrc --group Plugins --key blurEnabled true
+            kwriteconfig6 --file kwinrc --group Effect-blur --key BlurStrength 16
+            kwriteconfig6 --file kwinrc --group Effect-blur --key NoiseStrength 4
+            ;;
+        flat)
+            # Battery saver / Low-end GPU profile (Zero blur)
+            kwriteconfig6 --file kwinrc --group Plugins --key blurEnabled false
+            ;;
+    esac
+fi
+
+# 3. Reload KWin effects via D-Bus if available
+if command -v qdbus6 &>/dev/null; then
+    qdbus6 org.kde.KWin /KWin reconfigure 2>/dev/null || true
+fi
+
+echo "Siddha Glass Pro settings updated."

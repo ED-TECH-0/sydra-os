@@ -1,0 +1,88 @@
+#!/usr/bin/env bash
+# Sydra OS / Siddha GPU Detection and Setup Tool
+set -euo pipefail
+
+ACTION=${1:---status}
+
+detect_gpus() {
+    echo "=== GPU Hardware Detection ==="
+    lspci -nn | grep -Ei 'vga|3d|display' || echo "No standard VGA/3D controllers found."
+}
+
+has_nvidia() {
+    lspci -nn | grep -Ei 'vga|3d|display' | grep -q '\[10de:'
+}
+
+has_amd() {
+    lspci -nn | grep -Ei 'vga|3d|display' | grep -q '\[1002:'
+}
+
+has_intel() {
+    lspci -nn | grep -Ei 'vga|3d|display' | grep -q '\[8086:'
+}
+
+is_hybrid() {
+    has_nvidia && (has_intel || has_amd)
+}
+
+show_status() {
+    detect_gpus
+    echo ""
+    echo "--- Driver Status ---"
+    if has_nvidia; then
+        echo "NVIDIA GPU: DETECTED"
+        if is_hybrid; then
+            echo "Hybrid Graphics: YES (PRIME render offload supported)"
+            echo "Launch command: prime-run <application>"
+        fi
+        if command -v nvidia-smi &>/dev/null; then
+            echo "NVIDIA Driver: Active"
+            nvidia-smi --query-gpu=name,driver_version,memory.total --format=csv,noheader || true
+        else
+            echo "NVIDIA Driver: Not loaded / nouveau active"
+        fi
+    fi
+
+    if has_amd; then
+        echo "AMD Radeon GPU: DETECTED (Mesa/RADV open source drivers active)"
+    fi
+
+    if has_intel; then
+        echo "Intel GPU: DETECTED (Mesa/ANV open source drivers active)"
+    fi
+
+    if command -v glxinfo &>/dev/null; then
+        echo "Active OpenGL Renderer: $(glxinfo -B 2>/dev/null | grep 'OpenGL renderer string:' || echo 'Unknown')"
+    fi
+}
+
+install_drivers() {
+    echo "=== Configuring GPU Drivers ==="
+    if has_nvidia; then
+        echo "Installing NVIDIA open-source driver stack..."
+        if command -v pacman &>/dev/null; then
+            sudo pacman -S --needed --noconfirm nvidia-open nvidia-utils lib32-nvidia-utils nvidia-prime
+            echo "NVIDIA drivers installed."
+        fi
+    elif has_amd; then
+        echo "AMD Radeon detected: Mesa and RADV drivers already configured."
+    elif has_intel; then
+        echo "Intel graphics detected: Mesa and ANV drivers already configured."
+    fi
+}
+
+case "$ACTION" in
+    --status)
+        show_status
+        ;;
+    --detect)
+        detect_gpus
+        ;;
+    --install)
+        install_drivers
+        ;;
+    *)
+        echo "Usage: siddha-gpu-setup [--status|--detect|--install]"
+        exit 1
+        ;;
+esac

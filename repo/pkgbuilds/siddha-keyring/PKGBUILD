@@ -1,0 +1,15 @@
+# Maintainer: Sydra OS Team <team@sydra-os.org>
+pkgname=siddha-keyring
+pkgver=20261113
+pkgrel=1
+pkgdesc="Sydra OS GPG keyring for package validation"
+arch=('any')
+url="https://sydra-os.org"
+license=('GPL-3.0-or-later')
+
+package() {
+  install -d "$pkgdir/usr/share/pacman/keyrings"
+  touch "$pkgdir/usr/share/pacman/keyrings/siddha.gpg"
+  touch "$pkgdir/usr/share/pacman/keyrings/siddha-trusted"
+  touch "$pkgdir/usr/share/pacman/keyrings/siddha-revoked"
+}

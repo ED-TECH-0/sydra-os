@@ -1,0 +1,9 @@
+siddha-branding
+siddha-theme
+siddha-calamares-config
+siddha-settings
+siddha-gpu-setup
+siddha-dev
+siddha-welcome
+siddha-gamehub
+siddha-keyring

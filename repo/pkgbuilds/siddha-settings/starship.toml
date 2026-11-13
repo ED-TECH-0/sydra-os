@@ -1,0 +1,27 @@
+format = """
+$username\
+$hostname\
+$directory\
+$git_branch\
+$git_status\
+$package\
+$python\
+$nodejs\
+$rust\
+$golang\
+$line_break\
+$character"""
+
+[directory]
+style = "bold cyan"
+truncation_length = 4
+
+[character]
+success_symbol = "[λ](bold blue) "
+error_symbol = "[λ](bold red) "
+
+[git_branch]
+style = "bold purple"
+
+[git_status]
+style = "bold red"

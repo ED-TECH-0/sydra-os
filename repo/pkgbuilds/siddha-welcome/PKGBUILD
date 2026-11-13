@@ -1,0 +1,18 @@
+# Maintainer: Sydra OS Team <team@sydra-os.org>
+pkgname=siddha-welcome
+pkgver=0.1.0
+pkgrel=1
+pkgdesc="Welcome and onboarding application for Sydra OS"
+arch=('any')
+url="https://sydra-os.org"
+license=('GPL-3.0-or-later')
+depends=('python-pyside6' 'bash')
+source=('siddha-welcome.py' 'siddha-welcome.desktop')
+sha256sums=('SKIP' 'SKIP')
+
+package() {
+  install -Dm755 "$srcdir/siddha-welcome.py" "$pkgdir/usr/share/siddha/welcome/siddha-welcome.py"
+  install -Dm644 "$srcdir/siddha-welcome.desktop" "$pkgdir/usr/share/applications/siddha-welcome.desktop"
+  install -d "$pkgdir/usr/bin"
+  ln -sf /usr/share/siddha/welcome/siddha-welcome.py "$pkgdir/usr/bin/siddha-welcome"
+}

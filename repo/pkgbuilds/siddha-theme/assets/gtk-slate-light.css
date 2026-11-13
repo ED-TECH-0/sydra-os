@@ -1,0 +1,19 @@
+/* Sydra OS / Siddha Glass GTK Overrides - Preset: slate-light */
+@define-color accent_color #2F6FDE;
+@define-color window_bg_color rgba(233, 236, 242, 0.8);
+@define-color window_fg_color #12141A;
+
+window {
+    background-color: @window_bg_color;
+    color: @window_fg_color;
+    border-radius: 12px;
+}
+
+headerbar {
+    background-color: rgba(233, 236, 242, 0.90);
+    border-bottom: 1px solid rgba(255, 255, 255, 0.10);
+}
+
+button {
+    border-radius: 10px;
+}

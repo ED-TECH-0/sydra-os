@@ -1,0 +1,23 @@
+# Maintainer: Sydra OS Team <team@sydra-os.org>
+pkgname=siddha-theme
+pkgver=0.1.0
+pkgrel=1
+pkgdesc="Siddha Glass Pro desktop themes, color schemes, and switcher for Sydra OS"
+arch=('any')
+url="https://sydra-os.org"
+license=('GPL-3.0-or-later')
+depends=('plasma-desktop' 'bash')
+source=('siddha-glass-set')
+sha256sums=('SKIP')
+
+package() {
+  install -Dm755 "$srcdir/siddha-glass-set" "$pkgdir/usr/bin/siddha-glass-set"
+  
+  # Install color schemes
+  install -d "$pkgdir/usr/share/color-schemes"
+  cp "$srcdir/../assets"/*.colors "$pkgdir/usr/share/color-schemes/"
+  
+  # Install Konsole color schemes
+  install -d "$pkgdir/usr/share/konsole"
+  cp "$srcdir/../assets/konsole"/*.colorscheme "$pkgdir/usr/share/konsole/"
+}

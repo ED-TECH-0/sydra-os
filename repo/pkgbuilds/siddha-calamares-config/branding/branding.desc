@@ -1,0 +1,25 @@
+componentName: siddha
+
+strings:
+    productName:         Sydra OS
+    shortProductName:    Sydra
+    version:             0.1.0
+    shortVersion:        0.1
+    versionedName:       Sydra OS 0.1
+    shortVersionedName:  Sydra 0.1
+    bootloaderEntryName: Sydra OS
+    productUrl:          https://sydra-os.org
+    supportUrl:          https://sydra-os.org/community
+    knownIssuesUrl:      https://sydra-os.org/docs/known-issues
+    releaseNotesUrl:     https://sydra-os.org/docs/release-notes
+
+images:
+    productLogo:         "logo.svg"
+    productIcon:         "logo.svg"
+    productWelcome:      "welcome.png"
+
+style:
+   Sidebar: "widget"
+   Navigation: "widget"
+
+slideshow:               "show.qml"

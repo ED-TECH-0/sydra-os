@@ -1,0 +1,10 @@
+[Desktop Entry]
+Type=Application
+Version=1.0
+Name=Welcome to Sydra OS
+Comment=Onboarding and configuration wizard for Sydra OS
+Exec=python3 /usr/share/siddha/welcome/siddha-welcome.py
+Icon=preferences-system
+Terminal=false
+Categories=System;Settings;
+StartupNotify=true

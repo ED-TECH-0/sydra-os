@@ -1,0 +1,74 @@
+#!/usr/bin/env bash
+# Sydra OS / Siddha Developer Hub CLI
+set -euo pipefail
+
+LOGDIR="$HOME/.local/state/siddha"
+mkdir -p "$LOGDIR"
+LOG="$LOGDIR/dev-$(date +%Y%m%d).log"
+
+echo "=============================================="
+echo "           Sydra Developer Hub CLI"
+echo "=============================================="
+echo "1) Setup Rust toolchain (rustup stable)"
+echo "2) Setup Node.js tools (npm, pnpm)"
+echo "3) Setup Python modern tooling (uv, pipx)"
+echo "4) Setup Docker container engine"
+echo "5) Generate new SSH developer key"
+echo "6) Configure Git identity"
+echo "q) Quit"
+echo "=============================================="
+
+read -rp "Select an option [1-6, q]: " CHOICE
+
+case "$CHOICE" in
+    1)
+        echo "Configuring Rustup default stable toolchain..." | tee -a "$LOG"
+        if command -v rustup &>/dev/null; then
+            rustup default stable 2>&1 | tee -a "$LOG"
+            rustup component add clippy rustfmt 2>&1 | tee -a "$LOG"
+            echo "Rust configured: $(rustc --version 2>/dev/null || echo 'ready')"
+        else
+            echo "Error: rustup package not installed" | tee -a "$LOG"
+        fi
+        ;;
+    2)
+        echo "Configuring Node.js and package managers..." | tee -a "$LOG"
+        if command -v npm &>/dev/null; then
+            sudo npm install -g pnpm 2>&1 | tee -a "$LOG" || true
+            echo "Node ready: $(node --version)"
+        fi
+        ;;
+    3)
+        echo "Configuring Python modern tooling..." | tee -a "$LOG"
+        if command -v uv &>/dev/null; then
+            echo "uv is available: $(uv --version)"
+        fi
+        ;;
+    4)
+        echo "Enabling Docker service and configuring user group..." | tee -a "$LOG"
+        sudo systemctl enable --now docker.service 2>&1 | tee -a "$LOG"
+        sudo usermod -aG docker "$USER" 2>&1 | tee -a "$LOG"
+        echo "Docker enabled. Log out and back in for group changes to take effect."
+        ;;
+    5)
+        read -rp "Enter comment/email for SSH key: " KEY_EMAIL
+        ssh-keygen -t ed25519 -C "$KEY_EMAIL" -f "$HOME/.ssh/id_ed25519"
+        echo "Public key:"
+        cat "$HOME/.ssh/id_ed25519.pub"
+        ;;
+    6)
+        read -rp "Enter your Git Name: " GIT_NAME
+        read -rp "Enter your Git Email: " GIT_MAIL
+        git config --global user.name "$GIT_NAME"
+        git config --global user.email "$GIT_MAIL"
+        echo "Git identity updated."
+        ;;
+    q|Q)
+        echo "Goodbye!"
+        exit 0
+        ;;
+    *)
+        echo "Invalid selection."
+        exit 1
+        ;;
+esac
