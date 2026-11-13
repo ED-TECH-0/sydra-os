@@ -1,0 +1,20 @@
+#!/usr/bin/env bash
+set -euo pipefail
+
+# Allow local root to connect to Wayland / Xwayland
+if command -v xhost >/dev/null 2>&1; then
+    xhost +local:root >/dev/null 2>&1 || true
+fi
+
+# Ensure Wayland runtime directory permissions for root
+if [[ -n "${XDG_RUNTIME_DIR:-}" ]]; then
+    chmod 777 "$XDG_RUNTIME_DIR" 2>/dev/null || true
+    chmod 666 "${XDG_RUNTIME_DIR}/${WAYLAND_DISPLAY:-wayland-0}" 2>/dev/null || true
+fi
+
+# Launch calamares with debug output
+if command -v pkexec >/dev/null 2>&1; then
+    exec pkexec calamares -D 8 "$@"
+else
+    exec sudo -E calamares -D 8 "$@"
+fi
