@@ -1,7 +1,7 @@
 # Maintainer: Sydra OS Team <team@sydra-os.org>
 pkgname=siddha-calamares-config
 pkgver=0.1.0
-pkgrel=3
+pkgrel=4
 pkgdesc="Calamares installer branding and configurations for Sydra OS"
 arch=('any')
 url="https://sydra-os.org"

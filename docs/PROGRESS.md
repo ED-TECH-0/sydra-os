@@ -123,5 +123,5 @@ Task logging format:
 - **Physical USB Flash for Hardware Testing (Laptop B / Nitro RTX 5050)**:
   Insert a USB pendrive (<= 256GB), check device name with `lsblk`, then run:
   ```bash
-  sudo scripts/flash-usb.sh build/out/sydra-os-2026.11.13-x86_64.iso /dev/sdX
+  sudo scripts/flash-usb.sh build/out/sydra-os-2026.11.14-x86_64.iso /dev/sdX  # replace /dev/sdX with USB drive (e.g. /dev/sdb)
   ```
