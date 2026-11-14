@@ -16,11 +16,21 @@ DISK="build/vm/test-$MODE.qcow2"
 
 rm -f "build/vm/qmp-$MODE.sock"
 
+# Auto-detect display backend
+DISPLAY_ARGS=()
+if qemu-system-x86_64 -display sdl,gl=on -help >/dev/null 2>&1; then
+  DISPLAY_ARGS=(-device virtio-vga-gl -display sdl,gl=on)
+elif qemu-system-x86_64 -display gtk -help >/dev/null 2>&1; then
+  DISPLAY_ARGS=(-device virtio-vga -display gtk)
+else
+  DISPLAY_ARGS=(-vga virtio -display sdl)
+fi
+
 ARGS=(-enable-kvm -cpu host -smp 4 -m 2048 -machine q35
       -qmp "unix:build/vm/qmp-$MODE.sock,server,nowait"
       -drive "file=$DISK,if=virtio,format=qcow2"
       -netdev user,id=n0 -device virtio-net-pci,netdev=n0
-      -device virtio-vga-gl -display gtk,gl=on)
+      "${DISPLAY_ARGS[@]}")
 
 if [[ $MODE == uefi ]]; then
   OVMF_CODE=""
