@@ -14,7 +14,10 @@ fi
 DISK="build/vm/test-$MODE.qcow2"
 [[ -f $DISK ]] || qemu-img create -f qcow2 "$DISK" 30G
 
+rm -f "build/vm/qmp-$MODE.sock"
+
 ARGS=(-enable-kvm -cpu host -smp 4 -m 2048 -machine q35
+      -qmp "unix:build/vm/qmp-$MODE.sock,server,nowait"
       -drive "file=$DISK,if=virtio,format=qcow2"
       -netdev user,id=n0 -device virtio-net-pci,netdev=n0
       -device virtio-vga-gl -display gtk,gl=on)

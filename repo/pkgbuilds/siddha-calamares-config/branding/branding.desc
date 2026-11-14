@@ -1,5 +1,12 @@
 componentName: siddha
 
+windowExpanding: normal
+windowSize: 1024px,680px
+windowPlacement: center
+
+sidebar: widget
+navigation: widget
+
 strings:
     productName:         Sydra OS
     shortProductName:    Sydra
@@ -16,7 +23,16 @@ strings:
 images:
     productLogo:         "logo.svg"
     productIcon:         "logo.svg"
+    productWelcome:      "logo.svg"
+
+slideshow: []
+slideshowAPI: 1
 
 style:
-   Sidebar: "widget"
-   Navigation: "widget"
+   SidebarBackground:        "#1a1b26"
+   SidebarText:              "#c0caf5"
+   SidebarBackgroundCurrent: "#7aa2f7"
+   SidebarTextCurrent:       "#15161e"
+
+uploadServer:
+   type: "none"

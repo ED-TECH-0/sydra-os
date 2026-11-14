@@ -51,6 +51,7 @@ iptables
 jq
 kate
 kdegraphics-thumbnailers
+kde-cli-tools
 kdesu
 kdialog
 kio-extras
@@ -147,9 +148,11 @@ wine-mono
 wine-staging
 winetricks
 wireplumber
+xcb-util-cursor
 xdg-desktop-portal-kde
 xdg-user-dirs
 xf86-input-libinput
+xorg-xhost
 xorg-xwayland
 zip
 zoxide

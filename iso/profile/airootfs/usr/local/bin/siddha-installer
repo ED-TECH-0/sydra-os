@@ -11,7 +11,7 @@ echo "XDG_RUNTIME_DIR: ${XDG_RUNTIME_DIR:-unset}"
 
 # Allow local root to access Xwayland / Wayland
 if command -v xhost >/dev/null 2>&1; then
-    xhost +local:root 2>/dev/null || true
+    xhost +si:localuser:root 2>/dev/null || xhost +local:root 2>/dev/null || true
 fi
 
 # Ensure Wayland socket permissions for root
@@ -26,7 +26,7 @@ fi
 sudo -E \
     DISPLAY="${DISPLAY:-:0}" \
     WAYLAND_DISPLAY="${WAYLAND_DISPLAY:-wayland-0}" \
-    XDG_RUNTIME_DIR="/run/user/1000" \
+    XDG_RUNTIME_DIR="${XDG_RUNTIME_DIR:-/run/user/1000}" \
     XAUTHORITY="${XAUTHORITY:-$HOME/.Xauthority}" \
     QT_QPA_PLATFORM="wayland;xcb" \
     calamares -D 8 "$@"
