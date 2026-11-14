@@ -1,7 +1,7 @@
 # Maintainer: Sydra OS Team <team@sydra-os.org>
 pkgname=siddha-calamares-config
 pkgver=0.1.0
-pkgrel=5
+pkgrel=6
 pkgdesc="Calamares installer branding and configurations for Sydra OS"
 arch=('any')
 url="https://sydra-os.org"
@@ -10,6 +10,7 @@ source=()
 sha256sums=()
 
 package() {
+  install -Dm755 "$startdir/siddha-initcpio-fix" "$pkgdir/usr/bin/siddha-initcpio-fix"
   install -Dm644 "$startdir/settings.conf" "$pkgdir/etc/calamares/settings.conf"
   
   install -d "$pkgdir/etc/calamares/modules"

@@ -1,0 +1,30 @@
+#!/usr/bin/env bash
+set -e
+
+# Remove live ISO archiso drop-in configs from target
+rm -f /etc/mkinitcpio.conf.d/archiso.conf
+rm -f /etc/mkinitcpio.d/archiso.preset
+
+# Ensure /boot/vmlinuz-linux exists for mkinitcpio
+if [ ! -f /boot/vmlinuz-linux ]; then
+    for k in /usr/lib/modules/*/vmlinuz; do
+        if [ -f "$k" ]; then
+            cp -f "$k" /boot/vmlinuz-linux
+            break
+        fi
+    done
+fi
+
+# Ensure microcode images are present in /boot if available
+for ucode in intel-ucode.img amd-ucode.img; do
+    if [ ! -f "/boot/$ucode" ]; then
+        for cand in "/run/archiso/bootmnt/sydra/boot/$ucode" "/bootmnt/sydra/boot/$ucode" "/usr/share/$ucode"; do
+            if [ -f "$cand" ]; then
+                cp -f "$cand" "/boot/$ucode"
+                break
+            fi
+        done
+    fi
+done
+
+exit 0
