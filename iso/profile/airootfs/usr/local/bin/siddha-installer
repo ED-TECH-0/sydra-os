@@ -22,6 +22,15 @@ if [[ -n "${XDG_RUNTIME_DIR:-}" ]]; then
     fi
 fi
 
+# Ensure squashfs source path exists for Calamares unpackfs
+if [[ ! -f /run/archiso/bootmnt/sydra/x86_64/airootfs.sfs ]]; then
+    FOUND_SFS=$(find /run/archiso -name "airootfs.sfs" 2>/dev/null | head -n1 || true)
+    if [[ -n "$FOUND_SFS" && -f "$FOUND_SFS" ]]; then
+        sudo mkdir -p /run/archiso/bootmnt/sydra/x86_64
+        sudo ln -sf "$FOUND_SFS" /run/archiso/bootmnt/sydra/x86_64/airootfs.sfs
+    fi
+fi
+
 # Run Calamares with sudo -E preserving display variables
 sudo -E \
     DISPLAY="${DISPLAY:-:0}" \
