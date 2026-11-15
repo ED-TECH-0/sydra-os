@@ -51,8 +51,10 @@ for ucode in intel-ucode.img amd-ucode.img; do
     fi
 done
 
-# Run Calamares with sudo -E preserving display variables
+# Run Calamares with sudo -E preserving display variables and system PATH
+export PATH="/usr/local/sbin:/usr/local/bin:/usr/bin:/usr/sbin:/sbin:$PATH"
 sudo -E \
+    PATH="$PATH" \
     DISPLAY="${DISPLAY:-:0}" \
     WAYLAND_DISPLAY="${WAYLAND_DISPLAY:-wayland-0}" \
     XDG_RUNTIME_DIR="${XDG_RUNTIME_DIR:-/run/user/1000}" \
