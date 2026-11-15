@@ -139,7 +139,7 @@ Task logging format:
   - Packaged `org.sydra.glass.desktop` Look-and-Feel package into `siddha-theme-0.1.0-4` implementing dual-panel architecture: top translucent status bar + left vertical capsule dock (Dolphin, Konsole, Firefox, Sydra Game Hub, System Settings).
   - Bundled 3D metallic torus (`sydra-metallic-torus.svg`) and vibrant cyber frost (`sydra-cyber-frost.svg`) vector wallpapers.
   - Resolved Plasma Wayland boot freeze: configured `kwin_wayland` compositor for SDDM, created `/home/live` in `airootfs` with `1000:1000` ownership, disabled KWallet first-run prompt, and completed 13-section color schemes.
-  - Built production release ISO `build/out/sydra-os-2026.11.15-x86_64.iso` (4.1 GiB). SHA-256: `b441f49e9a9d0b881792bc0043bff79253a79e56f71c5dbbb48733c402b9435f`. Verified live boot and captured screenshot sequence in `~/Pictures/Screenshots/` and `~/Pictures/sydra-os-gui.png`.
+  - Built production release ISO `build/out/sydra-os-2026.11.15-x86_64.iso` (4.1 GiB). SHA-256: `1feafa893c983198f96ba4b10b9c95c95402b8775a15a88b0842f235dff522cc`. Verified live boot and captured screenshot sequence in `~/Pictures/Screenshots/` and `~/Pictures/sydra-os-gui.png`. Includes `squashfs-tools` (`unsquashfs`), `parted`, and `gptfdisk`.
 
 ---
 
