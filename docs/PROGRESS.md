@@ -143,6 +143,20 @@ Task logging format:
 
 ---
 
+## Phase 8: System Defaults & Hardening
+
+### T8.1 & T8.3 Snapshot Rollback & Safe Update Workflow
+- Status: DONE
+- Date: 2026-11-15
+- Target: Implement safe system update workflow (`siddha-update`), automated pre-update Snapper snapshotting, and snapshot rollback manager (`siddha-rollback`).
+- Result:
+  - Created `siddha-update`: verifies ≥ 5 GB root disk space, generates pre-update Snapper snapshot, upgrades official + Sydra pacman packages, refreshes Flatpak applications, and flags kernel updates requiring reboot.
+  - Created `siddha-rollback`: provides user-friendly CLI to inspect Btrfs/Snapper snapshot history and perform targeted rollback with single reboot.
+  - Packaged into `siddha-settings-0.1.0-2` and integrated into local `[siddha]` repository.
+  - Created `sydra-smoke-test` installed to `/usr/local/bin/sydra-smoke-test` on live ISO for automated post-boot verification of session, audio, network, core binaries, and custom utilities.
+
+---
+
 ## HUMAN ACTIONS NEEDED
 - **Interactive QEMU GUI Testing (Laptop A)**:
   Run in terminal to test the installer UI interactively:
