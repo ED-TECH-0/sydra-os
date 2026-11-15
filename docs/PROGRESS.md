@@ -167,6 +167,16 @@ Task logging format:
   - **ISO Build & QEMU Verification**: Rebuilt production release ISO `build/out/sydra-os-2026.11.15-x86_64.iso` (4.1 GiB). SHA-256: `4cfc4bd2a1688dd15b5d40c3735c29742a7954c68492098e53bfbddab76b0e5b`. Includes full glassmorphism stack (Kvantum dark glass engine, `kwinrulesrc` window opacity, `kwinrc` blur & translucency effects, and floating frosted glass panels with `translucencyMode=1`).
   - Verified live boot in QEMU: Clean desktop loaded with Sydra Obsidian Waves wallpaper, floating translucent top bar, left floating capsule dock with Sydra Game Hub launcher, and traffic light window controls. Captured screenshot saved to `~/Pictures/sydra-os-gui.png`.
 
+### T7.4 40+ Curated Native Linux & Steam Games Catalog
+- Status: DONE
+- Date: 2026-11-15
+- Target: Curate 40+ verified native Linux games in `catalog/native-games.yaml` with offline metadata (genre, badge, package/steam ID, license, launch notes).
+- Result:
+  - Curated 45 verified games across open-source native Linux titles (SuperTuxKart, Xonotic, 0 A.D., OpenTTD, Battle for Wesnoth, Mindustry, OpenRA, Luanti, SuperTux, Endless Sky, Teeworlds, Hedgewars, Warzone 2100, Simutrans, Cataclysm: DDA, Naev, Armagetron, Widelands, Freeciv, FreeCol, FreedroidRPG, AstroMenace, Dwarf Fortress, DCSS, NetHack, Shattered Pixel Dungeon, Empty Epsilon, Knights, KMines, KPatience) and native Steam hits (Counter-Strike 2, Dota 2, Team Fortress 2, Portal 2, Half-Life 2, Left 4 Dead 2, Factorio, Hollow Knight, Dead Cells, Celeste, Stardew Valley, Terraria, Valheim, Slay the Spire, RimWorld).
+  - Validated offline badge parsing via `python3 siddha-gamehub.py --dump-badges` (45/45 verified).
+  - Built `siddha-gamehub-0.1.0-3` and updated repository index.
+  - Updated `tests/smoke-live.sh` with new asset checks.
+
 ---
 
 ## HUMAN ACTIONS NEEDED
