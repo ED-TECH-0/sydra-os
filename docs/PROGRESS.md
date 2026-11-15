@@ -177,6 +177,18 @@ Task logging format:
   - Built `siddha-gamehub-0.1.0-3` and updated repository index.
   - Updated `tests/smoke-live.sh` with new asset checks.
 
+### T2.5 Calamares Unpackfs & Installer Environment Hardening
+- Status: DONE
+- Date: 2026-11-15
+- Target: Resolve Calamares unpackfs failure ("Failed to find unsquashfs, make sure you have the squashfs-tools package installed"), preserve environment PATH for Calamares under sudo, resolve bash package conflict, and optimize build compression.
+- Result:
+  - **Unpackfs & Toolchain**: Bundled `squashfs-tools` (providing `/usr/bin/unsquashfs`), `parted`, and `gptfdisk` into `packages/base.txt` and `packages/live-only.txt`.
+  - **Calamares Environment**: Updated `/usr/local/bin/siddha-installer` and `/etc/sudoers.d/g_wheel` (`env_keep += "PATH"`) to preserve root PATH under `sudo -E`.
+  - **Packaging Conflict Resolution**: Resolved file conflict between `bash` and `siddha-settings` over `/etc/skel/.bashrc` by migrating defaults into `/etc/profile.d/siddha.sh` (built package `siddha-settings-0.1.0-4`).
+  - **Build Speedup**: Tuned `iso/profile/profiledef.sh` with `-comp zstd -Xcompression-level 3 -b 1M`, reducing squashfs compression time from ~5 hours to ~4 minutes.
+  - **Release ISO**: Successfully built `build/out/sydra-os-2026.11.15-x86_64.iso` (4.2 GiB).
+    - SHA-256: `f828bf049bd68f7daafb708d3d9c17b94ff610e4486944eaec1dd9d4565e3941`.
+
 ---
 
 ## HUMAN ACTIONS NEEDED
