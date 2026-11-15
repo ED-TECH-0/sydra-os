@@ -40,7 +40,6 @@ github-cli
 go
 grub
 grub-btrfs
-gptfdisk
 gum
 gwenview
 htop
@@ -52,7 +51,6 @@ iptables
 jq
 kate
 kdegraphics-thumbnailers
-kde-cli-tools
 kdesu
 kdialog
 kio-extras
@@ -127,7 +125,6 @@ siddha-welcome
 snap-pac
 snapper
 sof-firmware
-squashfs-tools
 spectacle
 starship
 steam
@@ -150,11 +147,9 @@ wine-mono
 wine-staging
 winetricks
 wireplumber
-xcb-util-cursor
 xdg-desktop-portal-kde
 xdg-user-dirs
 xf86-input-libinput
-xorg-xhost
 xorg-xwayland
 zip
 zoxide

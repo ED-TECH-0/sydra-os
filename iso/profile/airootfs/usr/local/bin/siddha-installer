@@ -22,22 +22,34 @@ if [[ -n "${XDG_RUNTIME_DIR:-}" ]]; then
     fi
 fi
 
-# Ensure squashfs and boot source paths exist for Calamares unpackfs
+# Ensure squashfs source path exists for Calamares unpackfs
 if [[ ! -f /run/archiso/bootmnt/sydra/x86_64/airootfs.sfs ]]; then
-    FOUND_SFS=$(find /run/archiso -name "airootfs.sfs" 2>/dev/null | head -n1 || true)
+    FOUND_SFS=$(find /run /mnt /media -name "airootfs.sfs" 2>/dev/null | head -n1 || true)
     if [[ -n "$FOUND_SFS" && -f "$FOUND_SFS" ]]; then
         sudo mkdir -p /run/archiso/bootmnt/sydra/x86_64
         sudo ln -sf "$FOUND_SFS" /run/archiso/bootmnt/sydra/x86_64/airootfs.sfs
     fi
 fi
 
-if [[ ! -d /run/archiso/bootmnt/sydra/boot ]]; then
-    FOUND_BOOT=$(find /run/archiso -type d -path "*/sydra/boot" 2>/dev/null | head -n1 || true)
-    if [[ -n "$FOUND_BOOT" && -d "$FOUND_BOOT" ]]; then
-        sudo mkdir -p /run/archiso/bootmnt/sydra
-        sudo ln -sf "$FOUND_BOOT" /run/archiso/bootmnt/sydra/boot
+# Ensure vmlinuz-linux source path exists for Calamares unpackfs
+if [[ ! -f /run/archiso/bootmnt/sydra/boot/x86_64/vmlinuz-linux ]]; then
+    FOUND_VMLINUZ=$(find /run/archiso /usr/lib/modules -name "vmlinuz" -type f 2>/dev/null | head -n1 || true)
+    if [[ -n "$FOUND_VMLINUZ" && -f "$FOUND_VMLINUZ" ]]; then
+        sudo mkdir -p /run/archiso/bootmnt/sydra/boot/x86_64
+        sudo cp -f "$FOUND_VMLINUZ" /run/archiso/bootmnt/sydra/boot/x86_64/vmlinuz-linux
     fi
 fi
+
+# Ensure microcode source paths exist for Calamares unpackfs
+for ucode in intel-ucode.img amd-ucode.img; do
+    if [[ ! -f "/run/archiso/bootmnt/sydra/boot/$ucode" ]]; then
+        FOUND_UCODE=$(find /run/archiso /boot /usr/share -name "$ucode" -type f 2>/dev/null | head -n1 || true)
+        if [[ -n "$FOUND_UCODE" && -f "$FOUND_UCODE" ]]; then
+            sudo mkdir -p /run/archiso/bootmnt/sydra/boot
+            sudo cp -f "$FOUND_UCODE" "/run/archiso/bootmnt/sydra/boot/$ucode"
+        fi
+    fi
+done
 
 # Run Calamares with sudo -E preserving display variables
 sudo -E \

@@ -110,7 +110,24 @@ Task logging format:
 - Status: DONE
 - Date: 2026-11-13
 - Target: Rebuild Sydra OS ISO with `calamares` included; verify via QEMU.
-- Result: Successfully produced `build/out/sydra-os-2026.11.13-x86_64.iso` (4.1 GiB). SHA-256: `fe37ba928624a33b1d57a29272d77a7a94aa199dacaeb94c2f2f6254cfdd3556`. Boot verified in QEMU: "Install Sydra OS" launcher backed by `sudo calamares` and Sydra branding present on desktop.
+- Result: Successfully produced `build/out/sydra-os-2026.11.13-x86_64.iso` (4.1 GiB). Boot verified in QEMU: "Install Sydra OS" launcher backed by `sudo calamares` and Sydra branding present on desktop.
+
+### T2.3 Calamares Kernel, Initcpio, & Post-Install Hardening
+- Status: DONE
+- Date: 2026-11-15
+- Target: Permanently resolve `mkinitcpio -P` exit code 1 (`/boot/vmlinuz-linux must be readable`), ensure microcode copying, and clean up installer artifacts post-install.
+- Result: 
+  - Overhauled `siddha-initcpio-fix`: unconditionally validates `/boot/vmlinuz-linux` size, copies valid kernel binary directly from `/usr/lib/modules/*/vmlinuz`, removes live drop-ins (`archiso.conf`, `archiso.preset`), and verifies microcode images.
+  - Hardened `siddha-installer`: guarantees that `airootfs.sfs`, `vmlinuz-linux`, and ucode files exist at `/run/archiso/bootmnt/sydra/` before Calamares launches.
+  - Enhanced `mount.conf`: added Btrfs `@snapshots` subvolume (`/.snapshots`) for Snapper rollbacks.
+  - Enhanced `shellprocess_cleanup.conf` & `firstboot.conf`: scrubs installer desktop shortcuts from installed user desktop, configures `siddha` keyring alongside `archlinux`.
+  - Built `siddha-calamares-config-0.1.0-7` and updated `[siddha]` repository.
+
+### T4.3 Global KDE Plasma 6 & GTK Glass Defaults
+- Status: DONE
+- Date: 2026-11-15
+- Target: Provide out-of-the-box glassmorphism, blur effects, typography (Inter / JetBrains Mono), and GTK styling.
+- Result: Built `siddha-theme-0.1.0-2` with `/etc/xdg/kdeglobals` (SiddhaGlassGraphite default), `/etc/xdg/kwinrc` (blur & translucency enabled), and `/etc/xdg/gtk-{3,4}.0/gtk.css`. Updated `[siddha]` repository.
 
 ---
 

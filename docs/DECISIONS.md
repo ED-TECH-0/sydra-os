@@ -39,3 +39,16 @@ Format:
 ### [2026-11-13] DEC-005: Calamares 3.4.2 Qt6 Packaging
 - **Context**: Calamares is not in official Arch core/extra repositories. Needs native compilation for Qt6 installer integration.
 - **Decision**: Compiled `calamares` 3.4.2 natively using CMake, Ninja, and Qt6 against `kpmcore` 26.08 and `libpwquality`. Packaged and hosted inside the local `[siddha]` pacman repository with custom module overrides (`unpackfs` targeting `/run/archiso/bootmnt/sydra/x86_64/airootfs.sfs`).
+
+
+### [2026-11-15] DEC-006: Target Kernel & Initcpio Decoupling in Calamares
+- **Context**: Archiso's `mkarchiso` build process strips all files from `${pacstrap_dir}/boot` before squashing `airootfs.sfs`, placing `vmlinuz-linux` on the outer ISO medium (`/sydra/boot/x86_64/`). Additionally, live drop-in `/etc/mkinitcpio.conf.d/archiso.conf` was leaking into the target root, causing `mkinitcpio -P` to look for live-only netboot binaries.
+- **Evidence**: `mkinitcpio -P` inside target failed with `ERROR: Invalid option -k -- '/boot/vmlinuz-linux' must be readable`.
+- **Decision**: 
+  1. `siddha-installer` stages kernel and microcode at `/run/archiso/bootmnt/sydra/boot/` before Calamares begins.
+  2. `siddha-initcpio-fix` runs via `shellprocess@initcpio-fix` inside the chroot, strips `archiso.conf` and `archiso.preset`, and guarantees `/boot/vmlinuz-linux` is copied directly from `/usr/lib/modules/*/vmlinuz` with `0644` permissions if missing or empty.
+  3. Microcode images (`intel-ucode.img`, `amd-ucode.img`) are verified and copied to `/boot/`.
+
+### [2026-11-15] DEC-007: KDE Plasma 6 System-Wide Glassmorphism Defaults
+- **Context**: Newly created users and the live session booted with unstyled default Breeze without glassmorphism or blur active.
+- **Decision**: Package system-wide XDG configuration overrides (`/etc/xdg/kdeglobals`, `/etc/xdg/kwinrc`, and GTK 3/4 CSS) inside `siddha-theme`. This enables KWin blur, translucency on dialogs and menus, Inter UI font, JetBrains Mono fixed font, and SiddhaGlassGraphite theme by default on all sessions.

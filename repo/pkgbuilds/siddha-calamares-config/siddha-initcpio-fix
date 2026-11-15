@@ -1,30 +1,78 @@
 #!/usr/bin/env bash
 set -e
 
-# Remove live ISO archiso drop-in configs from target
+echo "=== [siddha-initcpio-fix] Starting kernel & initcpio preparation ==="
+
+# 1. Purge live archiso drop-ins so mkinitcpio builds for the installed target disk
 rm -f /etc/mkinitcpio.conf.d/archiso.conf
 rm -f /etc/mkinitcpio.d/archiso.preset
 
-# Ensure /boot/vmlinuz-linux exists for mkinitcpio
-if [ ! -f /boot/vmlinuz-linux ]; then
+# 2. Ensure /boot directory exists with proper permissions
+mkdir -p /boot
+chmod 755 /boot
+
+# 3. Unconditionally guarantee /boot/vmlinuz-linux is a valid readable kernel image
+# If missing, zero-length, or suspiciously small, copy from /usr/lib/modules/
+NEED_KERNEL=0
+if [ ! -s /boot/vmlinuz-linux ]; then
+    NEED_KERNEL=1
+elif [ "$(stat -c%s /boot/vmlinuz-linux 2>/dev/null || echo 0)" -lt 5000000 ]; then
+    NEED_KERNEL=1
+fi
+
+if [ "$NEED_KERNEL" -eq 1 ]; then
+    echo "[siddha-initcpio-fix] /boot/vmlinuz-linux missing or invalid, copying from modules..."
+    COPIED=0
     for k in /usr/lib/modules/*/vmlinuz; do
-        if [ -f "$k" ]; then
+        if [ -f "$k" ] && [ -s "$k" ]; then
             cp -f "$k" /boot/vmlinuz-linux
+            chmod 644 /boot/vmlinuz-linux
+            echo "[siddha-initcpio-fix] Installed kernel from $k -> /boot/vmlinuz-linux ($(stat -c%s /boot/vmlinuz-linux) bytes)"
+            COPIED=1
             break
         fi
     done
+    if [ "$COPIED" -eq 0 ]; then
+        cand=$(find /usr/lib/modules -name "vmlinuz*" -type f -size +5M 2>/dev/null | head -n1 || true)
+        if [ -n "$cand" ] && [ -f "$cand" ]; then
+            cp -f "$cand" /boot/vmlinuz-linux
+            chmod 644 /boot/vmlinuz-linux
+            echo "[siddha-initcpio-fix] Installed kernel from fallback $cand -> /boot/vmlinuz-linux"
+            COPIED=1
+        fi
+    fi
+    if [ "$COPIED" -eq 0 ]; then
+        echo "[siddha-initcpio-fix] WARNING: No vmlinuz found under /usr/lib/modules!" >&2
+    fi
+else
+    chmod 644 /boot/vmlinuz-linux
+    echo "[siddha-initcpio-fix] /boot/vmlinuz-linux already exists ($(stat -c%s /boot/vmlinuz-linux) bytes)"
 fi
 
-# Ensure microcode images are present in /boot if available
+# 4. Ensure microcode images are present in /boot
 for ucode in intel-ucode.img amd-ucode.img; do
-    if [ ! -f "/boot/$ucode" ]; then
-        for cand in "/run/archiso/bootmnt/sydra/boot/$ucode" "/bootmnt/sydra/boot/$ucode" "/usr/share/$ucode"; do
-            if [ -f "$cand" ]; then
+    if [ ! -s "/boot/$ucode" ]; then
+        for cand in \
+            "/run/archiso/bootmnt/sydra/boot/$ucode" \
+            "/run/archiso/bootmnt/boot/$ucode" \
+            "/bootmnt/sydra/boot/$ucode" \
+            "/usr/share/siddha/boot/$ucode" \
+            "/usr/share/$ucode"; do
+            if [ -f "$cand" ] && [ -s "$cand" ]; then
                 cp -f "$cand" "/boot/$ucode"
+                chmod 644 "/boot/$ucode"
+                echo "[siddha-initcpio-fix] Installed microcode from $cand -> /boot/$ucode"
                 break
             fi
         done
     fi
 done
 
+# 5. Verify /boot/vmlinuz-linux exists and is readable
+if [ ! -r /boot/vmlinuz-linux ]; then
+    echo "[siddha-initcpio-fix] ERROR: /boot/vmlinuz-linux is still not readable!" >&2
+    exit 1
+fi
+
+echo "=== [siddha-initcpio-fix] Kernel & initcpio preparation completed successfully ==="
 exit 0
