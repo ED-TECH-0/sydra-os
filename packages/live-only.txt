@@ -10,3 +10,6 @@ dosfstools
 e2fsprogs
 exfatprogs
 ntfs-3g
+squashfs-tools
+parted
+gptfdisk

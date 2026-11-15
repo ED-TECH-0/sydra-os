@@ -38,6 +38,7 @@ gdb
 git
 github-cli
 go
+gptfdisk
 grub
 grub-btrfs
 gum
@@ -92,6 +93,7 @@ okular
 openssh
 os-prober
 papirus-icon-theme
+parted
 pipewire
 pipewire-alsa
 pipewire-jack
@@ -126,6 +128,7 @@ snap-pac
 snapper
 sof-firmware
 spectacle
+squashfs-tools
 starship
 steam
 sudo

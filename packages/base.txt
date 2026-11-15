@@ -11,6 +11,9 @@ e2fsprogs
 dosfstools
 ntfs-3g
 exfatprogs
+squashfs-tools
+parted
+gptfdisk
 grub
 efibootmgr
 os-prober
