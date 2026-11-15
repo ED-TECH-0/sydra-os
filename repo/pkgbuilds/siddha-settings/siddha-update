@@ -1,0 +1,41 @@
+#!/usr/bin/env bash
+# Sydra OS Safe Update Tool
+set -euo pipefail
+
+echo "=============================================="
+echo "          Sydra OS System Update"
+echo "=============================================="
+
+# 1. Disk space check (need at least 5GB free)
+FREE_KB=$(df -k / | awk 'NR==2 {print $4}')
+if (( FREE_KB < 5000000 )); then
+    echo "ERROR: Less than 5 GB free space available on /. Aborting update." >&2
+    exit 1
+fi
+echo "[+] Disk space verified ($(df -h / | awk 'NR==2 {print $4}') available)"
+
+# 2. Snapper pre-update snapshot if available
+if command -v snapper >/dev/null 2>&1 && snapper list-configs 2>/dev/null | grep -q "root"; then
+    echo "[+] Creating pre-update snapshot..."
+    snapper create -c timeline -d "Before siddha-update $(date +'%Y-%m-%d %H:%M')" 2>/dev/null || true
+fi
+
+# 3. Synchronize package databases and upgrade system
+echo "[+] Upgrading official and Sydra OS packages via pacman..."
+sudo pacman -Syu "$@"
+
+# 4. Refresh Flatpak packages if installed
+if command -v flatpak >/dev/null 2>&1; then
+    echo "[+] Updating Flatpak applications..."
+    flatpak update -y 2>/dev/null || true
+fi
+
+# 5. Check if kernel was updated
+if [ -f /var/run/reboot-required ]; then
+    echo ""
+    echo "[!] A system reboot is recommended to apply kernel updates."
+fi
+
+echo "=============================================="
+echo "      Sydra OS Update Completed Successfully"
+echo "=============================================="

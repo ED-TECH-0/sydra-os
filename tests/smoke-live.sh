@@ -1,7 +1,9 @@
 #!/usr/bin/env bash
 set -euo pipefail
 
-echo "=== Sydra OS Live Smoke Test ==="
+echo "=============================================="
+echo "          Sydra OS Live Smoke Test"
+echo "=============================================="
 
 FAILURES=0
 pass() { echo "[PASS] $1"; }
@@ -34,7 +36,7 @@ else
   fail "Audio server not responsive or pactl missing"
 fi
 
-# 5. NetworkManager
+# 5. NetworkManager check
 if systemctl is-active --quiet NetworkManager; then
   pass "NetworkManager active"
 else
@@ -44,17 +46,45 @@ fi
 # 6. Core utilities check
 for cmd in steam zsh git dolphin konsole; do
   if command -v "$cmd" &>/dev/null; then
-    pass "Binary present: $cmd"
+    pass "Core binary present: $cmd"
   else
-    fail "Binary missing: $cmd"
+    fail "Core binary missing: $cmd"
   fi
 done
 
-echo "================================"
+# 7. Custom Sydra OS utilities check
+for scmd in siddha-dev siddha-gpu-setup siddha-gamehub siddha-glass-set siddha-welcome siddha-update siddha-rollback siddha-installer calamares; do
+  if command -v "$scmd" &>/dev/null; then
+    pass "Sydra binary present: $scmd"
+  else
+    fail "Sydra binary missing: $scmd"
+  fi
+done
+
+# 8. Glassmorphism assets check
+if [ -d "/usr/share/plasma/look-and-feel/org.sydra.glass.desktop" ]; then
+  pass "Look-and-feel present: org.sydra.glass.desktop"
+else
+  fail "Look-and-feel missing: org.sydra.glass.desktop"
+fi
+
+if [ -f "/usr/share/wallpapers/Sydra/sydra-metallic-torus.svg" ]; then
+  pass "Wallpaper present: sydra-metallic-torus.svg"
+else
+  fail "Wallpaper missing: sydra-metallic-torus.svg"
+fi
+
+if [ -f "/usr/share/color-schemes/SiddhaGlassGraphite.colors" ]; then
+  pass "Color scheme present: SiddhaGlassGraphite.colors"
+else
+  fail "Color scheme missing: SiddhaGlassGraphite.colors"
+fi
+
+echo "=============================================="
 if (( FAILURES == 0 )); then
-  echo "All live smoke tests passed!"
+  echo "All live smoke tests passed successfully with 0 failures!"
   exit 0
 else
-  echo "$FAILURES tests failed."
+  echo "$FAILURES test(s) failed."
   exit 1
 fi

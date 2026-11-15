@@ -29,6 +29,7 @@ file_permissions=(
   ["/usr/share/applications/siddha-installer.desktop"]="0:0:755"
   ["/usr/local/bin/siddha-installer"]="0:0:755"
   ["/usr/local/bin/siddha-desktop-init"]="0:0:755"
+  ["/usr/local/bin/sydra-smoke-test"]="0:0:755"
   ["/home/live"]="1000:1000:750"
   ["/home/live/Desktop/siddha-installer.desktop"]="1000:1000:755"
   ["/root"]="0:0:750"

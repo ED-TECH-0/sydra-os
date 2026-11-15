@@ -1,8 +1,8 @@
 # Maintainer: Sydra OS Team <team@sydra-os.org>
 pkgname=siddha-settings
 pkgver=0.1.0
-pkgrel=1
-pkgdesc="Default settings, sysctl, zram, and shell profiles for Sydra OS"
+pkgrel=2
+pkgdesc="Default settings, sysctl, zram, snapshot rollback, updater, and shell profiles for Sydra OS"
 arch=('any')
 url="https://sydra-os.org"
 license=('GPL-3.0-or-later')
@@ -13,8 +13,10 @@ source=(
   'zram-generator.conf'
   'gamemode.ini'
   'siddha-glass-gamemode'
+  'siddha-update'
+  'siddha-rollback'
 )
-sha256sums=('SKIP' 'SKIP' 'SKIP' 'SKIP' 'SKIP' 'SKIP')
+sha256sums=('SKIP' 'SKIP' 'SKIP' 'SKIP' 'SKIP' 'SKIP' 'SKIP' 'SKIP')
 
 package() {
   # Shell profile defaults
@@ -27,7 +29,9 @@ package() {
   # ZRAM configuration
   install -Dm644 "$srcdir/zram-generator.conf" "$pkgdir/etc/systemd/zram-generator.conf"
   
-  # Gamemode hooks
+  # Gamemode hooks and management binaries
   install -Dm644 "$srcdir/gamemode.ini" "$pkgdir/etc/gamemode.ini"
   install -Dm755 "$srcdir/siddha-glass-gamemode" "$pkgdir/usr/bin/siddha-glass-gamemode"
+  install -Dm755 "$srcdir/siddha-update" "$pkgdir/usr/bin/siddha-update"
+  install -Dm755 "$srcdir/siddha-rollback" "$pkgdir/usr/bin/siddha-rollback"
 }
