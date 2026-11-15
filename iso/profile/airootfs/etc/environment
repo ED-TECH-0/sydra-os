@@ -1,0 +1,2 @@
+QT_STYLE_OVERRIDE=kvantum
+KDE_FULL_SESSION=true

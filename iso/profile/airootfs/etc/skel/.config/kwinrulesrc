@@ -1,0 +1,14 @@
+[General]
+count=1
+rules=1
+
+[1]
+Description=Sydra Glass Translucent Windows
+opacityactive=88
+opacityactiverule=3
+opacityinactive=82
+opacityinactiverule=3
+types=1
+wmclass=.*
+wmclasscomplete=false
+wmclassmatch=3

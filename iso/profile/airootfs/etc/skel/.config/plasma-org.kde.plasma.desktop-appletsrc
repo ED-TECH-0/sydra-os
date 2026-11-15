@@ -19,11 +19,13 @@ PreviewImage=file:///usr/share/wallpapers/Sydra/contents/images/3840x2160.png
 
 [Containments][2]
 activityId=
+floating=1
 formfactor=2
 immutability=1
 lastScreen=0
 location=3
 plugin=org.kde.panel
+translucencyMode=1
 wallpaperplugin=org.kde.image
 
 [Containments][2][Applets][10]
@@ -53,11 +55,14 @@ AppletOrder=10;11;12;13
 
 [Containments][3]
 activityId=
+alignment=2
+floating=1
 formfactor=3
 immutability=1
 lastScreen=0
 location=1
 plugin=org.kde.panel
+translucencyMode=1
 wallpaperplugin=org.kde.image
 
 [Containments][3][Applets][20]

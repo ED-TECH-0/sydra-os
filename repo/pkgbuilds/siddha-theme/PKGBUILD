@@ -1,21 +1,23 @@
 # Maintainer: Sydra OS Team <team@sydra-os.org>
 pkgname=siddha-theme
 pkgver=0.1.0
-pkgrel=5
+pkgrel=6
 pkgdesc="Siddha Glass Pro desktop themes, color schemes, look-and-feel, and switcher for Sydra OS"
 arch=('any')
 url="https://sydra-os.org"
 license=('GPL-3.0-or-later')
-depends=('plasma-desktop' 'bash')
+depends=('plasma-desktop' 'kvantum' 'bash')
 source=(
   'siddha-glass-set'
   'kdeglobals'
   'kwinrc'
+  'kwinrulesrc'
+  'kvantum.kvconfig'
   'gtk-3.0.css'
   'gtk-4.0.css'
   'settings.ini'
 )
-sha256sums=('SKIP' 'SKIP' 'SKIP' 'SKIP' 'SKIP' 'SKIP')
+sha256sums=('SKIP' 'SKIP' 'SKIP' 'SKIP' 'SKIP' 'SKIP' 'SKIP' 'SKIP')
 
 package() {
   install -Dm755 "$srcdir/siddha-glass-set" "$pkgdir/usr/bin/siddha-glass-set"
@@ -35,6 +37,8 @@ package() {
   # Install system-wide KDE defaults
   install -Dm644 "$srcdir/kdeglobals" "$pkgdir/etc/xdg/kdeglobals"
   install -Dm644 "$srcdir/kwinrc" "$pkgdir/etc/xdg/kwinrc"
+  install -Dm644 "$srcdir/kwinrulesrc" "$pkgdir/etc/xdg/kwinrulesrc"
+  install -Dm644 "$srcdir/kvantum.kvconfig" "$pkgdir/etc/xdg/Kvantum/kvantum.kvconfig"
 
   # Install GTK CSS and settings defaults
   install -Dm644 "$srcdir/gtk-3.0.css" "$pkgdir/etc/xdg/gtk-3.0/gtk.css"
