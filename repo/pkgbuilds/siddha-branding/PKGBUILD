@@ -1,7 +1,7 @@
 # Maintainer: Sydra OS Team <team@sydra-os.org>
 pkgname=siddha-branding
 pkgver=0.1.0
-pkgrel=2
+pkgrel=3
 pkgdesc="Branding, wallpapers, logos, and OS identity files for Sydra OS"
 arch=('any')
 url="https://sydra-os.org"

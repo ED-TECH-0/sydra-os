@@ -1,0 +1,7 @@
+[Desktop Entry]
+Type=Application
+Name=Sydra Desktop Initialization
+Exec=/usr/local/bin/siddha-desktop-init
+Hidden=false
+NoDisplay=true
+X-GNOME-Autostart-enabled=true

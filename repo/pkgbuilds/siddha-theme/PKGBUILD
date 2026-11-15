@@ -1,7 +1,7 @@
 # Maintainer: Sydra OS Team <team@sydra-os.org>
 pkgname=siddha-theme
 pkgver=0.1.0
-pkgrel=2
+pkgrel=3
 pkgdesc="Siddha Glass Pro desktop themes, color schemes, and switcher for Sydra OS"
 arch=('any')
 url="https://sydra-os.org"
@@ -13,8 +13,9 @@ source=(
   'kwinrc'
   'gtk-3.0.css'
   'gtk-4.0.css'
+  'settings.ini'
 )
-sha256sums=('SKIP' 'SKIP' 'SKIP' 'SKIP' 'SKIP')
+sha256sums=('SKIP' 'SKIP' 'SKIP' 'SKIP' 'SKIP' 'SKIP')
 
 package() {
   install -Dm755 "$srcdir/siddha-glass-set" "$pkgdir/usr/bin/siddha-glass-set"
@@ -23,15 +24,17 @@ package() {
   install -d "$pkgdir/usr/share/color-schemes"
   cp "$startdir/assets"/*.colors "$pkgdir/usr/share/color-schemes/"
   
-  # Install Konsole color schemes
+  # Install Konsole color schemes and profiles
   install -d "$pkgdir/usr/share/konsole"
-  cp "$startdir/assets/konsole"/*.colorscheme "$pkgdir/usr/share/konsole/"
+  cp "$startdir/assets/konsole"/* "$pkgdir/usr/share/konsole/"
 
   # Install system-wide KDE defaults
   install -Dm644 "$srcdir/kdeglobals" "$pkgdir/etc/xdg/kdeglobals"
   install -Dm644 "$srcdir/kwinrc" "$pkgdir/etc/xdg/kwinrc"
 
-  # Install GTK CSS defaults
+  # Install GTK CSS and settings defaults
   install -Dm644 "$srcdir/gtk-3.0.css" "$pkgdir/etc/xdg/gtk-3.0/gtk.css"
+  install -Dm644 "$srcdir/settings.ini" "$pkgdir/etc/xdg/gtk-3.0/settings.ini"
   install -Dm644 "$srcdir/gtk-4.0.css" "$pkgdir/etc/xdg/gtk-4.0/gtk.css"
+  install -Dm644 "$srcdir/settings.ini" "$pkgdir/etc/xdg/gtk-4.0/settings.ini"
 }

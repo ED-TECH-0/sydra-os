@@ -1,0 +1,17 @@
+[Plugins]
+blurEnabled=true
+contrastEnabled=true
+
+[Effect-blur]
+BlurStrength=11
+NoiseStrength=1
+Saturation=1
+
+[org.kde.kdecoration2]
+BorderSize=None
+BorderSizeAuto=false
+ButtonsOnLeft=XIA
+ButtonsOnRight=
+CloseColor=255,95,86
+MinimizeColor=255,189,46
+MaximizeColor=39,201,63

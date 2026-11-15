@@ -1,38 +1,202 @@
-[General]
-ColorScheme=SiddhaGlass-Midnight
-Name=Siddha Glass (Midnight)
-shadeSortColumn=true
+[ColorEffects:Disabled]
+Color = 56,56,56
+ColorAmount = 0
+ColorEffect = 0
+ContrastAmount = 0.65
+ContrastEffect = 1
+IntensityAmount = 0.1
+IntensityEffect = 2
 
-[Colors:Window]
-BackgroundNormal=11,15,26
-BackgroundAlternate=11,15,26
-ForegroundNormal=238,241,248
-ForegroundInactive=154,163,181
-ForegroundActive=79,179,191
-ForegroundLink=79,179,191
-
-[Colors:View]
-BackgroundNormal=11,15,26
-BackgroundAlternate=11,15,26
-ForegroundNormal=238,241,248
-ForegroundInactive=154,163,181
-ForegroundLink=79,179,191
+[ColorEffects:Inactive]
+ChangeSelectionColor = true
+Color = 112,111,110
+ColorAmount = 0.025
+ColorEffect = 2
+ContrastAmount = 0.1
+ContrastEffect = 2
+Enable = false
+IntensityAmount = 0
+IntensityEffect = 0
 
 [Colors:Button]
-BackgroundNormal=11,15,26
-ForegroundNormal=238,241,248
-ForegroundActive=79,179,191
+BackgroundAlternate = 11,15,26
+BackgroundNormal = 18,24,40
+DecorationFocus = 79,179,191
+DecorationHover = 79,179,191
+ForegroundActive = 79,179,191
+ForegroundInactive = 154,163,181
+ForegroundLink = 29,153,243
+ForegroundNegative = 218,68,83
+ForegroundNeutral = 246,116,0
+ForegroundNormal = 238,241,248
+ForegroundPositive = 39,174,96
+ForegroundVisited = 155,89,182
+
+[Colors:Complementary]
+BackgroundAlternate = 30,87,116
+BackgroundNormal = 8,11,20
+DecorationFocus = 61,174,233
+DecorationHover = 61,174,233
+ForegroundActive = 79,179,191
+ForegroundInactive = 161,169,177
+ForegroundLink = 29,153,243
+ForegroundNegative = 218,68,83
+ForegroundNeutral = 246,116,0
+ForegroundNormal = 238,241,248
+ForegroundPositive = 39,174,96
+ForegroundVisited = 155,89,182
+
+[Colors:Header]
+BackgroundAlternate = 11,15,26
+BackgroundNormal = 8,11,20
+DecorationFocus = 61,174,233
+DecorationHover = 61,174,233
+ForegroundActive = 79,179,191
+ForegroundInactive = 154,163,181
+ForegroundLink = 79,179,191
+ForegroundNegative = 218,68,83
+ForegroundNeutral = 246,116,0
+ForegroundNormal = 238,241,248
+ForegroundPositive = 39,174,96
+ForegroundVisited = 155,89,182
+
+[Colors:Header][Inactive]
+BackgroundAlternate = 41,44,48
+BackgroundNormal = 32,35,38
+DecorationFocus = 61,174,233
+DecorationHover = 61,174,233
+ForegroundActive = 61,174,233
+ForegroundInactive = 161,169,177
+ForegroundLink = 29,153,243
+ForegroundNegative = 218,68,83
+ForegroundNeutral = 246,116,0
+ForegroundNormal = 252,252,252
+ForegroundPositive = 39,174,96
+ForegroundVisited = 155,89,182
 
 [Colors:Selection]
-BackgroundNormal=79,179,191
-ForegroundNormal=255,255,255
+BackgroundAlternate = 30,87,116
+BackgroundNormal = 79,179,191
+DecorationFocus = 61,174,233
+DecorationHover = 61,174,233
+ForegroundActive = 252,252,252
+ForegroundInactive = 161,169,177
+ForegroundLink = 253,188,75
+ForegroundNegative = 176,55,69
+ForegroundNeutral = 198,92,0
+ForegroundNormal = 255,255,255
+ForegroundPositive = 23,104,57
+ForegroundVisited = 155,89,182
 
 [Colors:Tooltip]
-BackgroundNormal=11,15,26
-ForegroundNormal=238,241,248
+BackgroundAlternate = 32,35,38
+BackgroundNormal = 8,11,20
+DecorationFocus = 61,174,233
+DecorationHover = 61,174,233
+ForegroundActive = 61,174,233
+ForegroundInactive = 161,169,177
+ForegroundLink = 29,153,243
+ForegroundNegative = 218,68,83
+ForegroundNeutral = 246,116,0
+ForegroundNormal = 238,241,248
+ForegroundPositive = 39,174,96
+ForegroundVisited = 155,89,182
+
+[Colors:View]
+BackgroundAlternate = 8,11,20
+BackgroundNormal = 11,15,26
+DecorationFocus = 79,179,191
+DecorationHover = 79,179,191
+ForegroundActive = 79,179,191
+ForegroundInactive = 154,163,181
+ForegroundLink = 79,179,191
+ForegroundNegative = 218,68,83
+ForegroundNeutral = 246,116,0
+ForegroundNormal = 238,241,248
+ForegroundPositive = 39,174,96
+ForegroundVisited = 155,89,182
+
+[Colors:Window]
+BackgroundAlternate = 8,11,20
+BackgroundNormal = 11,15,26
+DecorationFocus = 79,179,191
+DecorationHover = 79,179,191
+ForegroundActive = 79,179,191
+ForegroundInactive = 154,163,181
+ForegroundLink = 79,179,191
+ForegroundNegative = 218,68,83
+ForegroundNeutral = 246,116,0
+ForegroundNormal = 238,241,248
+ForegroundPositive = 39,174,96
+ForegroundVisited = 155,89,182
+
+[General]
+ColorScheme = SiddhaGlassMidnight
+Name = Siddha Glass (Midnight)
+Name[ar] = نسيم داكن
+Name[az] = Breeze - Tünd
+Name[bg] = Breeze Тъмен
+Name[bs] = Breeze tamna
+Name[ca] = Brisa fosca
+Name[ca@valencia] = Brisa fosca
+Name[cs] = Breeze Tmavé
+Name[da] = Breeze Dark
+Name[de] = Breeze Dunkel
+Name[el] = Breeze σκούρο
+Name[en_GB] = Breeze Dark
+Name[eo] = Breeze Dark
+Name[es] = Brisa oscuro
+Name[et] = Breeze tume
+Name[eu] = Breeze iluna
+Name[fi] = Tumma Breeze
+Name[fr] = Brise sombre
+Name[gl] = Brisa escura
+Name[he] = בריזה כהה
+Name[hi] = ब्रीज़ गहरा
+Name[hu] = Breeze Dark
+Name[ia] = Brisa obscure
+Name[id] = Breeze Gelap
+Name[is] = Breeze dökkt
+Name[it] = Brezza scuro
+Name[ja] = Breeze Dark
+Name[ka] = Breeze მუქი
+Name[ko] = 어두운 Breeze
+Name[lt] = Breeze tamsus
+Name[lv] = „Breeze“ tumšais
+Name[nb] = Breeze mørk
+Name[nl] = Breeze Dark
+Name[nn] = Breeze mørk
+Name[pa] = ਬਰੀਜ਼ ਗੂੜ੍ਹਾ
+Name[pl] = Ciemna Bryza
+Name[pt] = Brisa Escuro
+Name[pt_BR] = Breeze Dark
+Name[ro] = Briză, întunecat
+Name[ru] = Breeze, тёмный вариант
+Name[sa] = वायुः अन्धकारः
+Name[sk] = Tmavý vánok
+Name[sl] = Sapica, temna
+Name[sr] = Поветарац тамни
+Name[sr@ijekavian] = Поветарац тамни
+Name[sr@ijekavianlatin] = Povetarac tamni
+Name[sr@latin] = Povetarac tamni
+Name[sv] = Breeze mörk
+Name[ta] = கரும் பிரீஸ்
+Name[tg] = Насими торик
+Name[tr] = Esinti Koyu
+Name[ug] = مەيىن شامال قاراڭغۇ
+Name[uk] = Темна Breeze
+Name[zh_CN] = Breeze 微风深色
+Name[zh_TW] = Breeze Dark
+shadeSortColumn = true
+
+[KDE]
+contrast = 4
 
 [WM]
-activeBackground=11,15,26
-activeForeground=238,241,248
-inactiveBackground=11,15,26
-inactiveForeground=154,163,181
+activeBackground = 8,11,20
+activeBlend = 252,252,252
+activeForeground = 238,241,248
+inactiveBackground = 8,11,20
+inactiveBlend = 161,169,177
+inactiveForeground = 154,163,181
+

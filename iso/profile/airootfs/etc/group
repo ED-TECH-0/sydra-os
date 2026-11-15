@@ -13,3 +13,4 @@ power:x:98:live
 input:x:985:live
 users:x:984:live
 live:x:1000:
+nopasswdlogin:x:999:live

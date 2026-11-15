@@ -1,0 +1,73 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 3840 2160" width="3840" height="2160">
+  <defs>
+    <!-- Background Vignette -->
+    <radialGradient id="bg-glow" cx="60%" cy="50%" r="70%">
+      <stop offset="0%" stop-color="#141822" />
+      <stop offset="60%" stop-color="#080A0F" />
+      <stop offset="100%" stop-color="#040507" />
+    </radialGradient>
+
+    <!-- Chrome Metallic Torus Gradient -->
+    <linearGradient id="chrome-torus" x1="10%" y1="0%" x2="90%" y2="100%">
+      <stop offset="0%" stop-color="#3A3F4D" />
+      <stop offset="25%" stop-color="#D8E2EC" />
+      <stop offset="45%" stop-color="#687285" />
+      <stop offset="65%" stop-color="#F2F6FA" />
+      <stop offset="85%" stop-color="#2B303C" />
+      <stop offset="100%" stop-color="#9AA6B8" />
+    </linearGradient>
+
+    <!-- Chrome Sphere Gradient -->
+    <radialGradient id="chrome-sphere" cx="35%" cy="30%" r="65%">
+      <stop offset="0%" stop-color="#FFFFFF" />
+      <stop offset="30%" stop-color="#CBD5E1" />
+      <stop offset="70%" stop-color="#475569" />
+      <stop offset="100%" stop-color="#0F172A" />
+    </radialGradient>
+
+    <!-- Soft Glow Filter -->
+    <filter id="bloom" x="-40%" y="-40%" width="180%" height="180%">
+      <feGaussianBlur stdDeviation="80" result="blur" />
+      <feMerge>
+        <feMergeNode in="blur" />
+        <feMergeNode in="SourceGraphic" />
+      </feMerge>
+    </filter>
+  </defs>
+
+  <!-- Deep Canvas -->
+  <rect width="3840" height="2160" fill="url(#bg-glow)" />
+
+  <!-- Ambient Light Reflection Behind Objects -->
+  <ellipse cx="2300" cy="1150" rx="900" ry="700" fill="#2A354A" opacity="0.3" filter="url(#bloom)" />
+
+  <!-- 3D Metallic Torus Ring -->
+  <g filter="url(#bloom)">
+    <!-- Back of the Torus Ring -->
+    <path d="M 1600,1100 C 1600,750 2100,550 2550,750 C 3000,950 3100,1400 2700,1650 C 2300,1900 1750,1750 1600,1500" 
+          fill="none" stroke="url(#chrome-torus)" stroke-width="260" stroke-linecap="round" />
+  </g>
+
+  <!-- Front Torus Overlap -->
+  <path d="M 1550,1350 C 1450,1100 1650,850 2100,750 C 2550,650 2950,900 2900,1250 C 2850,1550 2350,1750 1900,1650 C 1650,1600 1550,1450 1550,1350 Z" 
+        fill="none" stroke="url(#chrome-torus)" stroke-width="240" />
+
+  <!-- Floating Specular Chrome Spheres -->
+  <g filter="url(#bloom)">
+    <!-- Main Large Sphere -->
+    <circle cx="1200" cy="800" r="180" fill="url(#chrome-sphere)" />
+    <!-- Secondary Sphere Bottom Right -->
+    <circle cx="2800" cy="1550" r="130" fill="url(#chrome-sphere)" />
+    <!-- Small Distant Sphere -->
+    <circle cx="2400" cy="450" r="75" fill="url(#chrome-sphere)" opacity="0.85" />
+    <!-- Small Foreground Floating Sphere -->
+    <circle cx="1450" cy="1650" r="95" fill="url(#chrome-sphere)" />
+  </g>
+
+  <!-- Vignette -->
+  <radialGradient id="vignette" cx="50%" cy="50%" r="70%">
+    <stop offset="60%" stop-color="#000000" stop-opacity="0.0" />
+    <stop offset="100%" stop-color="#000000" stop-opacity="0.55" />
+  </radialGradient>
+  <rect width="3840" height="2160" fill="url(#vignette)" />
+</svg>
