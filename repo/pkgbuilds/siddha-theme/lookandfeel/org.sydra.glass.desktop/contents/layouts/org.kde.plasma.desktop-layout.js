@@ -3,7 +3,7 @@ var desktopsArray = desktopsForActivity(currentActivity());
 for (var j = 0; j < desktopsArray.length; j++) {
     desktopsArray[j].wallpaperPlugin = 'org.kde.image';
     desktopsArray[j].currentConfigGroup = ["Wallpaper", "org.kde.image", "General"];
-    desktopsArray[j].writeConfig("Image", "/usr/share/wallpapers/Sydra/sydra-metallic-torus.svg");
+    desktopsArray[j].writeConfig("Image", "file:///usr/share/wallpapers/Sydra/contents/images/3840x2160.png");
 }
 
 // 2. Top Translucent Status Bar

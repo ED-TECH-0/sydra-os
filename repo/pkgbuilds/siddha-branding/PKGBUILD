@@ -1,7 +1,7 @@
 # Maintainer: Sydra OS Team <team@sydra-os.org>
 pkgname=siddha-branding
 pkgver=0.1.0
-pkgrel=3
+pkgrel=4
 pkgdesc="Branding, wallpapers, logos, and OS identity files for Sydra OS"
 arch=('any')
 url="https://sydra-os.org"
@@ -22,9 +22,21 @@ package() {
   install -Dm644 "$srcdir/sydra-logo.svg" "$pkgdir/usr/share/pixmaps/sydra-logo.svg"
   install -Dm644 "$srcdir/sydra-logo.svg" "$pkgdir/usr/share/siddha/branding/logo.svg"
 
-  # Wallpapers
-  install -d "$pkgdir/usr/share/wallpapers/Sydra"
+  # Wallpapers and KDE Wallpaper Package
+  install -d "$pkgdir/usr/share/wallpapers/Sydra/contents/images"
   if compgen -G "$startdir/wallpapers/*.svg" > /dev/null; then
     cp "$startdir/wallpapers"/*.svg "$pkgdir/usr/share/wallpapers/Sydra/"
+  fi
+  if compgen -G "$startdir/wallpapers/*.png" > /dev/null; then
+    cp "$startdir/wallpapers"/*.png "$pkgdir/usr/share/wallpapers/Sydra/"
+  fi
+  if [ -f "$startdir/wallpapers/sydra-obsidian-waves.png" ]; then
+    install -Dm644 "$startdir/wallpapers/sydra-obsidian-waves.png" "$pkgdir/usr/share/wallpapers/Sydra/contents/images/3840x2160.png"
+  fi
+  if [ -f "$startdir/wallpapers/screenshot.png" ]; then
+    install -Dm644 "$startdir/wallpapers/screenshot.png" "$pkgdir/usr/share/wallpapers/Sydra/contents/screenshot.png"
+  fi
+  if [ -f "$startdir/wallpapers/metadata.json" ]; then
+    install -Dm644 "$startdir/wallpapers/metadata.json" "$pkgdir/usr/share/wallpapers/Sydra/metadata.json"
   fi
 }

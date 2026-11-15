@@ -1,18 +1,21 @@
 #!/usr/bin/env bash
 # Sydra OS Live Desktop Initializer
-# Ensures global look-and-feel, wallpaper, colorscheme, and installer icon are properly active
+# Ensures wallpaper, colorscheme, and desktop icons are properly initialized
 
-sleep 1
-
-# 1. Apply Sydra Glass Pro Look and Feel package if present
-if command -v plasma-apply-lookandfeel >/dev/null 2>&1; then
-    if [ -d "/usr/share/plasma/look-and-feel/org.sydra.glass.desktop" ]; then
-        plasma-apply-lookandfeel -a "org.sydra.glass.desktop" 2>/dev/null || true
+# 1. Wait for Plasma Shell DBus service to be registered
+for i in $(seq 1 12); do
+    if qdbus org.kde.plasmashell /PlasmaShell org.kde.PlasmaShell.dumpCurrentLayoutMainScript >/dev/null 2>&1; then
+        break
     fi
+    sleep 1
+done
+
+# 2. Apply Sydra Obsidian Waves wallpaper
+WALLPAPER="/usr/share/wallpapers/Sydra/contents/images/3840x2160.png"
+if [ ! -f "$WALLPAPER" ]; then
+    WALLPAPER="/usr/share/wallpapers/Sydra/sydra-obsidian-waves.png"
 fi
 
-# 2. Apply metallic torus glass wallpaper
-WALLPAPER="/usr/share/wallpapers/Sydra/sydra-metallic-torus.svg"
 if [ -f "$WALLPAPER" ] && command -v plasma-apply-wallpaperimage >/dev/null 2>&1; then
     plasma-apply-wallpaperimage "$WALLPAPER" 2>/dev/null || true
 fi

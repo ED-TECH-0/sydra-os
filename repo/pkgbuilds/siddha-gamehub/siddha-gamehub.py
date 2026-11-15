@@ -150,17 +150,27 @@ class SydraGameHub(QMainWindow):
         self.load_catalog()
 
     def load_catalog(self):
-        catalog_path = "/usr/share/siddha/catalog/native-games.yaml"
-        if not os.path.exists(catalog_path):
-            catalog_path = "catalog/native-games.yaml"
+        catalog_path = None
+        for p in [
+            "/usr/share/siddha/catalog/native-games.yaml",
+            "/usr/share/siddha/gamehub/native-games.yaml",
+            "catalog/native-games.yaml",
+        ]:
+            if os.path.exists(p):
+                catalog_path = p
+                break
 
         self.games = []
-        if os.path.exists(catalog_path):
-            try:
-                with open(catalog_path) as f:
-                    self.games = yaml.safe_load(f) or []
-            except Exception as e:
-                print(f"Error loading catalog: {e}")
+        if catalog_path and os.path.exists(catalog_path):
+            if yaml:
+                try:
+                    with open(catalog_path) as f:
+                        self.games = yaml.safe_load(f) or []
+                except Exception as e:
+                    print(f"YAML load failed, trying fallback: {e}")
+                    self.games = load_yaml_fallback(catalog_path)
+            else:
+                self.games = load_yaml_fallback(catalog_path)
 
         for g in self.games:
             item = QListWidgetItem(f"{g.get('name', 'Unknown')} [{g.get('badge', 'NATIVE')}]")
@@ -213,26 +223,38 @@ class SydraGameHub(QMainWindow):
             subprocess.Popen(["steam", f"steam://rungameid/{install_target}"])
 
 def dump_badges():
-    catalog_path = "catalog/native-games.yaml"
-    if os.path.exists(catalog_path):
-        if yaml:
-            with open(catalog_path) as f:
-                data = yaml.safe_load(f) or []
-        else:
-            data = load_yaml_fallback(catalog_path)
-            
-        for item in data:
-            print(f"{item.get('name')}: {item.get('badge')}")
+    for p in [
+        "/usr/share/siddha/catalog/native-games.yaml",
+        "/usr/share/siddha/gamehub/native-games.yaml",
+        "catalog/native-games.yaml",
+    ]:
+        if os.path.exists(p):
+            catalog_path = p
+            break
+    else:
+        print("Catalog not found")
+        return
+
+    if yaml:
+        with open(catalog_path) as f:
+            data = yaml.safe_load(f) or []
+    else:
+        data = load_yaml_fallback(catalog_path)
+        
+    for item in data:
+        print(f"{item.get('name')}: {item.get('badge')}")
 
 if __name__ == "__main__":
     if "--dump-badges" in sys.argv:
         dump_badges()
         sys.exit(0)
 
-    from PySide6.QtWidgets import (
-        QApplication, QMainWindow, QWidget, QVBoxLayout, QHBoxLayout,
-        QLabel, QPushButton, QListWidget, QListWidgetItem, QFrame,
-        QCheckBox
-    )
-    from PySide6.QtCore import Qt
-    from PySide6.QtGui import QFont, QColor
+    if QApplication is None:
+        print("Error: PySide6 is required to run Sydra Game Hub UI.", file=sys.stderr)
+        sys.exit(1)
+
+    app = QApplication(sys.argv)
+    app.setApplicationName("Sydra Game Hub")
+    window = SydraGameHub()
+    window.show()
+    sys.exit(app.exec())
