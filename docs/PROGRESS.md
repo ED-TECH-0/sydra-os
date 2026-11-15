@@ -122,6 +122,7 @@ Task logging format:
   - Enhanced `mount.conf`: added Btrfs `@snapshots` subvolume (`/.snapshots`) for Snapper rollbacks.
   - Enhanced `shellprocess_cleanup.conf` & `firstboot.conf`: scrubs installer desktop shortcuts from installed user desktop, configures `siddha` keyring alongside `archlinux`.
   - Built `siddha-calamares-config-0.1.0-7` and updated `[siddha]` repository.
+  - Built fresh release candidate ISO `build/out/sydra-os-2026.11.15-x86_64.iso` (4.1 GiB). SHA-256: `b2742024c22fcd567ef1e43176e0ca555f70f49b6f9009c46fd59636cc9586d5`.
 
 ### T4.3 Global KDE Plasma 6 & GTK Glass Defaults
 - Status: DONE
@@ -140,5 +141,5 @@ Task logging format:
 - **Physical USB Flash for Hardware Testing (Laptop B / Nitro RTX 5050)**:
   Insert a USB pendrive (<= 256GB), check device name with `lsblk`, then run:
   ```bash
-  sudo scripts/flash-usb.sh build/out/sydra-os-2026.11.14-x86_64.iso /dev/sdX  # replace /dev/sdX with USB drive (e.g. /dev/sdb)
+  sudo scripts/flash-usb.sh build/out/sydra-os-2026.11.15-x86_64.iso /dev/sdX  # replace /dev/sdX with USB drive (e.g. /dev/sdb)
   ```
