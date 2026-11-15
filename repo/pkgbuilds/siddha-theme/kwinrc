@@ -1,18 +1,17 @@
+[Compositing]
+Backend=OpenGL
+Enabled=true
+GLCore=true
+WindowsBlockCompositing=false
+
 [Plugins]
 blurEnabled=true
 contrastEnabled=true
-translucencyEnabled=true
 
 [Effect-blur]
 BlurStrength=11
 NoiseStrength=2
 Saturation=1
-
-[Effect-translucency]
-Dialogs=85
-Inactive=85
-Menus=85
-Moving=80
 
 [org.kde.kdecoration2]
 ButtonsOnLeft=XIA

@@ -31,7 +31,9 @@ if [ -f "$HOME/Desktop/siddha-installer.desktop" ]; then
 fi
 
 # 5. Reconfigure KWin to enforce active blur and glass translucency
-if command -v qdbus >/dev/null 2>&1; then
+if command -v qdbus6 >/dev/null 2>&1; then
+    qdbus6 org.kde.KWin /KWin org.kde.KWin.reconfigure 2>/dev/null || true
+elif command -v qdbus >/dev/null 2>&1; then
     qdbus org.kde.KWin /KWin org.kde.KWin.reconfigure 2>/dev/null || true
 fi
 

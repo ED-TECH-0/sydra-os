@@ -4,11 +4,10 @@ rules=1
 
 [1]
 Description=Sydra Glass Translucent Windows
-opacityactive=88
-opacityactiverule=3
-opacityinactive=82
-opacityinactiverule=3
-types=1
+opacityactive=85
+opacityactiverule=2
+opacityinactive=80
+opacityinactiverule=2
 wmclass=.*
 wmclasscomplete=false
 wmclassmatch=3
