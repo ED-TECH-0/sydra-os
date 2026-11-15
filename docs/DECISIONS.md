@@ -65,10 +65,18 @@ Format:
   3. Pre-seed `/etc/skel/.config/kwalletrc` with `[Wallet] Enabled=false`.
   4. Ensure `nopasswdlogin:x:999:live` exists in `/etc/group` for SDDM autologin PAM authentication.
 
-### [2026-11-15] DEC-009: Mac-Style Traffic Light Window Controls & Glass Themes
-- **Context**: User provided reference images displaying smoked frosted glass windows with circular Red/Yellow/Green traffic-light controls on the top-left, 3D metallic torus wallpaper, and high background blur.
+### [2026-11-15] DEC-010: Desktop Containment Pre-seeding & Live Startup Stability
+- **Context**: Plasma 6 live sessions exhibited black screen void when `plasma-apply-lookandfeel` was triggered dynamically during session boot, tearing down corona while DBus was still registering.
+- **Evidence**: `plasma-org.kde.plasma.desktop-appletsrc` did not exist in `/home/live`, and calling `plasma-apply-lookandfeel` in `siddha-desktop-init` concurrently with plasmashell startup led to an uninitialized containment state.
 - **Decision**: 
-  1. Configure `kwinrc` with `ButtonsOnLeft=XIA` (Close, Minimize, Maximize) and `ButtonsOnRight=` with `BorderSize=None`.
-  2. Configure GTK 3/4 settings with `gtk-decoration-layout=close,minimize,maximize:`.
-  3. Provide full 13-section color schemes (`SiddhaGlassGraphite`, `SiddhaGlassMidnight`, `SiddhaGlassSlateLight`, `SiddhaGlassHighContrast`) compliant with Qt6 and Plasma 6 requirements.
-  4. Package 3D metallic torus (`sydra-metallic-torus.svg`) and vibrant cyber frost (`sydra-cyber-frost.svg`) wallpapers, with `siddha-desktop-init` applying the metallic torus theme automatically on session start.
+  1. Remove dynamic `plasma-apply-lookandfeel` from session startup scripts.
+  2. Pre-seed `plasma-org.kde.plasma.desktop-appletsrc` into `/etc/skel` and `/home/live` containing explicit wallpaper and applet containments (top panel with kickoff/tray/clock, dock with apps).
+  3. Introduce a DBus readiness wait loop (`qdbus org.kde.plasmashell ...`) in `siddha-desktop-init` before applying any fallback visual properties.
+
+### [2026-11-15] DEC-011: Minimalist Luxury Wallpaper (Sydra Obsidian Waves)
+- **Context**: User rejected the 3D metallic torus wallpaper as "silly that like ai generated", demanding a clean, authentic, professional aesthetic.
+- **Evidence**: Qt's `QSvgRenderer` does not support SVG2 `<filter>` (e.g. `feGaussianBlur`), rendering complex SVG filters as black voids. High-resolution raster images in a standard KDE Wallpaper Package structure render reliably across all Qt/KWin compositors.
+- **Decision**: 
+  1. Replaced metallic torus with **Sydra Obsidian Waves** (`sydra-obsidian-waves.png` / `.svg`) featuring authentic multi-layer glass contours on deep midnight obsidian (`#07090E` to `#121724`) with violet/cyan refraction edge lines.
+  2. Structured as a native KDE Wallpaper Package (`/usr/share/wallpapers/Sydra/contents/images/3840x2160.png`, `metadata.json`, `screenshot.png`).
+  3. Updated `siddha-branding-0.1.0-4` to install the complete package structure.

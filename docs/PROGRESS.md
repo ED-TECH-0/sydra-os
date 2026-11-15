@@ -155,6 +155,18 @@ Task logging format:
   - Packaged into `siddha-settings-0.1.0-2` and integrated into local `[siddha]` repository.
   - Created `sydra-smoke-test` installed to `/usr/local/bin/sydra-smoke-test` on live ISO for automated post-boot verification of session, audio, network, core binaries, and custom utilities.
 
+### T4.6 & T7.1 Desktop Black Screen Fix, Sydra Game Hub Overhaul, & Obsidian Waves Wallpaper
+- Status: DONE
+- Date: 2026-11-15
+- Target: Resolve black screen on live session boot, fix Sydra Game Hub launch failure, and replace metallic torus wallpaper with authentic minimalist luxury dark wallpaper.
+- Result:
+  - **Sydra Game Hub**: Completed truncated `__main__` entrypoint in `siddha-gamehub.py` with `QApplication` lifecycle, multi-path catalog search (`/usr/share/siddha/catalog/native-games.yaml`), fallback parser, and verified `--dump-badges` passes offline. Packaged into `siddha-gamehub-0.1.0-2`.
+  - **Minimalist Luxury Wallpaper**: Replaced metallic torus with **Sydra Obsidian Waves** (`sydra-obsidian-waves.png` and `.svg`) — authentic deep obsidian (`#07090E` to `#121724`) with violet, cyan, and indigo wave contours, crisp 1.5px edge highlights, and dot matrix developer accents. Structured as a native KDE Wallpaper Package (`/usr/share/wallpapers/Sydra/contents/images/3840x2160.png`, `metadata.json`, and `screenshot.png`). Packaged into `siddha-branding-0.1.0-4`.
+  - **Black Screen Resolution**: Removed disruptive dynamic `plasma-apply-lookandfeel` reload from `siddha-desktop-init`, pre-seeded `plasma-org.kde.plasma.desktop-appletsrc` into `/etc/skel` and `/home/live`, and added DBus readiness check. Built `siddha-theme-0.1.0-5`.
+  - **Complete Local Repository**: Rebuilt `siddha.db.tar.zst` and `siddha.db.tar.gz` ensuring all 10 packages (`calamares`, `siddha-branding`, `siddha-calamares-config`, `siddha-dev`, `siddha-gamehub`, `siddha-gpu-setup`, `siddha-keyring`, `siddha-settings`, `siddha-theme`, `siddha-welcome`) are properly indexed.
+  - **ISO Build & QEMU Verification**: Rebuilt production release ISO `build/out/sydra-os-2026.11.15-x86_64.iso` (4.1 GiB). SHA-256: `9af1754bf92b6a9f3c3cc72301c252f2130f73f98c916263ee847d724b449b44`.
+  - Verified live boot in QEMU: Clean desktop loaded with Sydra Obsidian Waves wallpaper, top bar with systray, dock with Sydra Game Hub launcher, and Welcome Center. Captured screenshot saved to `~/Pictures/sydra-os-gui.png`.
+
 ---
 
 ## HUMAN ACTIONS NEEDED

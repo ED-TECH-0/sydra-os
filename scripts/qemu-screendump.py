@@ -55,7 +55,7 @@ qemu_cmd = [
     "-enable-kvm",
     "-cpu", "host",
     "-smp", "4",
-    "-m", "4096",
+    "-m", os.environ.get("QEMU_RAM", "2560"),
     "-machine", "q35",
     "-device", "virtio-vga",
     "-display", "none",
