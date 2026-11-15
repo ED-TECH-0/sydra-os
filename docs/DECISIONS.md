@@ -52,3 +52,23 @@ Format:
 ### [2026-11-15] DEC-007: KDE Plasma 6 System-Wide Glassmorphism Defaults
 - **Context**: Newly created users and the live session booted with unstyled default Breeze without glassmorphism or blur active.
 - **Decision**: Package system-wide XDG configuration overrides (`/etc/xdg/kdeglobals`, `/etc/xdg/kwinrc`, and GTK 3/4 CSS) inside `siddha-theme`. This enables KWin blur, translucency on dialogs and menus, Inter UI font, JetBrains Mono fixed font, and SiddhaGlassGraphite theme by default on all sessions.
+
+### [2026-11-15] DEC-008: SDDM Wayland Compositor & Live User Initialization
+- **Context**: Plasma Wayland session froze on boot with black screen / hang when running autologin.
+- **Evidence**: 
+  - SDDM running with `DisplayServer=wayland` defaulted to searching for `weston --shell=kiosk`. Because `weston` was not installed, SDDM greeter crashed before launching the user session.
+  - `/home/live` did not exist in `airootfs`, causing Plasma Wayland and KWin to fail when writing XDG socket and runtime configuration files.
+  - KWallet prompted interactively on startup, blocking session completion.
+- **Decision**: 
+  1. Set `CompositorCommand=kwin_wayland --drm --no-lockscreen --no-global-shortcuts --locale1` under `[Wayland]` in `/etc/sddm.conf.d/autologin.conf`.
+  2. Pre-create `/home/live` in `airootfs` and configure `/etc/tmpfiles.d/siddha-live-user.conf` to guarantee `0750` ownership by user `live` (UID 1000).
+  3. Pre-seed `/etc/skel/.config/kwalletrc` with `[Wallet] Enabled=false`.
+  4. Ensure `nopasswdlogin:x:999:live` exists in `/etc/group` for SDDM autologin PAM authentication.
+
+### [2026-11-15] DEC-009: Mac-Style Traffic Light Window Controls & Glass Themes
+- **Context**: User provided reference images displaying smoked frosted glass windows with circular Red/Yellow/Green traffic-light controls on the top-left, 3D metallic torus wallpaper, and high background blur.
+- **Decision**: 
+  1. Configure `kwinrc` with `ButtonsOnLeft=XIA` (Close, Minimize, Maximize) and `ButtonsOnRight=` with `BorderSize=None`.
+  2. Configure GTK 3/4 settings with `gtk-decoration-layout=close,minimize,maximize:`.
+  3. Provide full 13-section color schemes (`SiddhaGlassGraphite`, `SiddhaGlassMidnight`, `SiddhaGlassSlateLight`, `SiddhaGlassHighContrast`) compliant with Qt6 and Plasma 6 requirements.
+  4. Package 3D metallic torus (`sydra-metallic-torus.svg`) and vibrant cyber frost (`sydra-cyber-frost.svg`) wallpapers, with `siddha-desktop-init` applying the metallic torus theme automatically on session start.

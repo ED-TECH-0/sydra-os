@@ -128,7 +128,17 @@ Task logging format:
 - Status: DONE
 - Date: 2026-11-15
 - Target: Provide out-of-the-box glassmorphism, blur effects, typography (Inter / JetBrains Mono), and GTK styling.
-- Result: Built `siddha-theme-0.1.0-2` with `/etc/xdg/kdeglobals` (SiddhaGlassGraphite default), `/etc/xdg/kwinrc` (blur & translucency enabled), and `/etc/xdg/gtk-{3,4}.0/gtk.css`. Updated `[siddha]` repository.
+- Result: Built `siddha-theme-0.1.0-3` with `/etc/xdg/kdeglobals` (SiddhaGlassGraphite default), `/etc/xdg/kwinrc` (blur & translucency enabled), and `/etc/xdg/gtk-{3,4}.0/gtk.css`. Updated `[siddha]` repository.
+
+### T4.4 Traffic Light Window Controls & Glass Aesthetic Alignment
+- Status: DONE
+- Date: 2026-11-15
+- Target: Implement user-specified visual identity: macOS-style traffic-light buttons on the top-left, smoked frosted glass windows with blur, and 3D metallic torus wallpaper.
+- Result: 
+  - Configured top-left window controls (`ButtonsOnLeft=XIA`, `ButtonsOnRight=`) across Qt6/KDE and GTK 3/4 (`gtk-decoration-layout=close,minimize,maximize:`).
+  - Bundled 3D metallic torus (`sydra-metallic-torus.svg`) and vibrant cyber frost (`sydra-cyber-frost.svg`) vector wallpapers.
+  - Resolved Plasma Wayland boot freeze: configured `kwin_wayland` compositor for SDDM, created `/home/live` in `airootfs` with `1000:1000` ownership, disabled KWallet first-run prompt, and completed 13-section color schemes.
+  - Built updated ISO `build/out/sydra-os-2026.11.15-x86_64.iso` (4.1 GiB). SHA-256: `6e48758145c46699c235de6f53fee78048f4b922483848ef33e7625a9baa0bfd`.
 
 ---
 
