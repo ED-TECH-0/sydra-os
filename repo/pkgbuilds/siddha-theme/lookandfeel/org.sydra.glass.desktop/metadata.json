@@ -1,0 +1,11 @@
+{
+    "KPackageStructure": "Plasma/LookAndFeel",
+    "KPlugin": {
+        "Category": "",
+        "Description": "Sydra Glass Pro Global Theme with Dark Frosted Glass & Left Dock",
+        "Id": "org.sydra.glass.desktop",
+        "License": "GPLv3+",
+        "Name": "Sydra Glass Pro",
+        "Website": "https://sydra-os.org"
+    }
+}

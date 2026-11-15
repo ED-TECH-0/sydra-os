@@ -1,8 +1,8 @@
 # Maintainer: Sydra OS Team <team@sydra-os.org>
 pkgname=siddha-theme
 pkgver=0.1.0
-pkgrel=3
-pkgdesc="Siddha Glass Pro desktop themes, color schemes, and switcher for Sydra OS"
+pkgrel=4
+pkgdesc="Siddha Glass Pro desktop themes, color schemes, look-and-feel, and switcher for Sydra OS"
 arch=('any')
 url="https://sydra-os.org"
 license=('GPL-3.0-or-later')
@@ -27,6 +27,10 @@ package() {
   # Install Konsole color schemes and profiles
   install -d "$pkgdir/usr/share/konsole"
   cp "$startdir/assets/konsole"/* "$pkgdir/usr/share/konsole/"
+
+  # Install Look-and-Feel global package
+  install -d "$pkgdir/usr/share/plasma/look-and-feel"
+  cp -a "$startdir/lookandfeel/org.sydra.glass.desktop" "$pkgdir/usr/share/plasma/look-and-feel/"
 
   # Install system-wide KDE defaults
   install -Dm644 "$srcdir/kdeglobals" "$pkgdir/etc/xdg/kdeglobals"

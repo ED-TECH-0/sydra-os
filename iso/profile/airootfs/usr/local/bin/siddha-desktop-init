@@ -1,21 +1,28 @@
 #!/usr/bin/env bash
 # Sydra OS Live Desktop Initializer
-# Ensures default wallpaper, colorscheme, and installer icon are properly active
+# Ensures global look-and-feel, wallpaper, colorscheme, and installer icon are properly active
 
 sleep 1
 
-# 1. Apply metallic torus glass wallpaper
+# 1. Apply Sydra Glass Pro Look and Feel package if present
+if command -v plasma-apply-lookandfeel >/dev/null 2>&1; then
+    if [ -d "/usr/share/plasma/look-and-feel/org.sydra.glass.desktop" ]; then
+        plasma-apply-lookandfeel -a "org.sydra.glass.desktop" 2>/dev/null || true
+    fi
+fi
+
+# 2. Apply metallic torus glass wallpaper
 WALLPAPER="/usr/share/wallpapers/Sydra/sydra-metallic-torus.svg"
 if [ -f "$WALLPAPER" ] && command -v plasma-apply-wallpaperimage >/dev/null 2>&1; then
     plasma-apply-wallpaperimage "$WALLPAPER" 2>/dev/null || true
 fi
 
-# 2. Apply Siddha Glass Graphite color scheme
+# 3. Apply Siddha Glass Graphite color scheme
 if command -v plasma-apply-colorscheme >/dev/null 2>&1; then
     plasma-apply-colorscheme "SiddhaGlassGraphite" 2>/dev/null || true
 fi
 
-# 3. Ensure desktop installer icon is trusted and executable
+# 4. Ensure desktop installer icon is trusted and executable
 if [ -f "$HOME/Desktop/siddha-installer.desktop" ]; then
     chmod +x "$HOME/Desktop/siddha-installer.desktop"
 fi
