@@ -187,7 +187,8 @@ Task logging format:
   - **Packaging Conflict Resolution**: Resolved file conflict between `bash` and `siddha-settings` over `/etc/skel/.bashrc` by migrating defaults into `/etc/profile.d/siddha.sh` (built package `siddha-settings-0.1.0-4`).
   - **Build Speedup**: Tuned `iso/profile/profiledef.sh` with `-comp zstd -Xcompression-level 3 -b 1M`, reducing squashfs compression time from ~5 hours to ~4 minutes.
   - **Release ISO**: Successfully built `build/out/sydra-os-2026.11.15-x86_64.iso` (4.2 GiB).
-    - SHA-256: `f828bf049bd68f7daafb708d3d9c17b94ff610e4486944eaec1dd9d4565e3941`.
+    - SHA-256: `c4372e0379ab9ee24ce1594c3085cd33470cd0f75d022d36f2bc891d6f548a3f`.
+    - Bundles `siddha-theme-0.1.0-7` (Force opacity rules, OpenGL compositing, kvantum lookandfeel default) and `squashfs-tools-4.7.5-1` (`unsquashfs`).
 
 ---
 
