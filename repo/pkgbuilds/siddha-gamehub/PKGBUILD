@@ -1,7 +1,7 @@
 # Maintainer: Sydra OS Team <team@sydra-os.org>
 pkgname=siddha-gamehub
 pkgver=0.1.0
-pkgrel=2
+pkgrel=3
 pkgdesc="Native game hub and launch optimizer for Sydra OS"
 arch=('any')
 url="https://sydra-os.org"

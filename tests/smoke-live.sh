@@ -68,10 +68,10 @@ else
   fail "Look-and-feel missing: org.sydra.glass.desktop"
 fi
 
-if [ -f "/usr/share/wallpapers/Sydra/sydra-metallic-torus.svg" ]; then
-  pass "Wallpaper present: sydra-metallic-torus.svg"
+if [ -f "/usr/share/wallpapers/Sydra/contents/images/3840x2160.png" ] || [ -f "/usr/share/wallpapers/Sydra/sydra-obsidian-waves.png" ]; then
+  pass "Wallpaper present: sydra-obsidian-waves.png"
 else
-  fail "Wallpaper missing: sydra-metallic-torus.svg"
+  fail "Wallpaper missing: sydra-obsidian-waves.png"
 fi
 
 if [ -f "/usr/share/color-schemes/SiddhaGlassGraphite.colors" ]; then
