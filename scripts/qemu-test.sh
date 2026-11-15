@@ -26,7 +26,10 @@ else
   DISPLAY_ARGS=(-vga virtio -display sdl)
 fi
 
-ARGS=(-enable-kvm -cpu host -smp 4 -m 4096 -machine q35
+RAM="${QEMU_RAM:-2560}"
+SMP="${QEMU_SMP:-2}"
+
+ARGS=(-enable-kvm -cpu host -smp "$SMP" -m "$RAM" -machine q35
       -qmp "unix:build/vm/qmp-$MODE.sock,server,nowait"
       -drive "file=$DISK,if=virtio,format=qcow2"
       -netdev user,id=n0 -device virtio-net-pci,netdev=n0
