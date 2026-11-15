@@ -133,12 +133,13 @@ Task logging format:
 ### T4.4 Traffic Light Window Controls & Glass Aesthetic Alignment
 - Status: DONE
 - Date: 2026-11-15
-- Target: Implement user-specified visual identity: macOS-style traffic-light buttons on the top-left, smoked frosted glass windows with blur, and 3D metallic torus wallpaper.
+- Target: Implement user-specified visual identity: macOS-style traffic-light buttons on the top-left, smoked frosted glass windows with blur, left vertical dock, and 3D metallic torus wallpaper.
 - Result: 
   - Configured top-left window controls (`ButtonsOnLeft=XIA`, `ButtonsOnRight=`) across Qt6/KDE and GTK 3/4 (`gtk-decoration-layout=close,minimize,maximize:`).
+  - Packaged `org.sydra.glass.desktop` Look-and-Feel package into `siddha-theme-0.1.0-4` implementing dual-panel architecture: top translucent status bar + left vertical capsule dock (Dolphin, Konsole, Firefox, Sydra Game Hub, System Settings).
   - Bundled 3D metallic torus (`sydra-metallic-torus.svg`) and vibrant cyber frost (`sydra-cyber-frost.svg`) vector wallpapers.
   - Resolved Plasma Wayland boot freeze: configured `kwin_wayland` compositor for SDDM, created `/home/live` in `airootfs` with `1000:1000` ownership, disabled KWallet first-run prompt, and completed 13-section color schemes.
-  - Built updated ISO `build/out/sydra-os-2026.11.15-x86_64.iso` (4.1 GiB). SHA-256: `6e48758145c46699c235de6f53fee78048f4b922483848ef33e7625a9baa0bfd`.
+  - Built updated ISO `build/out/sydra-os-2026.11.15-x86_64.iso` (4.1 GiB). SHA-256: `4a07cc7bfb29be3a2701b7ab5cb89a9c4a7ed8ff910a5a5acd0a7892d2dcb684`. Verified live boot and captured screenshot sequence in `~/Pictures/Screenshots/` and `~/Pictures/sydra-os-gui.png`.
 
 ---
 
