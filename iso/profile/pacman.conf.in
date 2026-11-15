@@ -1,6 +1,9 @@
 [options]
 Architecture = auto
-ParallelDownloads = 3
+ParallelDownloads = 5
+Color
+ILoveCandy
+VerbosePkgLists
 DisableDownloadTimeout
 SigLevel = Required DatabaseOptional
 LocalFileSigLevel = Optional

@@ -35,4 +35,9 @@ if command -v qdbus >/dev/null 2>&1; then
     qdbus org.kde.KWin /KWin org.kde.KWin.reconfigure 2>/dev/null || true
 fi
 
+# 6. Ensure Flathub repository is registered for Flatpaks
+if command -v flatpak >/dev/null 2>&1; then
+    flatpak remote-add --if-not-exists flathub https://dl.flathub.org/repo/flathub.flatpakrepo 2>/dev/null || true
+fi
+
 exit 0

@@ -1,6 +1,6 @@
 # Custom Siddha / Sydra OS packages (built into [siddha] repo)
 calamares
-# paru (built in Phase 2)
+yay
 siddha-calamares-config
 siddha-branding
 siddha-theme

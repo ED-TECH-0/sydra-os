@@ -1,13 +1,14 @@
 # Maintainer: Sydra OS Team <team@sydra-os.org>
 pkgname=siddha-settings
 pkgver=0.1.0
-pkgrel=2
+pkgrel=3
 pkgdesc="Default settings, sysctl, zram, snapshot rollback, updater, and shell profiles for Sydra OS"
 arch=('any')
 url="https://sydra-os.org"
 license=('GPL-3.0-or-later')
 source=(
   'zshrc'
+  'bashrc'
   'starship.toml'
   '99-siddha.conf'
   'zram-generator.conf'
@@ -16,11 +17,12 @@ source=(
   'siddha-update'
   'siddha-rollback'
 )
-sha256sums=('SKIP' 'SKIP' 'SKIP' 'SKIP' 'SKIP' 'SKIP' 'SKIP' 'SKIP')
+sha256sums=('SKIP' 'SKIP' 'SKIP' 'SKIP' 'SKIP' 'SKIP' 'SKIP' 'SKIP' 'SKIP')
 
 package() {
   # Shell profile defaults
   install -Dm644 "$srcdir/zshrc" "$pkgdir/etc/skel/.zshrc"
+  install -Dm644 "$srcdir/bashrc" "$pkgdir/etc/skel/.bashrc"
   install -Dm644 "$srcdir/starship.toml" "$pkgdir/etc/skel/.config/starship.toml"
   
   # Sysctl performance defaults

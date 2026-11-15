@@ -21,8 +21,13 @@ if command -v snapper >/dev/null 2>&1 && snapper list-configs 2>/dev/null | grep
 fi
 
 # 3. Synchronize package databases and upgrade system
-echo "[+] Upgrading official and Sydra OS packages via pacman..."
-sudo pacman -Syu "$@"
+if command -v yay >/dev/null 2>&1; then
+    echo "[+] Upgrading official, Sydra, and AUR packages via yay..."
+    yay -Syu "$@"
+else
+    echo "[+] Upgrading official and Sydra OS packages via pacman..."
+    sudo pacman -Syu "$@"
+fi
 
 # 4. Refresh Flatpak packages if installed
 if command -v flatpak >/dev/null 2>&1; then

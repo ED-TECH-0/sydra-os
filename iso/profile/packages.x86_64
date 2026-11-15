@@ -154,6 +154,7 @@ xdg-desktop-portal-kde
 xdg-user-dirs
 xf86-input-libinput
 xorg-xwayland
+yay
 zip
 zoxide
 zram-generator
