@@ -65,7 +65,11 @@ STATUS=$?
 
 if [[ $STATUS -ne 0 ]]; then
     echo "Calamares exited with error code $STATUS"
-    if command -v kdialog >/dev/null 2>&1; then
+    if command -v zenity >/dev/null 2>&1; then
+        zenity --error --title="Sydra OS Installer Error" --text="Calamares exited with code $STATUS.\n\n$(tail -n 10 "$LOG")" 2>/dev/null || true
+    elif command -v kdialog >/dev/null 2>&1; then
         kdialog --title "Sydra OS Installer Error" --error "Calamares failed to start (exit code $STATUS).\n\nDetails:\n$(tail -n 20 "$LOG")" 2>/dev/null || true
+    elif command -v notify-send >/dev/null 2>&1; then
+        notify-send "Sydra OS Installer Error" "Calamares exited with code $STATUS" 2>/dev/null || true
     fi
 fi
