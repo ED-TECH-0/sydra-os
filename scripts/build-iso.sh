@@ -19,10 +19,25 @@ if [[ -f iso/profile/pacman.conf.in ]]; then
   sed "s|@REPO_DIR@|$REPO_ENC|g" iso/profile/pacman.conf.in > iso/profile/pacman.conf
 fi
 
+# Safely unmount any lingering mounts from previous aborted runs
+for mnt in "$WORK/x86_64/airootfs/proc" "$WORK/x86_64/airootfs/sys" "$WORK/x86_64/airootfs/dev" "$WORK/x86_64/airootfs/run"; do
+  if [ -d "$mnt" ] && mountpoint -q "$mnt" 2>/dev/null; then
+    umount -l "$mnt" 2>/dev/null || true
+  fi
+done
+(grep -F "$WORK" /proc/mounts 2>/dev/null || true) | awk '{print $2}' | sort -r | while read -r m; do
+  [[ -n "$m" ]] && umount -l "$m" 2>/dev/null || true
+done
+
 rm -rf "$WORK"
 echo "Starting mkarchiso build..."
 mkarchiso -v -w "$WORK" -o "$OUT" iso/profile 2>&1 | tee "$LOG"
 
 ( cd "$OUT" && sha256sum ./*.iso > SHA256SUMS )
+
+# Safely unmount before deleting work
+(grep -F "$WORK" /proc/mounts 2>/dev/null || true) | awk '{print $2}' | sort -r | while read -r m; do
+  [[ -n "$m" ]] && umount -l "$m" 2>/dev/null || true
+done
 rm -rf "$WORK"
 echo "ISO ready in $OUT"
