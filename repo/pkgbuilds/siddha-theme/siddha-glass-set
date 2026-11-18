@@ -9,7 +9,61 @@ echo "=== Applying Siddha Glass: Preset [$PRESET], Intensity [$INTENSITY] ==="
 
 SCHEME_NAME="SiddhaGlass${PRESET^}"
 
-# 1. Apply KDE Color Scheme if in Plasma
+# 1. Apply COSMIC settings if running in COSMIC or config directory exists
+COSMIC_DIR="$HOME/.config/cosmic/com.system76.CosmicTheme.Dark.Builder/v2"
+mkdir -p "$COSMIC_DIR"
+
+case "$INTENSITY" in
+    pro)
+        echo "Low" > "$COSMIC_DIR/frosted"
+        echo "true" > "$COSMIC_DIR/frosted_windows"
+        echo "true" > "$COSMIC_DIR/frosted_panel"
+        echo "true" > "$COSMIC_DIR/frosted_applets"
+        echo "true" > "$COSMIC_DIR/frosted_system_interface"
+        ;;
+    standard)
+        echo "Medium" > "$COSMIC_DIR/frosted"
+        echo "true" > "$COSMIC_DIR/frosted_windows"
+        echo "true" > "$COSMIC_DIR/frosted_panel"
+        echo "true" > "$COSMIC_DIR/frosted_applets"
+        echo "true" > "$COSMIC_DIR/frosted_system_interface"
+        ;;
+    heavy)
+        echo "High" > "$COSMIC_DIR/frosted"
+        echo "true" > "$COSMIC_DIR/frosted_windows"
+        echo "true" > "$COSMIC_DIR/frosted_panel"
+        echo "true" > "$COSMIC_DIR/frosted_applets"
+        echo "true" > "$COSMIC_DIR/frosted_system_interface"
+        ;;
+    flat)
+        echo "None" > "$COSMIC_DIR/frosted"
+        echo "false" > "$COSMIC_DIR/frosted_windows"
+        echo "false" > "$COSMIC_DIR/frosted_panel"
+        echo "false" > "$COSMIC_DIR/frosted_applets"
+        echo "false" > "$COSMIC_DIR/frosted_system_interface"
+        ;;
+esac
+
+case "$PRESET" in
+    graphite)
+        echo "Some((0.357, 0.553, 0.937))" > "$COSMIC_DIR/accent"
+        echo "(0.071, 0.078, 0.102)" > "$COSMIC_DIR/bg_color"
+        ;;
+    midnight)
+        echo "Some((0.310, 0.702, 0.749))" > "$COSMIC_DIR/accent"
+        echo "(0.043, 0.059, 0.102)" > "$COSMIC_DIR/bg_color"
+        ;;
+    slate-light)
+        echo "Some((0.184, 0.435, 0.871))" > "$COSMIC_DIR/accent"
+        echo "(0.914, 0.925, 0.949)" > "$COSMIC_DIR/bg_color"
+        ;;
+    high-contrast)
+        echo "Some((1.0, 0.847, 0.302))" > "$COSMIC_DIR/accent"
+        echo "(0.0, 0.0, 0.0)" > "$COSMIC_DIR/bg_color"
+        ;;
+esac
+
+# 2. Apply KDE Color Scheme if in Plasma
 if command -v plasma-apply-colorscheme &>/dev/null; then
     plasma-apply-colorscheme "$SCHEME_NAME" 2>/dev/null || true
 fi

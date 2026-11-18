@@ -194,6 +194,52 @@ Color=240,240,240
     with open(cs_path, 'w') as f:
         f.write(cs_content)
 
+def generate_cosmic_theme(tokens, preset_name, out_dir):
+    preset = tokens['presets'][preset_name]
+    tint_rgb = hex_to_rgb(preset['tint'])
+    accent_rgb = hex_to_rgb(preset['accent'])
+    
+    r_tint, g_tint, b_tint = [round(c / 255.0, 3) for c in tint_rgb]
+    r_acc, g_acc, b_acc = [round(c / 255.0, 3) for c in accent_rgb]
+    
+    cosmic_builder_dir = os.path.join(out_dir, f"cosmic-{preset_name}", "com.system76.CosmicTheme.Dark.Builder", "v2")
+    os.makedirs(cosmic_builder_dir, exist_ok=True)
+    
+    with open(os.path.join(cosmic_builder_dir, "frosted"), "w") as f:
+        f.write("Medium\n")
+    with open(os.path.join(cosmic_builder_dir, "frosted_windows"), "w") as f:
+        f.write("true\n")
+    with open(os.path.join(cosmic_builder_dir, "frosted_panel"), "w") as f:
+        f.write("true\n")
+    with open(os.path.join(cosmic_builder_dir, "frosted_applets"), "w") as f:
+        f.write("true\n")
+    with open(os.path.join(cosmic_builder_dir, "frosted_system_interface"), "w") as f:
+        f.write("true\n")
+    with open(os.path.join(cosmic_builder_dir, "accent"), "w") as f:
+        f.write(f"Some(({r_acc}, {g_acc}, {b_acc}))\n")
+    with open(os.path.join(cosmic_builder_dir, "bg_color"), "w") as f:
+        f.write(f"({r_tint}, {g_tint}, {b_tint})\n")
+    with open(os.path.join(cosmic_builder_dir, "corner_radii"), "w") as f:
+        f.write("""(
+    radius_0: (0.0, 0.0, 0.0, 0.0),
+    radius_xs: (4.0, 4.0, 4.0, 4.0),
+    radius_s: (8.0, 8.0, 8.0, 8.0),
+    radius_m: (16.0, 16.0, 16.0, 16.0),
+    radius_l: (32.0, 32.0, 32.0, 32.0),
+    radius_xl: (160.0, 160.0, 160.0, 160.0),
+)
+""")
+    with open(os.path.join(cosmic_builder_dir, "gaps"), "w") as f:
+        f.write("(0, 8)\n")
+
+    # Cosmic terminal profile
+    term_dir = os.path.join(out_dir, f"cosmic-{preset_name}", "com.system76.CosmicTerm", "v1")
+    os.makedirs(term_dir, exist_ok=True)
+    with open(os.path.join(term_dir, "font_name"), "w") as f:
+        f.write(f'"{tokens["fonts"]["mono"]}"\n')
+    with open(os.path.join(term_dir, "opacity"), "w") as f:
+        f.write(f"{tokens['opacity']['terminal']}\n")
+
 def generate_gtk_css(tokens, preset_name, out_path):
     preset = tokens['presets'][preset_name]
     tint_rgb = hex_to_rgb(preset['tint'])
@@ -248,6 +294,8 @@ def main():
     print(f"Compiling themes to {args.out_dir}...")
     
     for preset in tokens['presets']:
+        generate_cosmic_theme(tokens, preset, args.out_dir)
+
         kde_out = os.path.join(args.out_dir, f"SiddhaGlass{preset.capitalize()}.colors")
         generate_kde_colorscheme(tokens, preset, kde_out)
         
