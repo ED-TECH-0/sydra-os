@@ -1,0 +1,13 @@
+[terminal]
+vt = "1"
+
+[general]
+service = "login"
+
+[initial_session]
+command = "start-cosmic"
+user = "live"
+
+[default_session]
+command = "cosmic-greeter-start"
+user = "cosmic-greeter"

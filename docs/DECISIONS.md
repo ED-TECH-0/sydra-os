@@ -80,3 +80,23 @@ Format:
   1. Replaced metallic torus with **Sydra Obsidian Waves** (`sydra-obsidian-waves.png` / `.svg`) featuring authentic multi-layer glass contours on deep midnight obsidian (`#07090E` to `#121724`) with violet/cyan refraction edge lines.
   2. Structured as a native KDE Wallpaper Package (`/usr/share/wallpapers/Sydra/contents/images/3840x2160.png`, `metadata.json`, `screenshot.png`).
   3. Updated `siddha-branding-0.1.0-4` to install the complete package structure.
+
+### [2026-11-19] DEC-012: Build Machine Bootstrap Verification (Laptop A)
+- **Context**: T0.5 requires verifying host build capabilities on Laptop A (EndeavourOS).
+- **Evidence**:
+  - `mkarchiso -h`: present (/usr/bin/mkarchiso).
+  - `makechrootpkg -h`: present (/usr/bin/makechrootpkg).
+  - `qemu-system-x86_64 --version`: present (QEMU 11.1.3).
+  - `repo-add -h`: present (pacman 7.1.0).
+  - `/dev/kvm`: present with full read/write access.
+  - Disk space: 208 GiB available on `/home` (exceeds 25 GiB minimum).
+  - Memory: 7.1 GiB RAM available, Intel Core i5-8350U (8 threads).
+- **Decision**: Mark T0.5 as DONE.
+
+### [2026-11-19] DEC-013: Primary Desktop Target — COSMIC Epoch 1 (v1.11.0)
+- **Context**: Master Plan 2.0 specifies COSMIC as the primary desktop environment for Sydra OS. KDE Plasma is retained in `packages/desktop-kde.txt` for the optional edition (Appendix K).
+- **Evidence**:
+  - `pacman -Sg cosmic` confirms all 28 official COSMIC packages in Arch `extra`: `cosmic-session` (v1:1.11.0-1), `cosmic-comp`, `cosmic-panel`, `cosmic-applets`, `cosmic-app-library`, `cosmic-launcher`, `cosmic-bg`, `cosmic-notifications`, `cosmic-osd`, `cosmic-settings`, `cosmic-greeter`, `cosmic-icon-theme`, `cosmic-wallpapers`, `cosmic-files`, `cosmic-terminal`, `cosmic-text-editor`, `cosmic-player`, `cosmic-store`, `xdg-desktop-portal-cosmic`.
+  - `cosmic-greeter.service` provides `display-manager.service` via `greetd --config /etc/greetd/cosmic-greeter.toml`.
+  - Configured `[initial_session]` with `user = "live"` and `command = "start-cosmic"` in `cosmic-greeter.toml` for autologin.
+- **Decision**: Set `packages/desktop.txt` to the verified COSMIC package set; route `display-manager.service` to `cosmic-greeter.service`. Move previous KDE packages to `packages/desktop-kde.txt`.

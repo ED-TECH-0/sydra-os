@@ -29,9 +29,14 @@ Task logging format:
 - Result: Created `docs/PROGRESS.md`, `docs/DECISIONS.md`, `docs/BLOCKERS.md`, `docs/LICENSES.md`, `docs/TEST_MATRIX.md`, `docs/RELEASE_NOTES_TEMPLATE.md`. Initial entries recorded for T0.1–T0.4 and DEC-001 through DEC-003.
 
 ### T0.5 Build machine bootstrap (Laptop A)
-- Status: WAITING_HUMAN_ACTION
-- Date: 2026-11-13
-- Need: Host toolchain installation (`archiso`, `devtools`, `qemu-desktop`, `edk2-ovmf`, etc.) requiring sudo/root privileges on Laptop A.
+- Status: DONE
+- Date: 2026-11-19
+- Result: Host toolchain verified on Laptop A (EndeavourOS): `mkarchiso` (archiso 79), `makechrootpkg` (devtools), `qemu-system-x86_64` (11.1.3), `repo-add` (7.1.0), `/dev/kvm` active, 208 GiB free disk, 7.1 GiB RAM.
+
+### T0.6 Name, trademark and domain check
+- Status: DONE
+- Date: 2026-11-18
+- Result: Rebranded to **Sydra OS** by E (Master Plan 2.0). Internal repository and packaging namespaces retain `siddha` (`siddha-*`) to ensure backward compatibility. Public facing identifiers (`/etc/os-release`, ISO volume label, Calamares branding, logo) standardized to Sydra OS.
 
 ---
 
@@ -61,6 +66,15 @@ Task logging format:
   - "Install Sydra OS" desktop launcher present.
   - Welcome Center opens: "Welcome to the Sydra OS operating system running KDE Plasma!" with Sydra OS documentation link.
   - Floating bottom panel, status tray, NetworkManager active.
+
+---
+
+## Phase 3: Desktop Base (COSMIC Main Edition)
+
+### T3.1 Package groups (COSMIC)
+- Status: CLAIMED by Antigravity on 2026-11-19
+- Target: Replace KDE Plasma packages in `packages/desktop.txt` with verified COSMIC Epoch 1 packages (`cosmic-session` v1:1.11.0-1, `cosmic-comp`, `cosmic-panel`, `cosmic-files`, `cosmic-terminal`, `cosmic-greeter`, etc.). Move KDE packages to `packages/desktop-kde.txt` for Appendix K. Regenerate `iso/profile/packages.x86_64`. Route `display-manager.service` to `cosmic-greeter.service`.
+- DONE WHEN: `make iso` succeeds and produces bootable ISO with COSMIC desktop packages.
 
 ---
 

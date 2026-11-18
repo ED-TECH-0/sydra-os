@@ -94,7 +94,7 @@ class SydraWelcomeWindow(QMainWindow):
 
         desc = QLabel(
             "A professional glass desktop engineered for developers and gamers.\n"
-            "Powered by Arch Linux, KDE Plasma 6 Wayland, and Siddha Glass Pro."
+            "Powered by Arch Linux, COSMIC Desktop Wayland, and Sydra Glass Pro."
         )
         desc.setFont(QFont("Inter", 12))
         desc.setWordWrap(True)

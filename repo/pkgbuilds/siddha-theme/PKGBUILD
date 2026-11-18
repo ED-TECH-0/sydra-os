@@ -1,12 +1,13 @@
 # Maintainer: Sydra OS Team <team@sydra-os.org>
 pkgname=siddha-theme
 pkgver=0.1.0
-pkgrel=7
+pkgrel=8
 pkgdesc="Siddha Glass Pro desktop themes, color schemes, look-and-feel, and switcher for Sydra OS"
 arch=('any')
 url="https://sydra-os.org"
 license=('GPL-3.0-or-later')
-depends=('plasma-desktop' 'kvantum' 'bash')
+depends=('kvantum' 'bash')
+optdepends=('plasma-desktop: for optional KDE Plasma edition')
 source=(
   'siddha-glass-set'
   'kdeglobals'
