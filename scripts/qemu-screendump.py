@@ -1,4 +1,5 @@
 #!/usr/bin/env python3
+import glob
 import json
 import os
 import shutil
@@ -8,7 +9,10 @@ import sys
 import time
 
 ROOT_DIR = os.path.abspath(os.path.join(os.path.dirname(__file__), ".."))
-ISO_PATH = os.path.join(ROOT_DIR, "build/out/sydra-os-2026.11.15-x86_64.iso")
+iso_candidates = sorted(glob.glob(os.path.join(ROOT_DIR, "build/out/sydra-os-*.iso")))
+if not iso_candidates:
+    sys.exit("Error: No sydra-os ISO found in build/out/")
+ISO_PATH = iso_candidates[-1]
 QMP_SOCK = os.path.join(ROOT_DIR, "build/vm/qmp-screendump.sock")
 VARS_PATH = os.path.join(ROOT_DIR, "build/vm/OVMF_VARS-screendump.fd")
 OVMF_CODE = "/usr/share/edk2/x64/OVMF_CODE.4m.fd"

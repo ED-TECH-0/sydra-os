@@ -200,7 +200,10 @@ Task logging format:
   - Updated `tokens/glass.json` with brand palette: base `#12141A`, primary `#5B8DEF`, secondary `#4FB3BF`.
   - Updated `siddha-calamares-config` (pkgrel 9): installed official logo to Calamares branding and updated `branding.desc` with brand color scheme.
   - Updated `siddha-branding` (pkgrel 5): packaged hicolor scalable SVG, standard PNG resolutions (16–512), pixmaps, and horizontal lockup.
+  - Updated `siddha-theme` (pkgrel 7): enforced active/inactive window opacity (85%/80%), enabled OpenGL compositing in kwinrc, and set kvantum style default.
   - Updated `AGENTS.md` and `docs/MASTER_PLAN.md` to version 2.0.
+  - Successfully built Release ISO: `build/out/sydra-os-2026.11.19-x86_64.iso` (4.2 GiB).
+    - SHA-256: `6eefb90dd294a26334926ac1eedf441ecea4b851f970c8e9d857fee27a34d44b`.
 
 ---
 
@@ -213,5 +216,5 @@ Task logging format:
 - **Physical USB Flash for Hardware Testing (Laptop B / Nitro RTX 5050)**:
   Insert a USB pendrive (<= 256GB), check device name with `lsblk`, then run:
   ```bash
-  sudo scripts/flash-usb.sh build/out/sydra-os-2026.11.15-x86_64.iso /dev/sdX  # replace /dev/sdX with USB drive (e.g. /dev/sdb)
+  sudo scripts/flash-usb.sh build/out/sydra-os-2026.11.19-x86_64.iso /dev/sdX  # replace /dev/sdX with USB drive (e.g. /dev/sdb)
   ```
