@@ -80,7 +80,7 @@ Task logging format:
   - Moved previous KDE Plasma package group to `packages/desktop-kde.txt`.
   - Regenerated `iso/profile/packages.x86_64` (185 package groups).
   - Built ISO `build/out/sydra-os-2026.11.19-x86_64.iso` (4.5 GiB).
-    - SHA-256: `3814fe9667f3e9fc29be4552bd38cff069f68543717af710523b51baf70dbab2`.
+    - SHA-256: `d38e61ead9bdc5a04cb908ae3dae1095cae7358353734a1422e0b45cf1d201f8`.
 
 ### T3.2 Live user and automatic desktop start (COSMIC)
 - Status: DONE
@@ -93,6 +93,18 @@ Task logging format:
   - Pre-seeded Frosted Glass theme settings (`frosted_panel=true`, `frosted_windows=true`, `frosted=Medium`).
   - Added desktop entry `/etc/skel/Desktop/siddha-installer.desktop` ("Install Sydra OS").
   - QEMU UEFI boot test PASS: Booted straight into native COSMIC Wayland desktop. Top panel (Workspaces, Applications, centered Clock, Status applets) and floating bottom frosted dock active and responsive. Screen capture verified.
+
+### T3.5 Installer Configuration for COSMIC Desktop
+- Status: DONE
+- Date: 2026-11-19
+- Target: Adapt Calamares modules and execution sequence for COSMIC desktop: remove obsolete displaymanager module from exec sequence, enable cosmic-greeter in target systemd services, remove live-user initial autologin from target greeter configuration on cleanup, and update installer error handler.
+- Result:
+  - Updated Calamares `settings.conf`: Removed `displaymanager` from exec sequence.
+  - Updated `services-systemd.conf`: Configured `cosmic-greeter` service as mandatory.
+  - Updated `shellprocess_firstboot.conf`: Enabled `cosmic-greeter.service` in installed system.
+  - Updated `shellprocess_cleanup.conf`: Automatically strips live user autologin (`initial_session`) from `/etc/greetd/cosmic-greeter.toml` upon install completion.
+  - Built package `siddha-calamares-config-0.1.0-10`.
+  - Verified clean ISO build and package inclusion.
 
 ---
 
