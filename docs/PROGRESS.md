@@ -284,3 +284,4 @@ Task logging format:
   ```bash
   sudo scripts/flash-usb.sh build/out/sydra-os-2026.11.19-x86_64.iso /dev/sdX  # replace /dev/sdX with USB drive (e.g. /dev/sdb)
   ```
+  *(Current Release ISO SHA-256: `d38e61ead9bdc5a04cb908ae3dae1095cae7358353734a1422e0b45cf1d201f8`)*
