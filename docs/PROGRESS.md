@@ -126,6 +126,22 @@ Task logging format:
   - Mapped panel/dock configuration under `com.system76.CosmicPanel.Panel` and `com.system76.CosmicPanel.Dock`.
   - Verified consistency pipeline for GTK and Qt/Kvantum applications.
 
+### T4.3 Generator (`tools/glassgen.py`)
+- Status: DONE
+- Date: 2026-11-19
+- Target: Generate COSMIC theme files, GTK CSS overrides, and terminal configs deterministically from `tokens/glass.json`.
+- Result:
+  - Enhanced `tools/glassgen.py` to compile COSMIC theme files (`com.system76.CosmicTheme.Dark.Builder/v2`) and terminal profiles (`com.system76.CosmicTerm/v1`).
+  - Validated contrast ratios (> 8.98:1 on all test backgrounds) and verified byte-for-byte deterministic output across repeat executions (`DETERMINISM PASS`).
+
+### T4.7 Presets and Intensity Switcher (`siddha-glass-set`)
+- Status: DONE
+- Date: 2026-11-19
+- Target: Implement `siddha-glass-set <preset> <intensity>` supporting live switching of COSMIC Frosted Glass levels (`pro`, `standard`, `heavy`, `flat`) and color palettes (`graphite`, `midnight`, `slate-light`, `high-contrast`).
+- Result:
+  - Updated `siddha-glass-set` with native COSMIC RON key writers.
+  - Built and updated package `siddha-theme-0.1.0-9`.
+
 ### T4.5 Procedural 4K Wallpapers & Branding Logo
 - Status: DONE
 - Date: 2026-11-13
