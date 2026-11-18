@@ -44,7 +44,7 @@ else
 fi
 
 # 6. Core utilities check
-for cmd in steam zsh git dolphin konsole; do
+for cmd in steam zsh git firefox cosmic-files cosmic-term cosmic-settings; do
   if command -v "$cmd" &>/dev/null; then
     pass "Core binary present: $cmd"
   else
@@ -62,22 +62,16 @@ for scmd in siddha-dev siddha-gpu-setup siddha-gamehub siddha-glass-set siddha-w
 done
 
 # 8. Glassmorphism assets check
-if [ -d "/usr/share/plasma/look-and-feel/org.sydra.glass.desktop" ]; then
-  pass "Look-and-feel present: org.sydra.glass.desktop"
+if [ -d "/usr/share/cosmic" ] || [ -d "/usr/share/plasma/look-and-feel/org.sydra.glass.desktop" ]; then
+  pass "Desktop theming structure present"
 else
-  fail "Look-and-feel missing: org.sydra.glass.desktop"
+  fail "Desktop theming structure missing"
 fi
 
 if [ -f "/usr/share/wallpapers/Sydra/contents/images/3840x2160.png" ] || [ -f "/usr/share/wallpapers/Sydra/sydra-obsidian-waves.png" ]; then
   pass "Wallpaper present: sydra-obsidian-waves.png"
 else
   fail "Wallpaper missing: sydra-obsidian-waves.png"
-fi
-
-if [ -f "/usr/share/color-schemes/SiddhaGlassGraphite.colors" ]; then
-  pass "Color scheme present: SiddhaGlassGraphite.colors"
-else
-  fail "Color scheme missing: SiddhaGlassGraphite.colors"
 fi
 
 echo "=============================================="
