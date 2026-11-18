@@ -72,9 +72,27 @@ Task logging format:
 ## Phase 3: Desktop Base (COSMIC Main Edition)
 
 ### T3.1 Package groups (COSMIC)
-- Status: CLAIMED by Antigravity on 2026-11-19
-- Target: Replace KDE Plasma packages in `packages/desktop.txt` with verified COSMIC Epoch 1 packages (`cosmic-session` v1:1.11.0-1, `cosmic-comp`, `cosmic-panel`, `cosmic-files`, `cosmic-terminal`, `cosmic-greeter`, etc.). Move KDE packages to `packages/desktop-kde.txt` for Appendix K. Regenerate `iso/profile/packages.x86_64`. Route `display-manager.service` to `cosmic-greeter.service`.
-- DONE WHEN: `make iso` succeeds and produces bootable ISO with COSMIC desktop packages.
+- Status: DONE
+- Date: 2026-11-19
+- Target: Replace KDE Plasma packages in `packages/desktop.txt` with verified COSMIC Epoch 1 packages (`cosmic-session` v1:1.11.0-1, `cosmic-comp`, `cosmic-panel`, `cosmic-files`, `cosmic-terminal`, `cosmic-greeter`, etc.). Move KDE packages to `packages/desktop-kde.txt` for Appendix K. Regenerate `iso/profile/packages.x86_64`.
+- Result:
+  - Verified and bundled all official Arch COSMIC packages: `cosmic-session` (v1:1.11.0-1), `cosmic-comp`, `cosmic-panel`, `cosmic-applets`, `cosmic-app-library`, `cosmic-launcher`, `cosmic-bg`, `cosmic-notifications`, `cosmic-osd`, `cosmic-settings`, `cosmic-greeter`, `cosmic-icon-theme`, `cosmic-wallpapers`, `cosmic-files`, `cosmic-terminal`, `cosmic-text-editor`, `cosmic-player`, `cosmic-store`, `xdg-desktop-portal-cosmic`.
+  - Moved previous KDE Plasma package group to `packages/desktop-kde.txt`.
+  - Regenerated `iso/profile/packages.x86_64` (185 package groups).
+  - Built ISO `build/out/sydra-os-2026.11.19-x86_64.iso` (4.5 GiB).
+    - SHA-256: `3814fe9667f3e9fc29be4552bd38cff069f68543717af710523b51baf70dbab2`.
+
+### T3.2 Live user and automatic desktop start (COSMIC)
+- Status: DONE
+- Date: 2026-11-19
+- Target: Automatic live user autologin into native COSMIC Wayland session without login prompt, configure `cosmic-greeter` (greetd), provide "Install Sydra OS" launcher, and boot directly to desktop.
+- Result:
+  - Configured `display-manager.service -> /usr/lib/systemd/system/cosmic-greeter.service`.
+  - Configured `/etc/greetd/cosmic-greeter.toml` with `[initial_session]` for user `live` running `start-cosmic`.
+  - Pre-seeded Sydra Obsidian Waves wallpaper in `~/.config/cosmic/com.system76.CosmicBackground/v1/all`.
+  - Pre-seeded Frosted Glass theme settings (`frosted_panel=true`, `frosted_windows=true`, `frosted=Medium`).
+  - Added desktop entry `/etc/skel/Desktop/siddha-installer.desktop` ("Install Sydra OS").
+  - QEMU UEFI boot test PASS: Booted straight into native COSMIC Wayland desktop. Top panel (Workspaces, Applications, centered Clock, Status applets) and floating bottom frosted dock active and responsive. Screen capture verified.
 
 ---
 
