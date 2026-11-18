@@ -1,0 +1,11 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 800 200" width="800" height="200">
+  <g transform="translate(30, 20) scale(0.3125)">
+    <!-- Embed Outer Hexagon -->
+    <path d="M 256,48 L 440,154 L 440,366 L 256,472 L 72,366 L 72,154 Z"
+          fill="#12141A" fill-opacity="0.85" stroke="#FFFFFF" stroke-opacity="0.3" stroke-width="6" stroke-linejoin="round" />
+    <path d="M 256,76 L 412,168 L 334,256 L 256,210 Z" fill="#5B8DEF" />
+    <path d="M 256,444 L 100,352 L 178,256 L 256,302 Z" fill="#4FB3BF" />
+    <path d="M 256,210 L 334,256 L 256,302 L 178,256 Z" fill="#FFFFFF" fill-opacity="0.3" />
+  </g>
+  <text x="220" y="125" font-family="Inter, sans-serif" font-size="72" font-weight="600" fill="#F2F4F8" letter-spacing="-1">Sydra<tspan fill="#5B8DEF" font-weight="300"> OS</tspan></text>
+</svg>

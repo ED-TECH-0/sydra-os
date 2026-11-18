@@ -190,6 +190,18 @@ Task logging format:
     - SHA-256: `c4372e0379ab9ee24ce1594c3085cd33470cd0f75d022d36f2bc891d6f548a3f`.
     - Bundles `siddha-theme-0.1.0-7` (Force opacity rules, OpenGL compositing, kvantum lookandfeel default) and `squashfs-tools-4.7.5-1` (`unsquashfs`).
 
+### T4.10 Brand Assets from Sydra Logo & Master Plan 2.0 Integration
+- Status: DONE
+- Date: 2026-11-19
+- Target: Integrate official Sydra OS glass prism logo (`assets/logo/sydra-logo.svg`), generate all brand variants deterministically (PNGs 16–512, multi-res favicon.ico, monochrome white/dark SVGs, horizontal lockup), update brand palette (`#12141A`, `#5B8DEF`, `#4FB3BF`), and update Calamares/branding packages.
+- Result:
+  - Saved official logo to `assets/logo/sydra-logo.svg`.
+  - Created `tools/brandgen.sh`: generated PNG sizes 16, 24, 32, 48, 64, 128, 256, 512, `favicon.ico`, monochrome white/dark SVGs, and horizontal lockup `sydra-logo-lockup.png` / `.svg`.
+  - Updated `tokens/glass.json` with brand palette: base `#12141A`, primary `#5B8DEF`, secondary `#4FB3BF`.
+  - Updated `siddha-calamares-config` (pkgrel 9): installed official logo to Calamares branding and updated `branding.desc` with brand color scheme.
+  - Updated `siddha-branding` (pkgrel 5): packaged hicolor scalable SVG, standard PNG resolutions (16–512), pixmaps, and horizontal lockup.
+  - Updated `AGENTS.md` and `docs/MASTER_PLAN.md` to version 2.0.
+
 ---
 
 ## HUMAN ACTIONS NEEDED

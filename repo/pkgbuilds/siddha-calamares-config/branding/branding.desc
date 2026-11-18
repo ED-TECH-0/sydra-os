@@ -29,10 +29,10 @@ slideshow: []
 slideshowAPI: 1
 
 style:
-   SidebarBackground:        "#1a1b26"
-   SidebarText:              "#c0caf5"
-   SidebarBackgroundCurrent: "#7aa2f7"
-   SidebarTextCurrent:       "#15161e"
+   SidebarBackground:        "#12141A"
+   SidebarText:              "#F2F4F8"
+   SidebarBackgroundCurrent: "#5B8DEF"
+   SidebarTextCurrent:       "#12141A"
 
 uploadServer:
    type: "none"

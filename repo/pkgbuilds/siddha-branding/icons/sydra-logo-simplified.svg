@@ -1,0 +1,17 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512" width="512" height="512">
+  <defs>
+    <linearGradient id="prism-grad-1" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#5B8DEF" />
+      <stop offset="100%" stop-color="#12141A" />
+    </linearGradient>
+    <linearGradient id="prism-grad-2" x1="100%" y1="0%" x2="0%" y2="100%">
+      <stop offset="0%" stop-color="#4FB3BF" />
+      <stop offset="100%" stop-color="#1A1C24" />
+    </linearGradient>
+  </defs>
+  <path d="M 256,48 L 440,154 L 440,366 L 256,472 L 72,366 L 72,154 Z"
+        fill="#12141A" stroke="#5B8DEF" stroke-width="12" stroke-linejoin="round" />
+  <path d="M 256,76 L 412,168 L 334,256 L 256,210 Z" fill="url(#prism-grad-1)" />
+  <path d="M 256,444 L 100,352 L 178,256 L 256,302 Z" fill="url(#prism-grad-2)" />
+  <path d="M 256,210 L 334,256 L 256,302 L 178,256 Z" fill="#FFFFFF" fill-opacity="0.35" />
+</svg>

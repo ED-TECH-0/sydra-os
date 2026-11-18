@@ -1,7 +1,7 @@
 # Maintainer: Sydra OS Team <team@sydra-os.org>
 pkgname=siddha-branding
 pkgver=0.1.0
-pkgrel=4
+pkgrel=5
 pkgdesc="Branding, wallpapers, logos, and OS identity files for Sydra OS"
 arch=('any')
 url="https://sydra-os.org"
@@ -18,9 +18,19 @@ package() {
   install -Dm644 "$srcdir/os-release" "$pkgdir/usr/share/siddha/branding/os-release"
   install -Dm644 "$srcdir/issue" "$pkgdir/usr/share/siddha/branding/issue"
   
-  # Logo
+  # Logo SVGs and Pixmaps
   install -Dm644 "$srcdir/sydra-logo.svg" "$pkgdir/usr/share/pixmaps/sydra-logo.svg"
   install -Dm644 "$srcdir/sydra-logo.svg" "$pkgdir/usr/share/siddha/branding/logo.svg"
+  install -Dm644 "$startdir/icons/sydra-logo-512.png" "$pkgdir/usr/share/pixmaps/sydra-logo.png"
+  install -Dm644 "$startdir/icons/sydra-logo-lockup.png" "$pkgdir/usr/share/siddha/branding/sydra-logo-lockup.png"
+
+  # Hicolor Icon Theme entries
+  install -Dm644 "$srcdir/sydra-logo.svg" "$pkgdir/usr/share/icons/hicolor/scalable/apps/sydra-logo.svg"
+  for s in 16 24 32 48 64 128 256 512; do
+    if [ -f "$startdir/icons/sydra-logo-${s}.png" ]; then
+      install -Dm644 "$startdir/icons/sydra-logo-${s}.png" "$pkgdir/usr/share/icons/hicolor/${s}x${s}/apps/sydra-logo.png"
+    fi
+  done
 
   # Wallpapers and KDE Wallpaper Package
   install -d "$pkgdir/usr/share/wallpapers/Sydra/contents/images"

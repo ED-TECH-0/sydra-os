@@ -1,7 +1,7 @@
 {
   "version": 1,
-  "name": "Siddha Glass Pro",
-  "brandName": "Sydra OS",
+  "name": "Sydra Glass Pro",
+  "brand": { "base": "#12141A", "primary": "#5B8DEF", "secondary": "#4FB3BF", "logo": "assets/logo/sydra-logo.svg" },
   "radius": { "window": 12, "control": 10, "dock": 16 },
   "blur": { "sm": 12, "md": 24, "lg": 36, "saturation": 1.2, "noise": 0.03 },
   "opacity": {

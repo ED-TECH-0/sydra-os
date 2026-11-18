@@ -1,4 +1,4 @@
-# Siddha OS (Sydra OS) - agent instructions
+# Sydra OS - agent instructions
 
 1. The full plan is `docs/MASTER_PLAN.md`. Read sections 0-7 once; then only the section of the current phase.
 2. Golden Rules (MASTER_PLAN section 4) are binding. Never write to disk devices except via `scripts/flash-usb.sh`. Never commit secrets.
@@ -8,8 +8,8 @@
 6. Ask the human (E) only for: physical actions, decisions in MASTER_PLAN section 14, or risky commands. No routine check-ins.
 7. After each task report: what changed, commands run, results, next task.
 
-Branding vs Internal Identity:
-- Public Brand: **Sydra OS** (UI titles, boot menu, ISO label `SYDRA_YYYYMM`, welcome app, docs)
-- Internal Identifier: **siddha** (package prefix `siddha-*`, local repo `[siddha]`, configs `/etc/siddha/`)
+Main desktop: **COSMIC** (decided by E). KDE Plasma is only an optional later edition (MASTER_PLAN Appendix K). Do not switch the main desktop. Record every COSMIC bug in docs/KNOWN_ISSUES.md.
 
 Machines: Laptop A = EndeavourOS build machine (only place that builds the ISO). Laptop B = Windows (Nitro, RTX 5050) GPU/gaming test lab and Game Hub development.
+
+Project name: **Sydra OS** (renamed from Siddha OS; never use "Siddha OS" or "Sida" in new code or text). Logo: assets/logo/sydra-logo.svg (do not modify; generate variants only). Brand colors: #12141A, #5B8DEF, #4FB3BF.
