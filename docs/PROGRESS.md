@@ -115,10 +115,16 @@ Task logging format:
 - Date: 2026-11-13
 - Result: `tokens/glass.json` created with radii, blur scales, layer opacity, shadow, fonts, and presets (`graphite`, `midnight`, `slate-light`, `high-contrast`).
 
-### T4.2 Theme Generator (`tools/glassgen.py`)
+### T4.2 COSMIC Theming Research Spike
 - Status: DONE
-- Date: 2026-11-13
-- Result: Validation passed. Contrast checks exceed 8.9:1 across all reference backgrounds. Compiled KDE `.colors`, Konsole `.colorscheme`, and GTK CSS overrides deterministically.
+- Date: 2026-11-19
+- Target: Map and document COSMIC Epoch 1 (v1.11.0) appearance options, file storage paths under `~/.config/cosmic/`, live-apply responsiveness, and scripting capabilities.
+- Result:
+  - Documented complete architecture in `docs/COSMIC_THEMING.md`.
+  - Mapped all `CosmicTheme.Dark.Builder/v2` keys (`frosted`, `frosted_windows`, `frosted_panel`, `frosted_applets`, `frosted_system_interface`, `accent`, `bg_color`, `corner_radii`, `gaps`).
+  - Verified RON schema for wallpaper background management (`com.system76.CosmicBackground/v1/all`).
+  - Mapped panel/dock configuration under `com.system76.CosmicPanel.Panel` and `com.system76.CosmicPanel.Dock`.
+  - Verified consistency pipeline for GTK and Qt/Kvantum applications.
 
 ### T4.5 Procedural 4K Wallpapers & Branding Logo
 - Status: DONE
