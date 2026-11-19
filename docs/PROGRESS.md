@@ -94,17 +94,21 @@ Task logging format:
   - Added desktop entry `/etc/skel/Desktop/siddha-installer.desktop` ("Install Sydra OS").
   - QEMU UEFI boot test PASS: Booted straight into native COSMIC Wayland desktop. Top panel (Workspaces, Applications, centered Clock, Status applets) and floating bottom frosted dock active and responsive. Screen capture verified.
 
-### T3.5 Installer Configuration for COSMIC Desktop
+### T3.5 Installer Configuration for COSMIC Desktop & End-to-End Target Boot Verification
 - Status: DONE
 - Date: 2026-11-19
-- Target: Adapt Calamares modules and execution sequence for COSMIC desktop: remove obsolete displaymanager module from exec sequence, enable cosmic-greeter in target systemd services, remove live-user initial autologin from target greeter configuration on cleanup, and update installer error handler.
+- Target: Adapt Calamares modules and execution sequence for COSMIC desktop: remove obsolete displaymanager module from exec sequence, enable cosmic-greeter in target systemd services, remove live-user initial autologin from target greeter configuration on cleanup, resolve GRUB Btrfs kernel premature EOF by mounting ESP at `/boot`, and verify end-to-end installation to target disk.
 - Result:
   - Updated Calamares `settings.conf`: Removed `displaymanager` from exec sequence.
   - Updated `services-systemd.conf`: Configured `cosmic-greeter` service as mandatory.
   - Updated `shellprocess_firstboot.conf`: Enabled `cosmic-greeter.service` in installed system.
   - Updated `shellprocess_cleanup.conf`: Automatically strips live user autologin (`initial_session`) from `/etc/greetd/cosmic-greeter.toml` upon install completion.
-  - Built package `siddha-calamares-config-0.1.0-10`.
-  - Verified clean ISO build and package inclusion.
+  - Resolved GRUB Btrfs kernel premature EOF: Configured `partition.conf` with `efi.mountPoint: "/boot"` (1024 MiB FAT32). Kernels and initramfs reside directly on FAT32 bypassing GRUB Btrfs decompression limitations while preserving full Btrfs root layout (`/@`, `/@home`, `/@snapshots`, `/@cache`, `/@log`) with `compress=zstd:1`.
+  - Added `/usr/local/bin/mkfs.btrfs` wrapper to disable `block-group-tree` for bootloader compatibility.
+  - Hardened `scripts/qemu-test.sh` to refresh NVRAM on ISO boot (`-boot order=d,menu=on`).
+  - Built package `siddha-calamares-config-0.1.0-11`.
+  - Built Release ISO `build/out/sydra-os-2026.11.19-x86_64.iso` (4.5 GiB, SHA-256: `67b5cc49896c24d6a77ced2d8234199db9474c43fae155703f9bfff14344c3f0`).
+  - End-to-End QEMU installation test PASS: Calamares installed cleanly to 30 GB virtual drive. Rebooted directly from disk into native COSMIC Greeter login interface. Screen verified.
 
 ---
 

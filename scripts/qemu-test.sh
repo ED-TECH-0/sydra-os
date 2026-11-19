@@ -53,7 +53,12 @@ if [[ $MODE == uefi ]]; then
   done
 
   VARS="build/vm/OVMF_VARS-$MODE.fd"
-  if [[ -n $OVMF_VARS_SRC && ! -f $VARS ]]; then
+  if [[ $BOOT != disk-only ]]; then
+    # Reset NVRAM when booting ISO so previous disk installs do not hijack boot order
+    if [[ -n $OVMF_VARS_SRC ]]; then
+      cp -f "$OVMF_VARS_SRC" "$VARS"
+    fi
+  elif [[ -n $OVMF_VARS_SRC && ! -f $VARS ]]; then
     cp "$OVMF_VARS_SRC" "$VARS"
   fi
 
@@ -67,7 +72,7 @@ fi
 
 if [[ $BOOT != disk-only ]]; then
   [[ -n $ISO && -f $ISO ]] || { echo "No ISO found in build/out/"; exit 1; }
-  ARGS+=(-boot d -cdrom "$ISO")
+  ARGS+=(-boot order=d,menu=on -cdrom "$ISO")
 fi
 
 echo "Launching QEMU ($MODE mode, boot: $BOOT)..."

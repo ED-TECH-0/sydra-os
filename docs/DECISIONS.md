@@ -100,3 +100,11 @@ Format:
   - `cosmic-greeter.service` provides `display-manager.service` via `greetd --config /etc/greetd/cosmic-greeter.toml`.
   - Configured `[initial_session]` with `user = "live"` and `command = "start-cosmic"` in `cosmic-greeter.toml` for autologin.
 - **Decision**: Set `packages/desktop.txt` to the verified COSMIC package set; route `display-manager.service` to `cosmic-greeter.service`. Move previous KDE packages to `packages/desktop-kde.txt`.
+
+### [2026-11-19] DEC-014: Calamares ESP Mount Point at /boot for Robust GRUB Btrfs Boot
+- **Context**: On UEFI installations with Btrfs root (`compress=zstd:1`), GRUB's EFI loader failed with `error: loader/efi/linux.c:grub_cmd_linux:700:premature end of file /@/boot/vmlinuz-linux` due to extent read limitations on compressed Btrfs extents.
+- **Evidence**:
+  - Direct GRUB shell test: Loading `vmlinuz-linux` from Btrfs `/@/boot/` threw `premature end of file`. Loading the exact same binary from FAT32 `(hd0,gpt1)/` succeeded immediately in 0.1s and booted to COSMIC greeter.
+  - Setting `efi.mountPoint: "/boot"` (1024 MiB FAT32) in `partition.conf` places kernels, initramfs, and microcodes directly on FAT32 while keeping the root (`/@`, `/@home`, `/@snapshots`, `/@cache`, `/@log`) on Btrfs with `compress=zstd:1`.
+  - Added `mkfs.btrfs` wrapper disabling `block-group-tree` for bootloader compatibility.
+- **Decision**: Mount ESP at `/boot` in Calamares `partition.conf`; package into `siddha-calamares-config-0.1.0-11`.
