@@ -9,7 +9,7 @@ rm -f /etc/mkinitcpio.d/archiso.preset
 
 # 2. Ensure /boot directory exists with proper permissions
 mkdir -p /boot
-chmod 755 /boot
+chmod 755 /boot 2>/dev/null || true
 
 # 3. Unconditionally guarantee /boot/vmlinuz-linux is a valid readable kernel image
 # If missing, zero-length, or suspiciously small, copy from /usr/lib/modules/
@@ -26,7 +26,7 @@ if [ "$NEED_KERNEL" -eq 1 ]; then
     for k in /usr/lib/modules/*/vmlinuz; do
         if [ -f "$k" ] && [ -s "$k" ]; then
             cp -f "$k" /boot/vmlinuz-linux
-            chmod 644 /boot/vmlinuz-linux
+            chmod 644 /boot/vmlinuz-linux 2>/dev/null || true
             echo "[siddha-initcpio-fix] Installed kernel from $k -> /boot/vmlinuz-linux ($(stat -c%s /boot/vmlinuz-linux) bytes)"
             COPIED=1
             break
@@ -36,7 +36,7 @@ if [ "$NEED_KERNEL" -eq 1 ]; then
         cand=$(find /usr/lib/modules -name "vmlinuz*" -type f -size +5M 2>/dev/null | head -n1 || true)
         if [ -n "$cand" ] && [ -f "$cand" ]; then
             cp -f "$cand" /boot/vmlinuz-linux
-            chmod 644 /boot/vmlinuz-linux
+            chmod 644 /boot/vmlinuz-linux 2>/dev/null || true
             echo "[siddha-initcpio-fix] Installed kernel from fallback $cand -> /boot/vmlinuz-linux"
             COPIED=1
         fi
@@ -45,7 +45,7 @@ if [ "$NEED_KERNEL" -eq 1 ]; then
         echo "[siddha-initcpio-fix] WARNING: No vmlinuz found under /usr/lib/modules!" >&2
     fi
 else
-    chmod 644 /boot/vmlinuz-linux
+    chmod 644 /boot/vmlinuz-linux 2>/dev/null || true
     echo "[siddha-initcpio-fix] /boot/vmlinuz-linux already exists ($(stat -c%s /boot/vmlinuz-linux) bytes)"
 fi
 
@@ -60,7 +60,7 @@ for ucode in intel-ucode.img amd-ucode.img; do
             "/usr/share/$ucode"; do
             if [ -f "$cand" ] && [ -s "$cand" ]; then
                 cp -f "$cand" "/boot/$ucode"
-                chmod 644 "/boot/$ucode"
+                chmod 644 "/boot/$ucode" 2>/dev/null || true
                 echo "[siddha-initcpio-fix] Installed microcode from $cand -> /boot/$ucode"
                 break
             fi

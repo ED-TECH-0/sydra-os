@@ -1,0 +1,2 @@
+#!/bin/sh
+exec /usr/bin/mkfs.btrfs -O ^block-group-tree "$@"
