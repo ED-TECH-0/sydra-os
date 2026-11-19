@@ -4,6 +4,7 @@ alsa-firmware
 alsa-utils
 amd-ucode
 ark
+b43-fwcutter
 base
 base-devel
 bash-completion
@@ -65,6 +66,9 @@ gptfdisk
 grub
 grub-btrfs
 gum
+gvfs
+gvfs-mtp
+gvfs-smb
 gwenview
 htop
 inotify-tools

@@ -31,6 +31,10 @@ bluez
 bluez-utils
 firefox
 flatpak
+gvfs
+gvfs-mtp
+gvfs-smb
+b43-fwcutter
 qt6ct
 kvantum
 inter-font
