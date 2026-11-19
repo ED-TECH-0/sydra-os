@@ -36,7 +36,8 @@ fi
 
 ARGS=(-enable-kvm -cpu host -smp "$SMP" -m "$RAM" -machine q35
       -qmp "unix:build/vm/qmp-$MODE.sock,server,nowait"
-      -drive "file=$DISK,if=virtio,format=qcow2,bootindex=$DISK_BOOTINDEX"
+      -drive "file=$DISK,if=none,id=disk0,format=qcow2"
+      -device "virtio-blk-pci,drive=disk0,bootindex=$DISK_BOOTINDEX"
       -netdev user,id=n0 -device virtio-net-pci,netdev=n0
       "${DISPLAY_ARGS[@]}")
 
@@ -77,7 +78,8 @@ fi
 
 if [[ $BOOT != disk-only ]]; then
   [[ -n $ISO && -f $ISO ]] || { echo "No ISO found in build/out/"; exit 1; }
-  ARGS+=(-drive "file=$ISO,media=cdrom,readonly=on,bootindex=1")
+  ARGS+=(-drive "file=$ISO,if=none,id=cd0,media=cdrom,readonly=on"
+         -device "ide-cd,drive=cd0,bootindex=1")
 fi
 
 echo "Launching QEMU ($MODE mode, boot: $BOOT)..."
