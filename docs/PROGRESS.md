@@ -291,9 +291,9 @@ Task logging format:
   - **Security & Polkit**: Fixed Polkit SUID bit (`chmod 4755 /usr/lib/polkit-1/polkit-agent-helper-1`), stripped live-only passwordless wheel rule (`49-nopasswd_global.rules`) from target installs, and sanitized `/etc/pacman.conf` to avoid broken local build URLs on target systems.
   - **Boot Speed & Systemd Services**: Masked `systemd-loop@.service` to prevent bogus loopback block device attach failures on `/dev/sr0`, purged `systemd-time-wait-sync.service` from `sysinit.target.wants` to eliminate indefinite boot hangs waiting for NTP before desktop launch, and cleaned dangling `cloud-init` symlinks.
   - **Time Synchronization**: Enabled `systemd-timesyncd.service` on installed system.
-  - Built `siddha-calamares-config-0.1.0-14` with silent bootloader parameters and `siddha-settings-0.1.0-5` with guarded shell profiles.
-  - Rebuilt production ISO `build/out/sydra-os-2026.11.19-x86_64.iso` (4.5 GiB). SHA-256: `26d6f8ced4fbd3241b6bb010086b8cabf430b5f8e86b01559393268019554f44`.
-  - **Silent Boot & Clean Console**: Configured `quiet loglevel=3 udev.log_level=3 systemd.show_status=auto vt.global_cursor_default=0` across UEFI (`systemd-boot`, GRUB) and BIOS (`syslinux`), masked `getty@tty1.service` to prevent VT1 display manager contention, and added udev rule to disable loop device attachment on optical CD/DVD media (`98-disable-cdrom-loop.rules`). Fixed `/etc/profile.d/siddha.sh` non-interactive shell parsing error, masked ModemManager to prevent 5-minute serial probing hangs and CPU soft lockups, decoupled pacman-init from early boot, and set default `SSH_AUTH_SOCK` in `/etc/environment` to suppress session import warning. Verified clean boot directly into COSMIC desktop in QEMU.
+  - Built `siddha-calamares-config-0.1.0-15` with silent bootloader parameters and `siddha-settings-0.1.0-5` with guarded shell profiles.
+  - Rebuilt production ISO `build/out/sydra-os-2026.11.19-x86_64.iso` (4.5 GiB). SHA-256: `b100f7b62d72c3158cd9856ce530b135d6338cb9d75b74315289ec0442713710`.
+  - **Silent Boot & Clean Console**: Configured `quiet loglevel=3 udev.log_level=3 systemd.show_status=false rd.systemd.show_status=false vt.global_cursor_default=0` across UEFI (`systemd-boot`, GRUB) and BIOS (`syslinux`), added `/etc/systemd/system.conf.d/10-quiet.conf` (`ShowStatus=no`), masked `getty@tty1.service` and `kmsconvt@tty1.service` to prevent VT1 display manager contention, purged legacy systemd-networkd wait-online drop-ins and sockets in favor of NetworkManager, eliminated 12-second legacy sleep in `siddha-desktop-init`, and added udev rule to disable loop device attachment on optical CD/DVD media (`98-disable-cdrom-loop.rules`). Verified clean boot directly into COSMIC desktop in QEMU.
 
 ---
 
@@ -308,4 +308,4 @@ Task logging format:
   ```bash
   sudo scripts/flash-usb.sh build/out/sydra-os-2026.11.19-x86_64.iso /dev/sdX  # replace /dev/sdX with USB drive (e.g. /dev/sdb)
   ```
-  *(Current Release ISO SHA-256: `26d6f8ced4fbd3241b6bb010086b8cabf430b5f8e86b01559393268019554f44`)*
+  *(Current Release ISO SHA-256: `b100f7b62d72c3158cd9856ce530b135d6338cb9d75b74315289ec0442713710`)*
