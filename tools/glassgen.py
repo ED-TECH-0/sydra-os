@@ -206,7 +206,7 @@ def generate_cosmic_theme(tokens, preset_name, out_dir):
     os.makedirs(cosmic_builder_dir, exist_ok=True)
     
     with open(os.path.join(cosmic_builder_dir, "frosted"), "w") as f:
-        f.write("Medium\n")
+        f.write("ExtremelyLow\n")
     with open(os.path.join(cosmic_builder_dir, "frosted_windows"), "w") as f:
         f.write("true\n")
     with open(os.path.join(cosmic_builder_dir, "frosted_panel"), "w") as f:
@@ -215,6 +215,8 @@ def generate_cosmic_theme(tokens, preset_name, out_dir):
         f.write("true\n")
     with open(os.path.join(cosmic_builder_dir, "frosted_system_interface"), "w") as f:
         f.write("true\n")
+    with open(os.path.join(cosmic_builder_dir, "interface_density"), "w") as f:
+        f.write("Comfortable\n")
     with open(os.path.join(cosmic_builder_dir, "accent"), "w") as f:
         f.write(f"Some(({r_acc}, {g_acc}, {b_acc}))\n")
     with open(os.path.join(cosmic_builder_dir, "bg_color"), "w") as f:

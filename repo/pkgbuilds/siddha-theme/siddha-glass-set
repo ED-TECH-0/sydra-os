@@ -11,29 +11,39 @@ SCHEME_NAME="SiddhaGlass${PRESET^}"
 
 # 1. Apply COSMIC settings if running in COSMIC or config directory exists
 COSMIC_DIR="$HOME/.config/cosmic/com.system76.CosmicTheme.Dark.Builder/v2"
-mkdir -p "$COSMIC_DIR"
+mkdir -p "$COSMIC_DIR" "$HOME/.config/cosmic/com.system76.CosmicComp/v1" "$HOME/.config/cosmic/com.system76.CosmicTk/v1" "$HOME/.config/cosmic/com.system76.CosmicPanel.Panel/v1" "$HOME/.config/cosmic/com.system76.CosmicPanel.Dock/v1"
+
+echo "false" > "$HOME/.config/cosmic/com.system76.CosmicComp/v1/active_hint"
+echo "Comfortable" > "$HOME/.config/cosmic/com.system76.CosmicTk/v1/interface_density"
+echo "Comfortable" > "$COSMIC_DIR/interface_density"
 
 case "$INTENSITY" in
     pro)
+        echo "ExtremelyLow" > "$COSMIC_DIR/frosted"
+        echo "true" > "$COSMIC_DIR/frosted_windows"
+        echo "true" > "$COSMIC_DIR/frosted_panel"
+        echo "true" > "$COSMIC_DIR/frosted_applets"
+        echo "true" > "$COSMIC_DIR/frosted_system_interface"
+        echo "0.05" > "$HOME/.config/cosmic/com.system76.CosmicPanel.Panel/v1/opacity"
+        echo "0.29" > "$HOME/.config/cosmic/com.system76.CosmicPanel.Dock/v1/opacity"
+        ;;
+    standard)
         echo "Low" > "$COSMIC_DIR/frosted"
         echo "true" > "$COSMIC_DIR/frosted_windows"
         echo "true" > "$COSMIC_DIR/frosted_panel"
         echo "true" > "$COSMIC_DIR/frosted_applets"
         echo "true" > "$COSMIC_DIR/frosted_system_interface"
+        echo "0.15" > "$HOME/.config/cosmic/com.system76.CosmicPanel.Panel/v1/opacity"
+        echo "0.35" > "$HOME/.config/cosmic/com.system76.CosmicPanel.Dock/v1/opacity"
         ;;
-    standard)
+    heavy)
         echo "Medium" > "$COSMIC_DIR/frosted"
         echo "true" > "$COSMIC_DIR/frosted_windows"
         echo "true" > "$COSMIC_DIR/frosted_panel"
         echo "true" > "$COSMIC_DIR/frosted_applets"
         echo "true" > "$COSMIC_DIR/frosted_system_interface"
-        ;;
-    heavy)
-        echo "High" > "$COSMIC_DIR/frosted"
-        echo "true" > "$COSMIC_DIR/frosted_windows"
-        echo "true" > "$COSMIC_DIR/frosted_panel"
-        echo "true" > "$COSMIC_DIR/frosted_applets"
-        echo "true" > "$COSMIC_DIR/frosted_system_interface"
+        echo "0.30" > "$HOME/.config/cosmic/com.system76.CosmicPanel.Panel/v1/opacity"
+        echo "0.50" > "$HOME/.config/cosmic/com.system76.CosmicPanel.Dock/v1/opacity"
         ;;
     flat)
         echo "None" > "$COSMIC_DIR/frosted"
@@ -41,6 +51,8 @@ case "$INTENSITY" in
         echo "false" > "$COSMIC_DIR/frosted_panel"
         echo "false" > "$COSMIC_DIR/frosted_applets"
         echo "false" > "$COSMIC_DIR/frosted_system_interface"
+        echo "1.0" > "$HOME/.config/cosmic/com.system76.CosmicPanel.Panel/v1/opacity"
+        echo "1.0" > "$HOME/.config/cosmic/com.system76.CosmicPanel.Dock/v1/opacity"
         ;;
 esac
 

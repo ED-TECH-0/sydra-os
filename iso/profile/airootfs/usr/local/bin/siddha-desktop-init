@@ -30,14 +30,19 @@ if [ -f "$HOME/Desktop/siddha-installer.desktop" ]; then
     chmod +x "$HOME/Desktop/siddha-installer.desktop"
 fi
 
-# 5. Reconfigure KWin to enforce active blur and glass translucency
+# 5. Apply COSMIC Glassy and Panel/Dock settings if running under COSMIC
+if [ -f "/usr/bin/siddha-glass-set" ]; then
+    /usr/bin/siddha-glass-set graphite pro || true
+fi
+
+# 6. Reconfigure KWin if running under Plasma
 if command -v qdbus6 >/dev/null 2>&1; then
     qdbus6 org.kde.KWin /KWin org.kde.KWin.reconfigure 2>/dev/null || true
 elif command -v qdbus >/dev/null 2>&1; then
     qdbus org.kde.KWin /KWin org.kde.KWin.reconfigure 2>/dev/null || true
 fi
 
-# 6. Ensure Flathub repository is registered for Flatpaks
+# 7. Ensure Flathub repository is registered for Flatpaks
 if command -v flatpak >/dev/null 2>&1; then
     flatpak remote-add --if-not-exists flathub https://dl.flathub.org/repo/flathub.flatpakrepo 2>/dev/null || true
 fi
