@@ -292,8 +292,8 @@ Task logging format:
   - **Boot Speed & Systemd Services**: Masked `systemd-loop@.service` to prevent bogus loopback block device attach failures on `/dev/sr0`, purged `systemd-time-wait-sync.service` from `sysinit.target.wants` to eliminate indefinite boot hangs waiting for NTP before desktop launch, and cleaned dangling `cloud-init` symlinks.
   - **Time Synchronization**: Enabled `systemd-timesyncd.service` on installed system.
   - Built `siddha-calamares-config-0.1.0-15` with silent bootloader parameters and `siddha-settings-0.1.0-5` with guarded shell profiles.
-  - Rebuilt production ISO `build/out/sydra-os-2026.11.19-x86_64.iso` (4.5 GiB). SHA-256: `b100f7b62d72c3158cd9856ce530b135d6338cb9d75b74315289ec0442713710`.
-  - **Silent Boot & Clean Console**: Configured `quiet loglevel=3 udev.log_level=3 systemd.show_status=false rd.systemd.show_status=false vt.global_cursor_default=0` across UEFI (`systemd-boot`, GRUB) and BIOS (`syslinux`), added `/etc/systemd/system.conf.d/10-quiet.conf` (`ShowStatus=no`), masked `getty@tty1.service` and `kmsconvt@tty1.service` to prevent VT1 display manager contention, purged legacy systemd-networkd wait-online drop-ins and sockets in favor of NetworkManager, eliminated 12-second legacy sleep in `siddha-desktop-init`, and added udev rule to disable loop device attachment on optical CD/DVD media (`98-disable-cdrom-loop.rules`). Verified clean boot directly into COSMIC desktop in QEMU.
+  - Rebuilt production ISO `build/out/sydra-os-2026.11.19-x86_64.iso` (4.5 GiB). SHA-256: `cf672a3cdc196c03aeb04594d43315f9a90ab7585aea0cc588c21f7867f30fd2`.
+  - **Silent Boot & Clean Console**: Configured `quiet loglevel=3 udev.log_level=3 systemd.show_status=false rd.systemd.show_status=false vt.global_cursor_default=0` across UEFI (`systemd-boot`, GRUB) and BIOS (`syslinux`), added `/etc/systemd/system.conf.d/10-quiet.conf` (`ShowStatus=no`), masked `getty@tty1.service` and `kmsconvt@tty1.service` to prevent VT1 display manager contention, purged legacy systemd-networkd wait-online drop-ins and sockets in favor of NetworkManager, removed 7 dangling VM daemon symlinks (Hyper-V, VirtualBox, VMware), purged `systemd-udev-settle` alsa-unmuter dependency, removed dangling `resolv.conf` to restore clean NetworkManager DNS, and optimized `siddha-desktop-init`. Verified clean boot directly into COSMIC desktop in QEMU.
 
 ---
 
@@ -308,4 +308,4 @@ Task logging format:
   ```bash
   sudo scripts/flash-usb.sh build/out/sydra-os-2026.11.19-x86_64.iso /dev/sdX  # replace /dev/sdX with USB drive (e.g. /dev/sdb)
   ```
-  *(Current Release ISO SHA-256: `b100f7b62d72c3158cd9856ce530b135d6338cb9d75b74315289ec0442713710`)*
+  *(Current Release ISO SHA-256: `cf672a3cdc196c03aeb04594d43315f9a90ab7585aea0cc588c21f7867f30fd2`)*
