@@ -11,6 +11,7 @@ bash-completion
 bat
 bluez
 bluez-utils
+brightnessctl
 btop
 btrfs-progs
 calamares
@@ -36,6 +37,7 @@ cosmic-text-editor
 cosmic-wallpapers
 cryptsetup
 curl
+diffutils
 distrobox
 dmidecode
 docker
@@ -103,6 +105,7 @@ man-pages
 memtest86+
 memtest86+-efi
 mesa
+mesa-utils
 mkinitcpio
 mkinitcpio-archiso
 nano
@@ -116,12 +119,14 @@ noto-fonts-emoji
 npm
 ntfs-3g
 nvidia-prime
+nvme-cli
 okular
 openssh
 os-prober
 pacman-contrib
 papirus-icon-theme
 parted
+pciutils
 pipewire
 pipewire-alsa
 pipewire-jack
@@ -165,8 +170,12 @@ switcheroo-control
 syslinux
 tesseract-data-eng
 tmux
+ttf-dejavu
 ttf-jetbrains-mono
+ttf-liberation
 unzip
+upower
+usbutils
 uv
 vim
 vulkan-icd-loader
@@ -178,11 +187,14 @@ wine-gecko
 wine-mono
 wine-staging
 winetricks
+wireless-regdb
 wireplumber
+wpa_supplicant
 xdg-desktop-portal-cosmic
 xdg-desktop-portal-gtk
 xdg-desktop-portal-kde
 xdg-user-dirs
+xdg-utils
 xf86-input-libinput
 xorg-xwayland
 yay

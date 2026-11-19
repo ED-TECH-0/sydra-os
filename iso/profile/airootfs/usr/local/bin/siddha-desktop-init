@@ -47,4 +47,7 @@ if command -v flatpak >/dev/null 2>&1; then
     flatpak remote-add --if-not-exists flathub https://dl.flathub.org/repo/flathub.flatpakrepo 2>/dev/null || true
 fi
 
+# 8. Ensure polkit helper has SUID permission
+chmod 4755 /usr/lib/polkit-1/polkit-agent-helper-1 2>/dev/null || true
+
 exit 0

@@ -48,4 +48,12 @@ zram-generator
 power-profiles-daemon
 firewalld
 iptables
+pciutils
+usbutils
+diffutils
+nvme-cli
+xdg-utils
+wireless-regdb
+wpa_supplicant
+mesa-utils
 fwupd

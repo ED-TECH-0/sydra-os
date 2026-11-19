@@ -35,10 +35,14 @@ gvfs
 gvfs-mtp
 gvfs-smb
 b43-fwcutter
+brightnessctl
+upower
 qt6ct
 kvantum
 inter-font
 ttf-jetbrains-mono
+ttf-liberation
+ttf-dejavu
 noto-fonts
 noto-fonts-cjk
 noto-fonts-emoji

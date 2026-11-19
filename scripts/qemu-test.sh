@@ -1,5 +1,6 @@
 #!/usr/bin/env bash
 set -euo pipefail
+export LC_ALL=C.UTF-8
 cd "$(dirname "$0")/.."
 
 MODE=${1:?usage: qemu-test.sh bios|uefi [disk-only]}
