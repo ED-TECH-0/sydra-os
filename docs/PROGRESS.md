@@ -107,7 +107,8 @@ Task logging format:
   - Added `/usr/local/bin/mkfs.btrfs` wrapper to disable `block-group-tree` for bootloader compatibility.
   - Hardened `scripts/qemu-test.sh` to refresh NVRAM on ISO boot (`-boot order=d,menu=on`).
   - Built package `siddha-calamares-config-0.1.0-11`.
-  - Built Release ISO `build/out/sydra-os-2026.11.19-x86_64.iso` (4.5 GiB, SHA-256: `05f386fbf3aaaff1c69e717d64edab7aa1b6396347588b998c4b2921a27a13f5`).
+  - Built Release ISO `build/out/sydra-os-2026.11.19-x86_64.iso` (4.5 GiB, SHA-256: `455d302bd2cab39b2713c50a0eade5c6f4c22e509c32ca3a1cf18df7b009310b`).
+  - Integrated 4K Sydra Moon Landscape as default system wallpaper across live and installed COSMIC sessions (`/usr/share/wallpapers/Sydra/contents/images/3840x2160.png`), featuring the official Sydra OS faceted glass hexagonal prism logo, glowing cyan orbital ring, and star flare.
   - Implemented Sydra Glassmorphism Engine: tuned alpha mapping (`alpha_map`), 8 designer glass presets, dedicated GUI control panel (`sydra-glass-control`), expanded Welcome app, dock intellihide controls, and fixed regional xkbcommon locale compose tables.
   - End-to-End QEMU installation test PASS: Calamares installed cleanly to 30 GB virtual drive. Rebooted directly from disk into native COSMIC Greeter login interface. Screen verified.
 
