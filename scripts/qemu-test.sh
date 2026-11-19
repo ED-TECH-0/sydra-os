@@ -27,7 +27,15 @@ else
   DISPLAY_ARGS=(-vga virtio -display sdl)
 fi
 
-RAM="${QEMU_RAM:-2560}"
+AVAIL_MB=$(awk '/MemAvailable/ {print int($2/1024)}' /proc/meminfo 2>/dev/null || echo 4096)
+DEFAULT_RAM=2048
+if (( AVAIL_MB < 2300 )); then
+  DEFAULT_RAM=1792
+fi
+if (( AVAIL_MB < 1800 )); then
+  DEFAULT_RAM=1536
+fi
+RAM="${QEMU_RAM:-$DEFAULT_RAM}"
 SMP="${QEMU_SMP:-2}"
 
 DISK_BOOTINDEX="1"
@@ -36,6 +44,7 @@ if [[ $BOOT != disk-only ]]; then
 fi
 
 ARGS=(-enable-kvm -cpu host -smp "$SMP" -m "$RAM" -machine q35
+      -overcommit mem-lock=off
       -qmp "unix:build/vm/qmp-$MODE.sock,server,nowait"
       -drive "file=$DISK,if=none,id=disk0,format=qcow2"
       -device "virtio-blk-pci,drive=disk0,bootindex=$DISK_BOOTINDEX"
