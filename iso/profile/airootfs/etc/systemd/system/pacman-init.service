@@ -1,15 +1,16 @@
 [Unit]
 Description=Initializes Pacman keyring
 Requires=etc-pacman.d-gnupg.mount
-After=etc-pacman.d-gnupg.mount time-sync.target
+After=etc-pacman.d-gnupg.mount
 BindsTo=etc-pacman.d-gnupg.mount
 Before=archlinux-keyring-wkd-sync.service
 
 [Service]
-Type=oneshot
+Type=simple
+ExecStart=/usr/bin/bash -c "/usr/bin/pacman-key --init && /usr/bin/pacman-key --populate"
 RemainAfterExit=yes
-ExecStart=/usr/bin/pacman-key --init
-ExecStart=/usr/bin/pacman-key --populate
+StandardOutput=journal
+StandardError=journal
 
 [Install]
 WantedBy=multi-user.target

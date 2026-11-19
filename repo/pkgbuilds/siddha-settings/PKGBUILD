@@ -1,7 +1,7 @@
 # Maintainer: Sydra OS Team <team@sydra-os.org>
 pkgname=siddha-settings
 pkgver=0.1.0
-pkgrel=4
+pkgrel=5
 pkgdesc="Default settings, sysctl, zram, snapshot rollback, updater, and shell profiles for Sydra OS"
 arch=('any')
 url="https://sydra-os.org"
