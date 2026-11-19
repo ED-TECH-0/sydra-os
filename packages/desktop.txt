@@ -18,6 +18,7 @@ cosmic-text-editor
 cosmic-player
 cosmic-store
 xdg-desktop-portal-cosmic
+xdg-desktop-portal-gtk
 gnome-keyring
 xdg-user-dirs
 xorg-xwayland
