@@ -78,7 +78,7 @@ sydra-os/
 
 | ISO Image | Architecture | Desktop | SHA-256 Checksum |
 |---|---|---|---|
-| `sydra-os-2026.11.19-x86_64.iso` | x86_64 (UEFI / BIOS) | **COSMIC** (Primary) | `8a12c8cb14d214f49ba6a6e03023bd07a8c8c7390965217a3ecd93b052cb7705` |
+| `sydra-os-2026.11.19-x86_64.iso` | x86_64 (UEFI / BIOS) | **COSMIC** (Primary) | `d7d10252e89cfa733b10f2d4388cf6a51d3b77e3ac1eb58145090484c2941dfb` |
 
 ---
 

@@ -289,9 +289,10 @@ Task logging format:
   - **Laptop Power & Display**: Added `brightnessctl` (backlight control without root) and `upower` (power/battery enumeration for COSMIC panel applet).
   - **Typography & Compatibility**: Added `ttf-liberation` (standard Arial/Times/Courier metrics for Web and Proton) and `ttf-dejavu`.
   - **Security & Polkit**: Fixed Polkit SUID bit (`chmod 4755 /usr/lib/polkit-1/polkit-agent-helper-1`), stripped live-only passwordless wheel rule (`49-nopasswd_global.rules`) from target installs, and sanitized `/etc/pacman.conf` to avoid broken local build URLs on target systems.
+  - **Boot Speed & Systemd Services**: Masked `systemd-loop@.service` to prevent bogus loopback block device attach failures on `/dev/sr0`, purged `systemd-time-wait-sync.service` from `sysinit.target.wants` to eliminate indefinite boot hangs waiting for NTP before desktop launch, and cleaned dangling `cloud-init` symlinks.
   - **Time Synchronization**: Enabled `systemd-timesyncd.service` on installed system.
   - Built `siddha-calamares-config-0.1.0-13`.
-  - Rebuilt production ISO `build/out/sydra-os-2026.11.19-x86_64.iso` (4.5 GiB). SHA-256: `8a12c8cb14d214f49ba6a6e03023bd07a8c8c7390965217a3ecd93b052cb7705`.
+  - Rebuilt production ISO `build/out/sydra-os-2026.11.19-x86_64.iso` (4.5 GiB). SHA-256: `d7d10252e89cfa733b10f2d4388cf6a51d3b77e3ac1eb58145090484c2941dfb`.
 
 ---
 
@@ -306,4 +307,4 @@ Task logging format:
   ```bash
   sudo scripts/flash-usb.sh build/out/sydra-os-2026.11.19-x86_64.iso /dev/sdX  # replace /dev/sdX with USB drive (e.g. /dev/sdb)
   ```
-  *(Current Release ISO SHA-256: `8a12c8cb14d214f49ba6a6e03023bd07a8c8c7390965217a3ecd93b052cb7705`)*
+  *(Current Release ISO SHA-256: `d7d10252e89cfa733b10f2d4388cf6a51d3b77e3ac1eb58145090484c2941dfb`)*
