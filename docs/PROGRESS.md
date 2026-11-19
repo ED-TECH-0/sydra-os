@@ -291,8 +291,9 @@ Task logging format:
   - **Security & Polkit**: Fixed Polkit SUID bit (`chmod 4755 /usr/lib/polkit-1/polkit-agent-helper-1`), stripped live-only passwordless wheel rule (`49-nopasswd_global.rules`) from target installs, and sanitized `/etc/pacman.conf` to avoid broken local build URLs on target systems.
   - **Boot Speed & Systemd Services**: Masked `systemd-loop@.service` to prevent bogus loopback block device attach failures on `/dev/sr0`, purged `systemd-time-wait-sync.service` from `sysinit.target.wants` to eliminate indefinite boot hangs waiting for NTP before desktop launch, and cleaned dangling `cloud-init` symlinks.
   - **Time Synchronization**: Enabled `systemd-timesyncd.service` on installed system.
-  - Built `siddha-calamares-config-0.1.0-13`.
-  - Rebuilt production ISO `build/out/sydra-os-2026.11.19-x86_64.iso` (4.5 GiB). SHA-256: `d7d10252e89cfa733b10f2d4388cf6a51d3b77e3ac1eb58145090484c2941dfb`.
+  - Built `siddha-calamares-config-0.1.0-14` with silent bootloader parameters.
+  - Rebuilt production ISO `build/out/sydra-os-2026.11.19-x86_64.iso` (4.5 GiB). SHA-256: `fb52a3f0a9a83b627f3dbe608c87e49096036cdaaae3571dc26373b4de6d3cce`.
+  - **Silent Boot & Clean Console**: Configured `quiet loglevel=3 udev.log_level=3 systemd.show_status=auto vt.global_cursor_default=0` across UEFI (`systemd-boot`, GRUB) and BIOS (`syslinux`), masked `getty@tty1.service` to prevent VT1 display manager contention, and added udev rule to disable loop device attachment on optical CD/DVD media (`98-disable-cdrom-loop.rules`). Verified quiet boot into COSMIC desktop in QEMU.
 
 ---
 
@@ -307,4 +308,4 @@ Task logging format:
   ```bash
   sudo scripts/flash-usb.sh build/out/sydra-os-2026.11.19-x86_64.iso /dev/sdX  # replace /dev/sdX with USB drive (e.g. /dev/sdb)
   ```
-  *(Current Release ISO SHA-256: `d7d10252e89cfa733b10f2d4388cf6a51d3b77e3ac1eb58145090484c2941dfb`)*
+  *(Current Release ISO SHA-256: `fb52a3f0a9a83b627f3dbe608c87e49096036cdaaae3571dc26373b4de6d3cce`)*
