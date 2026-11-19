@@ -1,113 +1,385 @@
 #!/usr/bin/env bash
-# Sydra OS / Siddha Glass Theme & Intensity Switcher
+# Sydra OS / Siddha Glass Theme, Glassmorphism & UI Customization Manager
 set -euo pipefail
 
-PRESET=${1:-graphite}
-INTENSITY=${2:-pro}
+PRESET="obsidian"
+GLASS="pro"
+PANEL_OPACITY=""
+DOCK_OPACITY=""
+DENSITY=""
+HINT=""
+AUTOHIDE=""
+ROUNDNESS=""
 
-echo "=== Applying Siddha Glass: Preset [$PRESET], Intensity [$INTENSITY] ==="
+print_usage() {
+    cat << 'EOF'
+Usage: siddha-glass-set [OPTIONS] [PRESET] [INTENSITY]
 
-SCHEME_NAME="SiddhaGlass${PRESET^}"
+Presets:
+  obsidian / graphite  - Sydra Signature Obsidian Glass (#12141A, Sapphire #5B8DEF)
+  teal / midnight      - Electric Cyan Glass (#0B0F1A, Teal #4FB3BF)
+  cyber-cyan           - Cyberpunk Cyan Glass (#0A141A, Neon #00E5FF)
+  emerald              - Matrix Glass (#0A1711, Emerald #10B981)
+  amethyst             - Purple Aurora Glass (#130C1E, Purple #A855F7)
+  sunset               - Amber Sunset Glass (#1A100E, Orange #F97316)
+  slate-light          - Crisp Frosted Light Glass (#E9ECF2, Blue #2F6FDE)
+  oled                 - Pure Pitch Black 100% Solid (#000000, Battery Saver)
 
-# 1. Apply COSMIC settings if running in COSMIC or config directory exists
-COSMIC_DIR="$HOME/.config/cosmic/com.system76.CosmicTheme.Dark.Builder/v2"
-mkdir -p "$COSMIC_DIR" "$HOME/.config/cosmic/com.system76.CosmicComp/v1" "$HOME/.config/cosmic/com.system76.CosmicTk/v1" "$HOME/.config/cosmic/com.system76.CosmicPanel.Panel/v1" "$HOME/.config/cosmic/com.system76.CosmicPanel.Dock/v1"
+Glass Transparency Levels:
+  crystal              - Ultra-translucent clear glass (20% opacity)
+  pro / sleek          - Tuned Sydra Glass (35% opacity, 5% panel, 29% dock)
+  standard             - Balanced translucency (55% opacity)
+  frost                - Diffused soft frosted matte (75% opacity)
+  flat                 - 100% opaque, zero blur (OLED & Battery saver)
 
-echo "false" > "$HOME/.config/cosmic/com.system76.CosmicComp/v1/active_hint"
-echo "Comfortable" > "$HOME/.config/cosmic/com.system76.CosmicTk/v1/interface_density"
-echo "Comfortable" > "$COSMIC_DIR/interface_density"
+Options:
+  --preset <name>           Set color scheme preset
+  --glass <level>           Set glassmorphism transparency level
+  --panel-opacity <0.0-1.0> Override top panel opacity (e.g. 0.05)
+  --dock-opacity <0.0-1.0>  Override bottom dock opacity (e.g. 0.29)
+  --density <mode>          Set interface density (compact, comfortable, spacious)
+  --hint <on|off>           Toggle active window border highlight hint
+  --autohide <mode>         Set dock autohide behavior (never, overlap, always)
+  --roundness <level>       Set window corner roundness (sharp, rounded, extra)
+  -h, --help                Show this help message
+EOF
+}
 
-case "$INTENSITY" in
-    pro)
-        echo "ExtremelyLow" > "$COSMIC_DIR/frosted"
-        echo "true" > "$COSMIC_DIR/frosted_windows"
-        echo "true" > "$COSMIC_DIR/frosted_panel"
-        echo "true" > "$COSMIC_DIR/frosted_applets"
-        echo "true" > "$COSMIC_DIR/frosted_system_interface"
-        echo "0.05" > "$HOME/.config/cosmic/com.system76.CosmicPanel.Panel/v1/opacity"
-        echo "0.29" > "$HOME/.config/cosmic/com.system76.CosmicPanel.Dock/v1/opacity"
-        ;;
-    standard)
-        echo "Low" > "$COSMIC_DIR/frosted"
-        echo "true" > "$COSMIC_DIR/frosted_windows"
-        echo "true" > "$COSMIC_DIR/frosted_panel"
-        echo "true" > "$COSMIC_DIR/frosted_applets"
-        echo "true" > "$COSMIC_DIR/frosted_system_interface"
-        echo "0.15" > "$HOME/.config/cosmic/com.system76.CosmicPanel.Panel/v1/opacity"
-        echo "0.35" > "$HOME/.config/cosmic/com.system76.CosmicPanel.Dock/v1/opacity"
-        ;;
-    heavy)
-        echo "Medium" > "$COSMIC_DIR/frosted"
-        echo "true" > "$COSMIC_DIR/frosted_windows"
-        echo "true" > "$COSMIC_DIR/frosted_panel"
-        echo "true" > "$COSMIC_DIR/frosted_applets"
-        echo "true" > "$COSMIC_DIR/frosted_system_interface"
-        echo "0.30" > "$HOME/.config/cosmic/com.system76.CosmicPanel.Panel/v1/opacity"
-        echo "0.50" > "$HOME/.config/cosmic/com.system76.CosmicPanel.Dock/v1/opacity"
-        ;;
-    flat)
-        echo "None" > "$COSMIC_DIR/frosted"
-        echo "false" > "$COSMIC_DIR/frosted_windows"
-        echo "false" > "$COSMIC_DIR/frosted_panel"
-        echo "false" > "$COSMIC_DIR/frosted_applets"
-        echo "false" > "$COSMIC_DIR/frosted_system_interface"
-        echo "1.0" > "$HOME/.config/cosmic/com.system76.CosmicPanel.Panel/v1/opacity"
-        echo "1.0" > "$HOME/.config/cosmic/com.system76.CosmicPanel.Dock/v1/opacity"
-        ;;
-esac
-
-case "$PRESET" in
-    graphite)
-        echo "Some((0.357, 0.553, 0.937))" > "$COSMIC_DIR/accent"
-        echo "(0.071, 0.078, 0.102)" > "$COSMIC_DIR/bg_color"
-        ;;
-    midnight)
-        echo "Some((0.310, 0.702, 0.749))" > "$COSMIC_DIR/accent"
-        echo "(0.043, 0.059, 0.102)" > "$COSMIC_DIR/bg_color"
-        ;;
-    slate-light)
-        echo "Some((0.184, 0.435, 0.871))" > "$COSMIC_DIR/accent"
-        echo "(0.914, 0.925, 0.949)" > "$COSMIC_DIR/bg_color"
-        ;;
-    high-contrast)
-        echo "Some((1.0, 0.847, 0.302))" > "$COSMIC_DIR/accent"
-        echo "(0.0, 0.0, 0.0)" > "$COSMIC_DIR/bg_color"
-        ;;
-esac
-
-# 2. Apply KDE Color Scheme if in Plasma
-if command -v plasma-apply-colorscheme &>/dev/null; then
-    plasma-apply-colorscheme "$SCHEME_NAME" 2>/dev/null || true
+# Parse legacy positional arguments if provided without flags
+if [[ $# -gt 0 && ! "$1" =~ ^- ]]; then
+    PRESET="$1"
+    shift
+    if [[ $# -gt 0 && ! "$1" =~ ^- ]]; then
+        GLASS="$1"
+        shift
+    fi
 fi
 
-# 2. Adjust KWin blur based on intensity
-if command -v kwriteconfig6 &>/dev/null; then
-    case "$INTENSITY" in
-        pro)
-            kwriteconfig6 --file kwinrc --group Plugins --key blurEnabled true
-            kwriteconfig6 --file kwinrc --group Effect-blur --key BlurStrength 8
-            kwriteconfig6 --file kwinrc --group Effect-blur --key NoiseStrength 2
-            ;;
-        standard)
-            kwriteconfig6 --file kwinrc --group Plugins --key blurEnabled true
-            kwriteconfig6 --file kwinrc --group Effect-blur --key BlurStrength 12
-            kwriteconfig6 --file kwinrc --group Effect-blur --key NoiseStrength 3
-            ;;
-        heavy)
-            kwriteconfig6 --file kwinrc --group Plugins --key blurEnabled true
-            kwriteconfig6 --file kwinrc --group Effect-blur --key BlurStrength 16
-            kwriteconfig6 --file kwinrc --group Effect-blur --key NoiseStrength 4
-            ;;
-        flat)
-            # Battery saver / Low-end GPU profile (Zero blur)
-            kwriteconfig6 --file kwinrc --group Plugins --key blurEnabled false
-            ;;
+# Parse flag arguments
+while [[ $# -gt 0 ]]; do
+    case "$1" in
+        --preset) PRESET="$2"; shift 2 ;;
+        --glass) GLASS="$2"; shift 2 ;;
+        --panel-opacity) PANEL_OPACITY="$2"; shift 2 ;;
+        --dock-opacity) DOCK_OPACITY="$2"; shift 2 ;;
+        --density) DENSITY="$2"; shift 2 ;;
+        --hint) HINT="$2"; shift 2 ;;
+        --autohide) AUTOHIDE="$2"; shift 2 ;;
+        --roundness) ROUNDNESS="$2"; shift 2 ;;
+        -h|--help) print_usage; exit 0 ;;
+        *) echo "Unknown option: $1" >&2; print_usage; exit 1 ;;
+    esac
+done
+
+# Normalize preset aliases
+case "$PRESET" in
+    graphite) PRESET="obsidian" ;;
+    midnight) PRESET="teal" ;;
+esac
+
+# Normalize glass aliases
+case "$GLASS" in
+    sleek) GLASS="pro" ;;
+    heavy) GLASS="frost" ;;
+esac
+
+echo "=== Applying Sydra Glass: Preset [$PRESET], Glass Level [$GLASS] ==="
+
+# Target COSMIC directories
+COSMIC_BUILDER="$HOME/.config/cosmic/com.system76.CosmicTheme.Dark.Builder/v2"
+COSMIC_THEME="$HOME/.config/cosmic/com.system76.CosmicTheme.Dark/v2"
+COSMIC_COMP="$HOME/.config/cosmic/com.system76.CosmicComp/v1"
+COSMIC_TK="$HOME/.config/cosmic/com.system76.CosmicTk/v1"
+COSMIC_PANEL="$HOME/.config/cosmic/com.system76.CosmicPanel.Panel/v1"
+COSMIC_DOCK="$HOME/.config/cosmic/com.system76.CosmicPanel.Dock/v1"
+COSMIC_ENTRIES="$HOME/.config/cosmic/com.system76.CosmicPanel/v1"
+
+mkdir -p "$COSMIC_BUILDER" "$COSMIC_THEME" "$COSMIC_COMP" "$COSMIC_TK" "$COSMIC_PANEL" "$COSMIC_DOCK" "$COSMIC_ENTRIES"
+echo '["Panel","Dock"]' > "$COSMIC_ENTRIES/entries"
+
+# 1. Apply Glassmorphism Transparency & Alpha Map
+case "$GLASS" in
+    crystal)
+        FROST="ExtremelyLow"
+        IS_FROSTED="true"
+        DEF_PANEL="0.02"
+        DEF_DOCK="0.20"
+        cat << 'EOF' > "$COSMIC_BUILDER/alpha_map"
+(
+    extremely_low: 0.20,
+    extremely_low_2: 0.24,
+    very_low: 0.28,
+    very_low_2: 0.32,
+    low: 0.38,
+    low_2: 0.44,
+    medium: 0.50,
+    medium_2: 0.56,
+    high: 0.62,
+    high_2: 0.68,
+    very_high: 0.74,
+    very_high_2: 0.80,
+    extremely_high: 0.85,
+    extremely_high_2: 0.90,
+)
+EOF
+        ;;
+    pro)
+        FROST="ExtremelyLow"
+        IS_FROSTED="true"
+        DEF_PANEL="0.05"
+        DEF_DOCK="0.29"
+        cat << 'EOF' > "$COSMIC_BUILDER/alpha_map"
+(
+    extremely_low: 0.35,
+    extremely_low_2: 0.38,
+    very_low: 0.42,
+    very_low_2: 0.46,
+    low: 0.50,
+    low_2: 0.55,
+    medium: 0.60,
+    medium_2: 0.65,
+    high: 0.70,
+    high_2: 0.75,
+    very_high: 0.80,
+    very_high_2: 0.85,
+    extremely_high: 0.88,
+    extremely_high_2: 0.92,
+)
+EOF
+        ;;
+    standard)
+        FROST="Low"
+        IS_FROSTED="true"
+        DEF_PANEL="0.15"
+        DEF_DOCK="0.45"
+        cat << 'EOF' > "$COSMIC_BUILDER/alpha_map"
+(
+    extremely_low: 0.50,
+    extremely_low_2: 0.54,
+    very_low: 0.58,
+    very_low_2: 0.62,
+    low: 0.68,
+    low_2: 0.72,
+    medium: 0.76,
+    medium_2: 0.80,
+    high: 0.84,
+    high_2: 0.88,
+    very_high: 0.90,
+    very_high_2: 0.92,
+    extremely_high: 0.94,
+    extremely_high_2: 0.96,
+)
+EOF
+        ;;
+    frost)
+        FROST="Medium"
+        IS_FROSTED="true"
+        DEF_PANEL="0.30"
+        DEF_DOCK="0.60"
+        cat << 'EOF' > "$COSMIC_BUILDER/alpha_map"
+(
+    extremely_low: 0.72,
+    extremely_low_2: 0.75,
+    very_low: 0.78,
+    very_low_2: 0.81,
+    low: 0.84,
+    low_2: 0.87,
+    medium: 0.90,
+    medium_2: 0.92,
+    high: 0.94,
+    high_2: 0.95,
+    very_high: 0.96,
+    very_high_2: 0.97,
+    extremely_high: 0.98,
+    extremely_high_2: 0.99,
+)
+EOF
+        ;;
+    flat)
+        FROST="None"
+        IS_FROSTED="false"
+        DEF_PANEL="1.0"
+        DEF_DOCK="1.0"
+        cat << 'EOF' > "$COSMIC_BUILDER/alpha_map"
+(
+    extremely_low: 1.0,
+    extremely_low_2: 1.0,
+    very_low: 1.0,
+    very_low_2: 1.0,
+    low: 1.0,
+    low_2: 1.0,
+    medium: 1.0,
+    medium_2: 1.0,
+    high: 1.0,
+    high_2: 1.0,
+    very_high: 1.0,
+    very_high_2: 1.0,
+    extremely_high: 1.0,
+    extremely_high_2: 1.0,
+)
+EOF
+        ;;
+    *)
+        echo "Unknown glass level: $GLASS (using pro)"
+        FROST="ExtremelyLow"
+        IS_FROSTED="true"
+        DEF_PANEL="0.05"
+        DEF_DOCK="0.29"
+        ;;
+esac
+
+echo "$FROST" > "$COSMIC_BUILDER/frosted"
+echo "$IS_FROSTED" > "$COSMIC_BUILDER/frosted_windows"
+echo "$IS_FROSTED" > "$COSMIC_BUILDER/frosted_panel"
+echo "$IS_FROSTED" > "$COSMIC_BUILDER/frosted_applets"
+echo "$IS_FROSTED" > "$COSMIC_BUILDER/frosted_system_interface"
+
+# Opacity overrides or defaults
+FINAL_PANEL_OPACITY="${PANEL_OPACITY:-$DEF_PANEL}"
+FINAL_DOCK_OPACITY="${DOCK_OPACITY:-$DEF_DOCK}"
+echo "$FINAL_PANEL_OPACITY" > "$COSMIC_PANEL/opacity"
+echo "$FINAL_DOCK_OPACITY" > "$COSMIC_DOCK/opacity"
+
+# Top Panel base settings
+echo "Top" > "$COSMIC_PANEL/anchor"
+echo "false" > "$COSMIC_PANEL/anchor_gap"
+echo "false" > "$COSMIC_PANEL/expand_to_edges"
+echo "ThemeDefault" > "$COSMIC_PANEL/background"
+echo "S" > "$COSMIC_PANEL/size"
+echo "None" > "$COSMIC_PANEL/size_wings"
+echo "None" > "$COSMIC_PANEL/size_center"
+echo "8" > "$COSMIC_PANEL/border_radius"
+
+# Bottom Dock base settings
+echo "Bottom" > "$COSMIC_DOCK/anchor"
+echo "true" > "$COSMIC_DOCK/anchor_gap"
+echo "false" > "$COSMIC_DOCK/expand_to_edges"
+echo "ThemeDefault" > "$COSMIC_DOCK/background"
+echo "S" > "$COSMIC_DOCK/size"
+echo "None" > "$COSMIC_DOCK/size_wings"
+echo "None" > "$COSMIC_DOCK/size_center"
+echo "160" > "$COSMIC_DOCK/border_radius"
+
+# 2. Apply Dock Autohide if specified
+if [[ -n "$AUTOHIDE" ]]; then
+    case "$AUTOHIDE" in
+        never) echo "Never" > "$COSMIC_DOCK/autohide" ;;
+        overlap|intellihide) echo "OnOverlap" > "$COSMIC_DOCK/autohide" ;;
+        always) echo "Always" > "$COSMIC_DOCK/autohide" ;;
     esac
 fi
 
-# 3. Reload KWin effects via D-Bus if available
-if command -v qdbus6 &>/dev/null; then
-    qdbus6 org.kde.KWin /KWin reconfigure 2>/dev/null || true
+# 3. Apply Interface Density
+if [[ -n "$DENSITY" ]]; then
+    case "$DENSITY" in
+        compact) DENSITY_VAL="Compact" ;;
+        comfortable) DENSITY_VAL="Comfortable" ;;
+        spacious) DENSITY_VAL="Spacious" ;;
+        *) DENSITY_VAL="Comfortable" ;;
+    esac
+else
+    DENSITY_VAL="Comfortable"
+fi
+echo "$DENSITY_VAL" > "$COSMIC_TK/interface_density"
+echo "$DENSITY_VAL" > "$COSMIC_BUILDER/interface_density"
+
+# 4. Apply Active Window Hint
+if [[ -n "$HINT" ]]; then
+    case "$HINT" in
+        off|false|0) echo "false" > "$COSMIC_COMP/active_hint" ;;
+        on|true|1) echo "true" > "$COSMIC_COMP/active_hint" ;;
+    esac
+else
+    echo "false" > "$COSMIC_COMP/active_hint"
 fi
 
-echo "Siddha Glass Pro settings updated."
+# 5. Apply Corner Roundness
+case "${ROUNDNESS:-rounded}" in
+    sharp)
+        cat << 'EOF' > "$COSMIC_BUILDER/corner_radii"
+(
+    radius_0: (0.0, 0.0, 0.0, 0.0),
+    radius_xs: (2.0, 2.0, 2.0, 2.0),
+    radius_s: (4.0, 4.0, 4.0, 4.0),
+    radius_m: (6.0, 6.0, 6.0, 6.0),
+    radius_l: (10.0, 10.0, 10.0, 10.0),
+    radius_xl: (160.0, 160.0, 160.0, 160.0),
+)
+EOF
+        ;;
+    extra)
+        cat << 'EOF' > "$COSMIC_BUILDER/corner_radii"
+(
+    radius_0: (0.0, 0.0, 0.0, 0.0),
+    radius_xs: (6.0, 6.0, 6.0, 6.0),
+    radius_s: (10.0, 10.0, 10.0, 10.0),
+    radius_m: (18.0, 18.0, 18.0, 18.0),
+    radius_l: (32.0, 32.0, 32.0, 32.0),
+    radius_xl: (160.0, 160.0, 160.0, 160.0),
+)
+EOF
+        ;;
+    rounded|*)
+        cat << 'EOF' > "$COSMIC_BUILDER/corner_radii"
+(
+    radius_0: (0.0, 0.0, 0.0, 0.0),
+    radius_xs: (4.0, 4.0, 4.0, 4.0),
+    radius_s: (8.0, 8.0, 8.0, 8.0),
+    radius_m: (14.0, 14.0, 14.0, 14.0),
+    radius_l: (24.0, 24.0, 24.0, 24.0),
+    radius_xl: (160.0, 160.0, 160.0, 160.0),
+)
+EOF
+        ;;
+esac
+
+# 6. Apply Color Preset
+case "$PRESET" in
+    obsidian)
+        echo "Some((0.357, 0.553, 0.937))" > "$COSMIC_BUILDER/accent"
+        echo "(0.071, 0.078, 0.102)" > "$COSMIC_BUILDER/bg_color"
+        ;;
+    teal)
+        echo "Some((0.310, 0.702, 0.749))" > "$COSMIC_BUILDER/accent"
+        echo "(0.043, 0.059, 0.102)" > "$COSMIC_BUILDER/bg_color"
+        ;;
+    cyber-cyan)
+        echo "Some((0.0, 0.898, 1.0))" > "$COSMIC_BUILDER/accent"
+        echo "(0.039, 0.078, 0.102)" > "$COSMIC_BUILDER/bg_color"
+        ;;
+    emerald)
+        echo "Some((0.063, 0.725, 0.506))" > "$COSMIC_BUILDER/accent"
+        echo "(0.039, 0.090, 0.067)" > "$COSMIC_BUILDER/bg_color"
+        ;;
+    amethyst)
+        echo "Some((0.659, 0.333, 0.969))" > "$COSMIC_BUILDER/accent"
+        echo "(0.075, 0.047, 0.118)" > "$COSMIC_BUILDER/bg_color"
+        ;;
+    sunset)
+        echo "Some((0.976, 0.451, 0.086))" > "$COSMIC_BUILDER/accent"
+        echo "(0.102, 0.063, 0.055)" > "$COSMIC_BUILDER/bg_color"
+        ;;
+    slate-light)
+        echo "Some((0.184, 0.435, 0.871))" > "$COSMIC_BUILDER/accent"
+        echo "(0.914, 0.925, 0.949)" > "$COSMIC_BUILDER/bg_color"
+        ;;
+    oled)
+        echo "Some((0.357, 0.553, 0.937))" > "$COSMIC_BUILDER/accent"
+        echo "(0.0, 0.0, 0.0)" > "$COSMIC_BUILDER/bg_color"
+        ;;
+    *)
+        echo "Some((0.357, 0.553, 0.937))" > "$COSMIC_BUILDER/accent"
+        echo "(0.071, 0.078, 0.102)" > "$COSMIC_BUILDER/bg_color"
+        ;;
+esac
+
+# 7. Window gaps (8px floating aesthetics)
+echo "(8, 8)" > "$COSMIC_BUILDER/gaps"
+
+# 8. KDE Plasma fallback
+if command -v plasma-apply-colorscheme &>/dev/null; then
+    SCHEME_NAME="SiddhaGlass${PRESET^}"
+    plasma-apply-colorscheme "$SCHEME_NAME" 2>/dev/null || true
+fi
+
+echo "[✓] Sydra Glass styling applied successfully."

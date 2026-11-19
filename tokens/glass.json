@@ -29,8 +29,15 @@
   },
   "presets": {
     "graphite":      { "tint": "#12141A", "text": "#F2F4F8", "muted": "#A8AFBD", "accent": "#5B8DEF" },
+    "obsidian":      { "tint": "#12141A", "text": "#F2F4F8", "muted": "#A8AFBD", "accent": "#5B8DEF" },
     "midnight":      { "tint": "#0B0F1A", "text": "#EEF1F8", "muted": "#9AA3B5", "accent": "#4FB3BF" },
+    "teal":          { "tint": "#0B0F1A", "text": "#EEF1F8", "muted": "#9AA3B5", "accent": "#4FB3BF" },
+    "cyber-cyan":    { "tint": "#0A141A", "text": "#E8F8FA", "muted": "#7FA8B0", "accent": "#00E5FF" },
+    "emerald":       { "tint": "#0A1711", "text": "#EAF8F0", "muted": "#7DAE93", "accent": "#10B981" },
+    "amethyst":      { "tint": "#130C1E", "text": "#F4EAFB", "muted": "#9C81B8", "accent": "#A855F7" },
+    "sunset":        { "tint": "#1A100E", "text": "#FAECE8", "muted": "#B58C7F", "accent": "#F97316" },
     "slate-light":   { "tint": "#E9ECF2", "text": "#12141A", "muted": "#4A5163", "accent": "#2F6FDE" },
+    "oled":          { "tint": "#000000", "text": "#FFFFFF", "muted": "#94A3B8", "accent": "#5B8DEF" },
     "high-contrast": { "tint": "#000000", "text": "#FFFFFF", "muted": "#D0D0D0", "accent": "#FFD84D" }
   },
   "accentLimits": { "maxSaturation": 0.65, "minLightness": 0.45, "maxLightness": 0.75 }

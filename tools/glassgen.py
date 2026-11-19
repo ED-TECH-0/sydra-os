@@ -221,18 +221,36 @@ def generate_cosmic_theme(tokens, preset_name, out_dir):
         f.write(f"Some(({r_acc}, {g_acc}, {b_acc}))\n")
     with open(os.path.join(cosmic_builder_dir, "bg_color"), "w") as f:
         f.write(f"({r_tint}, {g_tint}, {b_tint})\n")
+    with open(os.path.join(cosmic_builder_dir, "alpha_map"), "w") as f:
+        f.write("""(
+    extremely_low: 0.35,
+    extremely_low_2: 0.38,
+    very_low: 0.42,
+    very_low_2: 0.46,
+    low: 0.50,
+    low_2: 0.55,
+    medium: 0.60,
+    medium_2: 0.65,
+    high: 0.70,
+    high_2: 0.75,
+    very_high: 0.80,
+    very_high_2: 0.85,
+    extremely_high: 0.88,
+    extremely_high_2: 0.92,
+)
+""")
     with open(os.path.join(cosmic_builder_dir, "corner_radii"), "w") as f:
         f.write("""(
     radius_0: (0.0, 0.0, 0.0, 0.0),
     radius_xs: (4.0, 4.0, 4.0, 4.0),
     radius_s: (8.0, 8.0, 8.0, 8.0),
-    radius_m: (16.0, 16.0, 16.0, 16.0),
-    radius_l: (32.0, 32.0, 32.0, 32.0),
+    radius_m: (14.0, 14.0, 14.0, 14.0),
+    radius_l: (24.0, 24.0, 24.0, 24.0),
     radius_xl: (160.0, 160.0, 160.0, 160.0),
 )
 """)
     with open(os.path.join(cosmic_builder_dir, "gaps"), "w") as f:
-        f.write("(0, 8)\n")
+        f.write("(8, 8)\n")
 
     # Cosmic terminal profile
     term_dir = os.path.join(out_dir, f"cosmic-{preset_name}", "com.system76.CosmicTerm", "v1")

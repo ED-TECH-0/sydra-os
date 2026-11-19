@@ -32,7 +32,7 @@ fi
 
 # 5. Apply COSMIC Glassy and Panel/Dock settings if running under COSMIC
 if [ -f "/usr/bin/siddha-glass-set" ]; then
-    /usr/bin/siddha-glass-set graphite pro || true
+    /usr/bin/siddha-glass-set obsidian pro || true
 fi
 
 # 6. Reconfigure KWin if running under Plasma

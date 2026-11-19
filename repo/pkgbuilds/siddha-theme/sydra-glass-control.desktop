@@ -1,0 +1,11 @@
+[Desktop Entry]
+Type=Application
+Version=1.0
+Name=Sydra Glass & Desktop Customizer
+GenericName=Glassmorphism & Desktop Settings
+Comment=Customize COSMIC glassmorphism transparency, dock & panel opacity, and theme presets
+Exec=python3 /usr/share/siddha/glass-control/sydra-glass-control.py
+Icon=preferences-desktop-theme
+Terminal=false
+Categories=Settings;DesktopSettings;
+StartupNotify=true

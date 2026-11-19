@@ -1,7 +1,7 @@
 # Maintainer: Sydra OS Team <team@sydra-os.org>
 pkgname=siddha-theme
 pkgver=0.1.0
-pkgrel=10
+pkgrel=11
 pkgdesc="Siddha Glass Pro desktop themes, color schemes, look-and-feel, and switcher for Sydra OS"
 arch=('any')
 url="https://sydra-os.org"
@@ -10,6 +10,8 @@ depends=('kvantum' 'bash')
 optdepends=('plasma-desktop: for optional KDE Plasma edition')
 source=(
   'siddha-glass-set'
+  'sydra-glass-control.py'
+  'sydra-glass-control.desktop'
   'kdeglobals'
   'kwinrc'
   'kwinrulesrc'
@@ -18,11 +20,17 @@ source=(
   'gtk-4.0.css'
   'settings.ini'
 )
-sha256sums=('SKIP' 'SKIP' 'SKIP' 'SKIP' 'SKIP' 'SKIP' 'SKIP' 'SKIP')
+sha256sums=('SKIP' 'SKIP' 'SKIP' 'SKIP' 'SKIP' 'SKIP' 'SKIP' 'SKIP' 'SKIP' 'SKIP')
 
 package() {
   install -Dm755 "$srcdir/siddha-glass-set" "$pkgdir/usr/bin/siddha-glass-set"
   
+  # Install Sydra Glass Control GUI application
+  install -Dm755 "$srcdir/sydra-glass-control.py" "$pkgdir/usr/share/siddha/glass-control/sydra-glass-control.py"
+  install -Dm644 "$srcdir/sydra-glass-control.desktop" "$pkgdir/usr/share/applications/sydra-glass-control.desktop"
+  install -d "$pkgdir/usr/bin"
+  ln -sf /usr/share/siddha/glass-control/sydra-glass-control.py "$pkgdir/usr/bin/sydra-glass-control"
+
   # Install color schemes
   install -d "$pkgdir/usr/share/color-schemes"
   cp "$startdir/assets"/*.colors "$pkgdir/usr/share/color-schemes/"

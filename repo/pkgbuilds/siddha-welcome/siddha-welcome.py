@@ -7,13 +7,22 @@ First-run onboarding wizard and quick setup.
 import sys
 import os
 import subprocess
-from PySide6.QtWidgets import (
-    QApplication, QMainWindow, QWidget, QVBoxLayout, QHBoxLayout,
-    QLabel, QPushButton, QStackedWidget, QListWidget, QListWidgetItem,
-    QFrame, QTextEdit
-)
-from PySide6.QtCore import Qt
-from PySide6.QtGui import QFont
+try:
+    from PySide6.QtWidgets import (
+        QApplication, QMainWindow, QWidget, QVBoxLayout, QHBoxLayout,
+        QLabel, QPushButton, QStackedWidget, QListWidget, QListWidgetItem,
+        QFrame, QTextEdit
+    )
+    from PySide6.QtCore import Qt
+    from PySide6.QtGui import QFont
+except ImportError:
+    from PyQt6.QtWidgets import (
+        QApplication, QMainWindow, QWidget, QVBoxLayout, QHBoxLayout,
+        QLabel, QPushButton, QStackedWidget, QListWidget, QListWidgetItem,
+        QFrame, QTextEdit
+    )
+    from PyQt6.QtCore import Qt
+    from PyQt6.QtGui import QFont
 
 class SydraWelcomeWindow(QMainWindow):
     def __init__(self):
@@ -105,20 +114,38 @@ class SydraWelcomeWindow(QMainWindow):
     def create_appearance_page(self):
         page = QWidget()
         layout = QVBoxLayout(page)
+        layout.setSpacing(12)
         
-        title = QLabel("Desktop Appearance & Glass Presets")
+        title = QLabel("Desktop Appearance & Glass Customization")
         title.setFont(QFont("Inter", 18, QFont.Bold))
         layout.addWidget(title)
 
-        desc = QLabel("Switch between tuned glass intensity modes:")
+        desc = QLabel(
+            "Sydra OS features full glassmorphism across windows, panels, and docks.\n"
+            "Quickly select a tuned glass level or launch the full GUI customizer:"
+        )
+        desc.setWordWrap(True)
         layout.addWidget(desc)
 
-        btn_pro = QPushButton("Set Mode: Pro (Subtle Glass)")
-        btn_pro.clicked.connect(lambda: subprocess.run(["siddha-glass-set", "graphite", "pro"]))
+        btn_gui = QPushButton("✨ Open Sydra Glass Customizer GUI")
+        btn_gui.setStyleSheet("background-color: #4FB3BF; color: #12141A; font-weight: bold; padding: 12px;")
+        btn_gui.clicked.connect(lambda: subprocess.Popen(["sydra-glass-control"]))
+        layout.addWidget(btn_gui)
+
+        btn_crystal = QPushButton("💎 Set Crystal Glass (Ultra Translucent 20%)")
+        btn_crystal.clicked.connect(lambda: subprocess.run(["siddha-glass-set", "--preset", "obsidian", "--glass", "crystal"]))
+        layout.addWidget(btn_crystal)
+
+        btn_pro = QPushButton("✨ Set Sleek Pro (Tuned Glass - Default)")
+        btn_pro.clicked.connect(lambda: subprocess.run(["siddha-glass-set", "--preset", "obsidian", "--glass", "pro"]))
         layout.addWidget(btn_pro)
 
-        btn_flat = QPushButton("Set Mode: Flat (Battery / Low GPU Saver)")
-        btn_flat.clicked.connect(lambda: subprocess.run(["siddha-glass-set", "graphite", "flat"]))
+        btn_frost = QPushButton("❄️ Set Diffused Frost (Matte Frosted Glass)")
+        btn_frost.clicked.connect(lambda: subprocess.run(["siddha-glass-set", "--preset", "obsidian", "--glass", "frost"]))
+        layout.addWidget(btn_frost)
+
+        btn_flat = QPushButton("🔋 Set OLED Flat (100% Solid - Battery Saver)")
+        btn_flat.clicked.connect(lambda: subprocess.run(["siddha-glass-set", "--preset", "oled", "--glass", "flat"]))
         layout.addWidget(btn_flat)
 
         layout.addStretch()
